@@ -1,18 +1,13 @@
 import pandas as pd
 import numpy as np
 
+from schema.records import ParquetSchema as PCol
 
 def add_contextual_surprisal_gap(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    トークンごとに「文脈的サプライザル・ギャップ」を算出し、新しいカラムとして追加する。
-
-    【算出式】
-    Contextual_Surprisal_Gap_t = isolated_surprisal_t - surprisal_t
-    """
     res_df = df.copy()
-    if 'isolated_surprisal' in res_df.columns and 'surprisal' in res_df.columns:
-        res_df['surprisal_gap'] = res_df['isolated_surprisal'] - res_df['surprisal']
+    if PCol.METRIC_ISOLATED_SURPRISAL in res_df.columns and PCol.METRIC_SURPRISAL in res_df.columns:
+        res_df[PCol.CALC_SURPRISAL_GAP] = res_df[PCol.METRIC_ISOLATED_SURPRISAL] - res_df[PCol.METRIC_SURPRISAL]
     else:
-        res_df['surprisal_gap'] = np.nan
+        res_df[PCol.CALC_SURPRISAL_GAP] = np.nan
 
     return res_df

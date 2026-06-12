@@ -13,6 +13,27 @@ from typing import Any, Dict, List, Optional
 COLLECTOR_VERSION = "1.0.0"
 
 
+class Fields:
+    IDX = "idx"
+    TOKEN_ID = "token_id"
+    TOKEN_STR = "token_str"
+    LINE = "line"
+    COLUMN = "column"
+    AST_TYPE = "ast_type"
+    NESTING_DEPTH = "nesting_depth"
+    FUNCTION_ID = "function_id"
+    IS_STATEMENT_START = "is_statement_start"
+    IS_FUNCTION_START = "is_function_start"
+
+    # metrics 辞書内で使われるキー
+    METRIC_KEY_SURPRISAL = "surprisal"
+    METRIC_KEY_ENTROPY = "entropy"
+    METRIC_KEY_ISOLATED_SURPRISAL = "isolated_surprisal"
+
+    # Parquet保存時に付与されるプレフィックス
+    METRIC_PREFIX = "metric_"
+
+
 @dataclass(slots=True)
 class TokenRecord:
     """A single token observation.
@@ -48,29 +69,26 @@ class TokenRecord:
     token_metrics: Dict[str, Optional[float]] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        """Return a JSON-serializable representation."""
         return asdict(self)
 
     def to_flat_dict(self) -> Dict[str, Any]:
-        """Return a flattened representation (one record per token).
-
-        ``token_metrics`` keys are prefixed with ``metric_`` so the columnar
-        layout (Parquet) stays self-describing and collision-free.
-        """
+        """Return a flattened representation (one record per token)."""
+        # 💡 Fields の定数を使って辞書を構築し、名前のズレを防ぐ
         base: Dict[str, Any] = {
-            "idx": self.idx,
-            "token_id": self.token_id,
-            "token_str": self.token_str,
-            "line": self.line,
-            "column": self.column,
-            "ast_type": self.ast_type,
-            "nesting_depth": self.nesting_depth,
-            "function_id": self.function_id,
-            "is_statement_start": self.is_statement_start,
-            "is_function_start": self.is_function_start,
+            Fields.IDX: self.idx,
+            Fields.TOKEN_ID: self.token_id,
+            Fields.TOKEN_STR: self.token_str,
+            Fields.LINE: self.line,
+            Fields.COLUMN: self.column,
+            Fields.AST_TYPE: self.ast_type,
+            Fields.NESTING_DEPTH: self.nesting_depth,
+            Fields.FUNCTION_ID: self.function_id,
+            Fields.IS_STATEMENT_START: self.is_statement_start,
+            Fields.IS_FUNCTION_START: self.is_function_start,
         }
+        # metrics をフラット化 (metric_ プレフィックスを付与)
         for key, value in self.token_metrics.items():
-            base[f"metric_{key}"] = value
+            base[f"{Fields.METRIC_PREFIX}{key}"] = value
         return base
 
 
@@ -111,3 +129,50 @@ class CollectionResult:
             "metadata": self.metadata.to_dict(),
             "tokens": [t.to_dict() for t in self.tokens],
         }
+
+class ParquetSchema:
+    """
+    Parquetファイルとして保存された後の、DataFrameのカラム名を定義するスキーマ。
+    """
+    # 💡 Fields の定数をそのまま引き継ぐことで、完全な一元管理を実現
+    IDX = Fields.IDX
+    TOKEN_ID = Fields.TOKEN_ID
+    TOKEN_STR = Fields.TOKEN_STR
+    LINE = Fields.LINE
+    COLUMN = Fields.COLUMN
+    AST_TYPE = Fields.AST_TYPE
+    NESTING_DEPTH = Fields.NESTING_DEPTH
+    FUNCTION_ID = Fields.FUNCTION_ID
+    IS_STATEMENT_START = Fields.IS_STATEMENT_START
+    IS_FUNCTION_START = Fields.IS_FUNCTION_START
+
+    # 💡 フラット化されたメトリクスのカラム名を動的に生成して定義
+    METRIC_SURPRISAL = f"{Fields.METRIC_PREFIX}{Fields.METRIC_KEY_SURPRISAL}"
+    METRIC_ENTROPY = f"{Fields.METRIC_PREFIX}{Fields.METRIC_KEY_ENTROPY}"
+    METRIC_ISOLATED_SURPRISAL = f"{Fields.METRIC_PREFIX}{Fields.METRIC_KEY_ISOLATED_SURPRISAL}"
+
+    # --- Phase 2 で追加される拡張メトリクス ---
+    CALC_SURPRISAL_GAP = "surprisal_gap"
+
+
+class SummarySchema:
+    """
+    Phase 2 の分析結果として出力されるサマリーCSV (`analysis_summary.csv`) のカラム名定義。
+
+    【📊 CSVデータの構造イメージ (1行 = 1ソースコードファイル)】
+    +----------+------------+-------+------------+------------------+---------------------------+-------------------+--------------+---------------+
+    | uid      | dataset    | ppl   | macro_lmcc | avg_lmcc_density | avg_first_token_surprisal | avg_surprisal_gap | total_tokens | num_functions |
+    +----------+------------+-------+------------+------------------+---------------------------+-------------------+--------------+---------------+
+    | 0a4af5.. | apr        | 1.05  | 12.4       | 6.2              | 0.12                      | 0.05              | 150          | 2             |
+    | HumanE_0 | humaneval  | 2.10  | 8.5        | 8.5              | 0.88                      | 0.10              | 45           | 1             |
+    +----------+------------+-------+------------+------------------+---------------------------+-------------------+--------------+---------------+
+    """
+    UID = "uid"
+    DATASET = "dataset"
+    PPL = "ppl"
+    MACRO_LMCC = "macro_lmcc"
+    AVG_LMCC_DENSITY = "avg_lmcc_density"
+    AVG_FIRST_TOKEN_SURPRISAL = "avg_first_token_surprisal"
+    AVG_SURPRISAL_GAP = "avg_surprisal_gap"
+    TOTAL_TOKENS = "total_tokens"
+    NUM_FUNCTIONS = "num_functions"

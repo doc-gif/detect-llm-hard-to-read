@@ -4,11 +4,13 @@ from pathlib import Path
 import pandas as pd
 import traceback
 
-# 💡 あなたの指定された通りの正しい呼び出し形式に完全対応
 from macro import perplexity, lm_cc, lm_cc_density
 from micro import context_surprisal_gap, first_token_suprisal
 
-# --- ログの設定 ---
+# 💡 スキーマ定義をインポート
+from schema.records import ParquetSchema as PCol
+from schema.records import SummarySchema as SCol
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
@@ -16,67 +18,57 @@ logging.basicConfig(
 )
 
 # --- 設定エリア ---
-INPUT_DIR = Path("../out").resolve()
-OUTPUT_DIR = Path("../results").resolve()
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+INPUT_DIR = PROJECT_ROOT / "out"
+OUTPUT_DIR = PROJECT_ROOT / "results"
 
 ENRICHED_DIR = OUTPUT_DIR / "enriched"
 SUMMARIES_DIR = OUTPUT_DIR / "summaries"
 
 
 def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
-    """
-    1つのParquetファイルを読み込み、各指標を計算して拡張ファイルを保存し、サマリーを返す。
-    """
     df = pd.read_parquet(parquet_path)
 
-    # --- 1. データクレンジング ---
-    if 'surprisal' in df.columns:
-        df_clean = df[df['surprisal'].notnull()].copy()
+    # 💡 PCol (ParquetSchema) を使ってアクセス
+    if PCol.METRIC_SURPRISAL in df.columns:
+        df_clean = df[df[PCol.METRIC_SURPRISAL].notnull()].copy()
     else:
         df_clean = df.copy()
 
-    # --- 2. ミクロ指標の計算 (トークンレベルの拡張) ---
-    if 'isolated_surprisal' in df_clean.columns:
-        # 💡 正しいモジュール名・関数名で呼び出し
+    if PCol.METRIC_ISOLATED_SURPRISAL in df_clean.columns:
         df_clean = context_surprisal_gap.add_contextual_surprisal_gap(df_clean)
 
-    # --- 3. マクロ指標の計算 (ファイル全体) ---
     ppl = perplexity.calculate(df_clean)
-    # 💡 正しいモジュール名・関数名で呼び出し
     macro_lmcc = lm_cc.calculate_macro_lmcc(df_clean)
-    # 💡 正しいモジュール名・関数名で呼び出し (マクロ指標)
     avg_lmcc_density = lm_cc_density.calculate_lmcc_density_per_function(df_clean)
 
-    # --- 4. 構造レベル(関数)指標の集計 ---
-    # 💡 正しいモジュール名・関数名で呼び出し
     first_tokens_df = first_token_suprisal.extract_first_token_surprisal(df_clean)
 
-    # CSVサマリー用に、ファイル内のすべての関数における第一トークン・サプライザルの平均を算出
     avg_first_token = first_tokens_df['first_token_surprisal'].mean() if not first_tokens_df.empty else None
-    avg_gap = df_clean['surprisal_gap'].mean() if 'surprisal_gap' in df_clean.columns else None
 
-    # --- 5. 拡張Parquetの保存 ---
+    # ギャップ計算で追加される新しいカラムも定数を使うのが望ましいです（PCol.CALC_SURPRISAL_GAPを推奨）
+    avg_gap = df_clean[PCol.CALC_SURPRISAL_GAP].mean() if PCol.CALC_SURPRISAL_GAP in df_clean.columns else None
+
     relative_path = parquet_path.relative_to(base_in_dir)
     out_parquet_path = ENRICHED_DIR / relative_path
     out_parquet_path.parent.mkdir(parents=True, exist_ok=True)
 
     df_clean.to_parquet(out_parquet_path)
 
-    # --- 6. サマリー辞書の作成 ---
-    uid = parquet_path.stem.replace("result_", "")  # result_01479... -> 01479...
+    uid = parquet_path.stem.replace("result_", "")
 
+    # 💡 SCol (SummarySchema) を使って辞書を作成。これで出力CSVの列名が完璧に保証される
     summary = {
-        "uid": uid,
-        "dataset": relative_path.parent.name,  # (例: apr)
-        "ppl": ppl,
-        "macro_lmcc": macro_lmcc,
-        "avg_lmcc_density": avg_lmcc_density,
-        "avg_first_token_surprisal": avg_first_token,
-        "avg_surprisal_gap": avg_gap,
-        "total_tokens": len(df_clean),
-        "num_functions": len(first_tokens_df) if not first_tokens_df.empty else 0
+        SCol.UID: uid,
+        SCol.DATASET: relative_path.parent.name,
+        SCol.PPL: ppl,
+        SCol.MACRO_LMCC: macro_lmcc,
+        SCol.AVG_LMCC_DENSITY: avg_lmcc_density,
+        SCol.AVG_FIRST_TOKEN_SURPRISAL: avg_first_token,
+        SCol.AVG_SURPRISAL_GAP: avg_gap,
+        SCol.TOTAL_TOKENS: len(df_clean),
+        SCol.NUM_FUNCTIONS: len(first_tokens_df) if not first_tokens_df.empty else 0
     }
-
     return summary
 
 
@@ -116,6 +108,10 @@ def run_pipeline():
 
     if summary_list:
         summary_df = pd.DataFrame(summary_list)
+        # SColの定義順にカラムを並び替える（オプションですが綺麗に整頓されます）
+        cols = [getattr(SCol, k) for k in dir(SCol) if not k.startswith("_") and isinstance(getattr(SCol, k), str)]
+        summary_df = summary_df[[c for c in cols if c in summary_df.columns]]
+
         summary_csv_path = SUMMARIES_DIR / "analysis_summary.csv"
         summary_df.to_csv(summary_csv_path, index=False)
         logging.info(f"💾 サマリーCSVを保存しました: {summary_csv_path}")

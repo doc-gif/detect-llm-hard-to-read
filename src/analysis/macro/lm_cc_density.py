@@ -1,30 +1,22 @@
 import pandas as pd
 from typing import Optional
 
+from schema.records import ParquetSchema as PCol
 
 def calculate_lmcc_density_per_function(df_clean: pd.DataFrame) -> Optional[float]:
-    """
-    ファイル全体における Semantic Unit (関数) あたりの LM-CC 密度を算出するマクロ指標。
-
-    【算出式】
-    LM-CC_Density = Total_LM-CC_in_units / N  (Nはファイル内の関数ユニット総数)
-    """
-    if df_clean.empty or 'is_statement_start' not in df_clean.columns or 'function_id' not in df_clean.columns:
+    if df_clean.empty or PCol.IS_STATEMENT_START not in df_clean.columns or PCol.FUNCTION_ID not in df_clean.columns or PCol.METRIC_ENTROPY not in df_clean.columns:
         return None
 
-    # 関数ブロック内に存在するステートメントの開始トークンのみ抽出
-    statements = df_clean[(df_clean['is_statement_start'] == True) & (df_clean['function_id'].notnull())].copy()
+    statements = df_clean[(df_clean[PCol.IS_STATEMENT_START] == True) & (df_clean[PCol.FUNCTION_ID].notnull())].copy()
     if statements.empty:
         return 0.0
 
-    statements['nesting_depth'] = statements['nesting_depth'].fillna(0)
-    statements['stmt_complexity'] = (1 + statements['nesting_depth']) * statements['entropy']
+    statements[PCol.NESTING_DEPTH] = statements[PCol.NESTING_DEPTH].fillna(0)
+    statements['stmt_complexity'] = (1 + statements[PCol.NESTING_DEPTH]) * statements[PCol.METRIC_ENTROPY]
 
-    # 各関数ごとのLM-CCの総和を算出
-    unit_lmcc_series = statements.groupby('function_id')['stmt_complexity'].sum()
+    unit_lmcc_series = statements.groupby(PCol.FUNCTION_ID)['stmt_complexity'].sum()
 
     num_units = len(unit_lmcc_series)
     total_unit_lmcc = unit_lmcc_series.sum()
 
-    # 🌟 総スコアをユニット数で割ることで、マクロな「密度」とする
     return float(total_unit_lmcc / num_units) if num_units > 0 else 0.0
