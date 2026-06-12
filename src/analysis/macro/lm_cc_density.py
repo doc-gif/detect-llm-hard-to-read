@@ -3,7 +3,7 @@ from typing import Optional
 
 from schema.records import ParquetSchema as PCol
 
-def calculate_lmcc_density_per_function(df_clean: pd.DataFrame) -> Optional[float]:
+def calculate(df_clean: pd.DataFrame) -> Optional[float]:
     if df_clean.empty or PCol.IS_STATEMENT_START not in df_clean.columns or PCol.FUNCTION_ID not in df_clean.columns or PCol.METRIC_ENTROPY not in df_clean.columns:
         return None
 

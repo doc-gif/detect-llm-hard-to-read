@@ -160,19 +160,19 @@ class SummarySchema:
     Phase 2 の分析結果として出力されるサマリーCSV (`analysis_summary.csv`) のカラム名定義。
 
     【📊 CSVデータの構造イメージ (1行 = 1ソースコードファイル)】
-    +----------+------------+-------+------------+------------------+---------------------------+-------------------+--------------+---------------+
-    | uid      | dataset    | ppl   | macro_lmcc | avg_lmcc_density | avg_first_token_surprisal | avg_surprisal_gap | total_tokens | num_functions |
-    +----------+------------+-------+------------+------------------+---------------------------+-------------------+--------------+---------------+
-    | 0a4af5.. | apr        | 1.05  | 12.4       | 6.2              | 0.12                      | 0.05              | 150          | 2             |
-    | HumanE_0 | humaneval  | 2.10  | 8.5        | 8.5              | 0.88                      | 0.10              | 45           | 1             |
-    +----------+------------+-------+------------+------------------+---------------------------+-------------------+--------------+---------------+
+    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+
+    | uid      | dataset    | ppl   | lm_cc      | lm_cc_density    | avg_first_token_surprisal | avg_context_surprisal_gap | total_tokens | num_functions |
+    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+
+    | 0a4af5.. | apr        | 1.05  | 12.4       | 6.2              | 0.12                      | 0.05                      | 150          | 2             |
+    | HumanE_0 | humaneval  | 2.10  | 8.5        | 8.5              | 0.88                      | 0.10                      | 45           | 1             |
+    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+
     """
     UID = "uid"
     DATASET = "dataset"
     PPL = "ppl"
-    MACRO_LMCC = "macro_lmcc"
-    AVG_LMCC_DENSITY = "avg_lmcc_density"
+    LM_CC = "lm_cc"
+    LM_CC_DENSITY = "lm_cc_density"
     AVG_FIRST_TOKEN_SURPRISAL = "avg_first_token_surprisal"
-    AVG_SURPRISAL_GAP = "avg_surprisal_gap"
+    AVG_CONTEXT_SURPRISAL_GAP = "avg_context_surprisal_gap"
     TOTAL_TOKENS = "total_tokens"
     NUM_FUNCTIONS = "num_functions"

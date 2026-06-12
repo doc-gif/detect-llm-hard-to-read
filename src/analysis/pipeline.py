@@ -7,7 +7,6 @@ import traceback
 from macro import perplexity, lm_cc, lm_cc_density
 from micro import context_surprisal_gap, first_token_suprisal
 
-# 💡 スキーマ定義をインポート
 from schema.records import ParquetSchema as PCol
 from schema.records import SummarySchema as SCol
 
@@ -29,43 +28,55 @@ SUMMARIES_DIR = OUTPUT_DIR / "summaries"
 def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
     df = pd.read_parquet(parquet_path)
 
-    # 💡 PCol (ParquetSchema) を使ってアクセス
+    # ==========================================
+    # 1. データクレンジング (ノイズ除去)
+    # ==========================================
+    # 予測対象外のトークン（BOSなど）を除外し、計算のベースとなる綺麗なデータを作成
     if PCol.METRIC_SURPRISAL in df.columns:
         df_clean = df[df[PCol.METRIC_SURPRISAL].notnull()].copy()
     else:
         df_clean = df.copy()
 
-    if PCol.METRIC_ISOLATED_SURPRISAL in df_clean.columns:
-        df_clean = context_surprisal_gap.add_contextual_surprisal_gap(df_clean)
-
-    ppl = perplexity.calculate(df_clean)
-    macro_lmcc = lm_cc.calculate_macro_lmcc(df_clean)
-    avg_lmcc_density = lm_cc_density.calculate_lmcc_density_per_function(df_clean)
-
+    # ==========================================
+    # 2. データ成形 (Transformation)
+    # ==========================================
+    df_clean = context_surprisal_gap.add_contextual_surprisal_gap(df_clean)
     first_tokens_df = first_token_suprisal.extract_first_token_surprisal(df_clean)
 
-    avg_first_token = first_tokens_df['first_token_surprisal'].mean() if not first_tokens_df.empty else None
+    # ==========================================
+    # 3. マクロ指標算出 (Macro Metrics Calculation)
+    # ==========================================
+    cal_perplexity = perplexity.calculate(df_clean)
+    cal_lm_cc = lm_cc.calculate(df_clean)
+    cal_lm_cc_density = lm_cc_density.calculate(df_clean)
 
-    # ギャップ計算で追加される新しいカラムも定数を使うのが望ましいです（PCol.CALC_SURPRISAL_GAPを推奨）
-    avg_gap = df_clean[PCol.CALC_SURPRISAL_GAP].mean() if PCol.CALC_SURPRISAL_GAP in df_clean.columns else None
+    # ==========================================
+    # 4. ミクロ指標算出 (Micro Metrics Aggregation)
+    # ==========================================
+    avg_context_surprisal_gap = context_surprisal_gap.calculate_avg(df_clean)
+    avg_first_token_surprisal = first_token_suprisal.calculate_avg(first_tokens_df)
 
+    # ==========================================
+    # 5. 保存と結果の返却
+    # ==========================================
     relative_path = parquet_path.relative_to(base_in_dir)
     out_parquet_path = ENRICHED_DIR / relative_path
     out_parquet_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # ギャップ列などが追加された「拡張版」のデータフレームを保存
     df_clean.to_parquet(out_parquet_path)
 
     uid = parquet_path.stem.replace("result_", "")
 
-    # 💡 SCol (SummarySchema) を使って辞書を作成。これで出力CSVの列名が完璧に保証される
+    # スキーマ定義（SCol）に従ってサマリー辞書を構築
     summary = {
         SCol.UID: uid,
         SCol.DATASET: relative_path.parent.name,
-        SCol.PPL: ppl,
-        SCol.MACRO_LMCC: macro_lmcc,
-        SCol.AVG_LMCC_DENSITY: avg_lmcc_density,
-        SCol.AVG_FIRST_TOKEN_SURPRISAL: avg_first_token,
-        SCol.AVG_SURPRISAL_GAP: avg_gap,
+        SCol.PPL: cal_perplexity,
+        SCol.LM_CC: cal_lm_cc,
+        SCol.LM_CC_DENSITY: cal_lm_cc_density,
+        SCol.AVG_FIRST_TOKEN_SURPRISAL: avg_first_token_surprisal,
+        SCol.AVG_CONTEXT_SURPRISAL_GAP: avg_context_surprisal_gap,
         SCol.TOTAL_TOKENS: len(df_clean),
         SCol.NUM_FUNCTIONS: len(first_tokens_df) if not first_tokens_df.empty else 0
     }
