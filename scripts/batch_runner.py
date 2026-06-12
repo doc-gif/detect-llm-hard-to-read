@@ -87,15 +87,25 @@ def run_batch():
     success_count = 0
     error_count = 0
 
-    # 💡 追記: 全体のファイル数を取得
     total_files = len(target_files)
 
-    # 💡 変更: enumerate(..., 1) を使って 1から始まるインデックス(i)を取得
+    data_root = (project_root / "data").resolve()
+
     for i, (filepath, base_dir) in enumerate(target_files, 1):
         project_name = filepath.stem
-        relative_path = filepath.relative_to(base_dir)
 
-        target_dir = output_dir / base_dir.name / relative_path.parent
+        # 1. 大元の data_root からの相対パスを取得する
+        # 例: data/xcodeeval_simplified/code_translation/result_xxx.py
+        # ➔ relative_to_data = Path("xcodeeval_simplified/code_translation/result_xxx.py")
+        relative_to_data = filepath.relative_to(data_root)
+
+        # 2. ファイル名を除く親フォルダの階層（parts）をアンダースコアで結合する
+        # 例: ("xcodeeval_simplified", "code_translation") ➔ "xcodeeval_simplified_code_translation"
+        flat_dir_name = "_".join(relative_to_data.parent.parts)
+
+        # 3. out/ 直下にフラットなフォルダを作成する
+        # 例: ../out/xcodeeval_simplified_code_translation/
+        target_dir = output_dir / flat_dir_name
         target_dir.mkdir(parents=True, exist_ok=True)
 
         output_filename = f"result_{project_name}.{OUTPUT_FORMAT}"
