@@ -1,0 +1,39 @@
+k=int(input())
+b=input()
+c=input()
+d=input()
+e=input()
+s=b+c+d+e
+#print(s)
+a=[0]*10
+for i in s:
+    if(i=="0"):
+        a[0]=a[0]+1
+    elif(i=="1"):
+        a[1]=a[1]+1
+        #print(a[1])
+    elif(i=="2"):
+        a[2]=a[2]+1
+    elif(i=="3"):
+        a[3]=a[3]+1
+    elif(i=="4"):
+        a[4]=a[4]+1
+    elif(i=="5"):
+        a[5]=a[5]+1
+    elif(i=="6"):
+        a[6]=a[6]+1
+    elif(i=="7"):
+        a[7]=a[7]+1
+    elif(i=="8"):
+        a[8]=a[8]+1
+    elif(i=="9"):
+        a[9]=a[9]+1
+d=0
+#print(a)
+for i in a:
+    if(i<=k*2):
+        d=d+1
+if(d==10):
+    print("YES")
+else:
+    print("NO")

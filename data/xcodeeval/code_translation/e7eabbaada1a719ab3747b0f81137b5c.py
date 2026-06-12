@@ -1,0 +1,1 @@
+for s in[*open(0)][1:]:P=pow;n,k=map(int,s.split());p=P(2,n-1,M:=10**9+7);print([(P(2*p,k,M)+p*P(~-p,k,M))*P(p+1,-1,M)%M,P(p+1,k,M)][n&1])

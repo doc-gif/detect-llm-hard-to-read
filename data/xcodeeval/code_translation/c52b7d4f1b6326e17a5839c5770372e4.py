@@ -1,0 +1,21 @@
+dict={}
+dict["January"]=0
+dict["February"]=1
+dict["March"]=2
+dict["April"]=3
+dict["May"]=4
+dict["June"]=5
+dict["July"]=6
+dict["August"]=7
+dict["September"]=8
+dict["October"]=9
+dict["November"]=10
+dict["December"]=11
+tmp=input()
+s=int(input())
+s+=dict[tmp]
+s%=12
+for i in dict:
+	if(dict[i]==s):
+		print(i)
+		break

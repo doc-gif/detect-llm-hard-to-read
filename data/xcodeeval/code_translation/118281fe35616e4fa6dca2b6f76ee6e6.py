@@ -1,0 +1,31 @@
+a=int(input())
+b=int(input())
+tmn=0
+tmx=0
+cmx=0
+cmn=0
+if(a>b):
+    max=a
+    min=b
+else:
+    max=b
+    min=a
+if(a==b):
+    t=0
+elif(a-b==1 or b-a==1):
+    t=1
+else:
+    while True:
+        max-=1
+        cmx+=1
+        tmx+=cmx
+        if(max==min):
+            t=tmx+tmn
+            break
+        min+=1
+        cmn+=1
+        tmn+=cmn
+        if(max==min):
+            t=tmx+tmn
+            break
+print(t)
