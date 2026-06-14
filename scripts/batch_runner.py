@@ -21,6 +21,7 @@ logging.basicConfig(
 INPUT_DIRS = [
     "../data/humaneval",
     "../data/humaneval_simplified",
+    "../data/humaneval_simplified-top60",
     "../data/xcodeeval/apr",
     "../data/xcodeeval/code_translation",
     "../data/xcodeeval_simplified/apr",

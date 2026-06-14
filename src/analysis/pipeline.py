@@ -4,7 +4,7 @@ from pathlib import Path
 import pandas as pd
 import traceback
 
-from macro import perplexity, lm_cc, lm_cc_density
+from macro import perplexity, lm_cc, lm_cc_density, loc
 from micro import context_surprisal_gap, first_token_suprisal
 
 from schema.records import ParquetSchema as PCol
@@ -49,6 +49,7 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
     cal_perplexity = perplexity.calculate(df_clean)
     cal_lm_cc = lm_cc.calculate(df_clean)
     cal_lm_cc_density = lm_cc_density.calculate(df_clean)
+    cal_loc = loc.calculate(df_clean)
 
     # ==========================================
     # 4. ミクロ指標算出 (Micro Metrics Aggregation)
@@ -75,6 +76,7 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
         SCol.PPL: cal_perplexity,
         SCol.LM_CC: cal_lm_cc,
         SCol.LM_CC_DENSITY: cal_lm_cc_density,
+        SCol.LOC: cal_loc,
         SCol.AVG_FIRST_TOKEN_SURPRISAL: avg_first_token_surprisal,
         SCol.AVG_CONTEXT_SURPRISAL_GAP: avg_context_surprisal_gap,
         SCol.TOTAL_TOKENS: len(df_clean),
