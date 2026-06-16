@@ -25,7 +25,9 @@ INPUT_DIRS = [
     "../data/xcodeeval/apr",
     "../data/xcodeeval/code_translation",
     "../data/xcodeeval_simplified/apr",
-    "../data/xcodeeval_simplified/code_translation"
+    "../data/xcodeeval_simplified/code_translation",
+    "../data/xcodeeval_simplified-top50/apr",
+    "../data/xcodeeval_simplified-top50/code_translation"
 ]
 
 # 2. 出力先の最上位ディレクトリパス
