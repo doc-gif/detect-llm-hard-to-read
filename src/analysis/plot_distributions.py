@@ -15,11 +15,8 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 # ==========================================
 from pathlib import Path
 
-# __file__ が src/analysis/plot_distributions.py の場合、
-# parent を3回辿ると detect-llm-hard-to-read ディレクトリが PROJECT_ROOT になります
 PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-# パス構築の修正
 SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
 
 # グラフを保存する大元の出力先ディレクトリ
@@ -30,7 +27,11 @@ SCORE_FILES = {
         "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
         "format": "simple"
     },
-    "humaneval_simplified": {
+    # "humaneval_simplified": {
+    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
+    #     "format": "simple"
+    # },
+    "humaneval_simplified-top60": {
         "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
         "format": "simple"
     },
@@ -38,7 +39,11 @@ SCORE_FILES = {
         "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
         "format": "nested"
     },
-    "xcodeeval_simplified_apr": {
+    # "xcodeeval_simplified_apr": {
+    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
+    #     "format": "nested"
+    # },
+    "xcodeeval_simplified-top50_apr": {
         "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
         "format": "nested"
     },
@@ -46,7 +51,11 @@ SCORE_FILES = {
         "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
         "format": "nested"
     },
-    "xcodeeval_simplified_code_translation": {
+    # "xcodeeval_simplified_code_translation": {
+    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
+    #     "format": "nested"
+    # },
+    "xcodeeval_simplified-top50_code_translation": {
         "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
         "format": "nested"
     }

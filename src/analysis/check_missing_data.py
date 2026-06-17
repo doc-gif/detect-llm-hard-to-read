@@ -7,38 +7,52 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 # ==========================================
 # ⚙️ 設定エリア
-# ==========================================
-# 1. サマリーCSVのパス
-SUMMARY_CSV_PATH = "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/summaries/analysis_summary.csv"
+# ==========================================\
+PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-# 2. 各データセットのスコアJSONへのパスと形式の定義
+SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
+
+# グラフを保存する大元の出力先ディレクトリ
+OUTPUT_PLOT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "plots"
+
 SCORE_FILES = {
     "humaneval": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/humaneval-ier/results_score.json",
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
         "format": "simple"
     },
-    "humaneval_simplified": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/humaneval-ier-simplified/results_score_simplified.json",
+    # "humaneval_simplified": {
+    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
+    #     "format": "simple"
+    # },
+    "humaneval_simplified-top60": {
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
         "format": "simple"
     },
     "xcodeeval_apr": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/apr/python_test_filtered_results.json",
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
         "format": "nested"
     },
-    "xcodeeval_simplified_apr": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/apr-simplified/python_test_filtered_results.json",
+    # "xcodeeval_simplified_apr": {
+    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
+    #     "format": "nested"
+    # },
+    "xcodeeval_simplified-top50_apr": {
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
         "format": "nested"
     },
     "xcodeeval_code_translation": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/code_translation/python2c_test_filtered_results.json",
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
         "format": "nested"
     },
-    "xcodeeval_simplified_code_translation": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/code_translation-simplified/python2c_test_filtered_results.json",
+    # "xcodeeval_simplified_code_translation": {
+    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
+    #     "format": "nested"
+    # },
+    "xcodeeval_simplified-top50_code_translation": {
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
         "format": "nested"
     }
 }
-
 
 def load_expected_uids(dataset_name: str, config: dict) -> set:
     """JSONから期待されるすべてのUID（タスクID）を抽出し、Set(集合)として返す"""
