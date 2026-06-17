@@ -13,29 +13,43 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 # ==========================================
 # ⚙️ 設定エリア
 # ==========================================
-SUMMARY_CSV_PATH = "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/summaries/analysis_summary.csv"
+from pathlib import Path
+
+# __file__ が src/analysis/plot_distributions.py の場合、
+# parent を3回辿ると detect-llm-hard-to-read ディレクトリが PROJECT_ROOT になります
+PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
+
+# パス構築の修正
+SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
 
 # グラフを保存する大元の出力先ディレクトリ
-OUTPUT_PLOT_DIR = Path("/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/plots")
+OUTPUT_PLOT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "plots"
 
 SCORE_FILES = {
-    "humaneval": {"path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/humaneval-ier/results_score.json",
-                  "format": "simple"},
+    "humaneval": {
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
+        "format": "simple"
+    },
     "humaneval_simplified": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/humaneval-ier-simplified/results_score_simplified.json",
-        "format": "simple"},
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
+        "format": "simple"
+    },
     "xcodeeval_apr": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/apr/python_test_filtered_results.json",
-        "format": "nested"},
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
+        "format": "nested"
+    },
     "xcodeeval_simplified_apr": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/apr-simplified/python_test_filtered_results.json",
-        "format": "nested"},
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
+        "format": "nested"
+    },
     "xcodeeval_code_translation": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/code_translation/python2c_test_filtered_results.json",
-        "format": "nested"},
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
+        "format": "nested"
+    },
     "xcodeeval_simplified_code_translation": {
-        "path": "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/code_translation-simplified/python2c_test_filtered_results.json",
-        "format": "nested"}
+        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
+        "format": "nested"
+    }
 }
 
 METRIC_LABELS = {
