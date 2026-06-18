@@ -1,0 +1,92 @@
+[
+  {
+    "task_id": "HumanEval_2",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "def",
+      "▁trunc",
+      "ate",
+      "_",
+      "number",
+      "(",
+      "number",
+      ":",
+      "▁float",
+      ")",
+      "▁->",
+      "▁float",
+      ":",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁number",
+      "▁%",
+      "▁",
+      "1",
+      ".",
+      "0",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.555868148803711,
+      0.053250301629304886,
+      2.553257465362549,
+      0.27075737714767456,
+      1.448249340057373,
+      6.463662147521973,
+      1.2130473852157593,
+      1.7412861585617065,
+      5.76450252532959,
+      0.7046204209327698,
+      2.7715554237365723,
+      1.1636308431625366,
+      2.0664045810699463,
+      0.7460497617721558,
+      0.053899358958005905,
+      1.6333274841308594,
+      0.06446523219347,
+      0.3362496495246887,
+      0.6860601902008057,
+      2.583129405975342,
+      2.3836188316345215,
+      1.7723300457000732,
+      0.269661545753479,
+      0.2080438733100891,
+      1.7745022773742676,
+      0.3620949983596802,
+      1.309422254562378
+    ],
+    "code": " from typing import *\n\ndef truncate_number(number: float) -> float:\n\n    return number % 1.0\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef truncate_number(number: float) -> float:\n    return number % 1.0",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def truncate_number(number: float) -> float:\n    return number % 1.0",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 27,
+          "children": [
+            {
+              "block_code": "    return number % 1.0",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 19,
+              "end_token": 27,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 27
+    }
+  }
+]

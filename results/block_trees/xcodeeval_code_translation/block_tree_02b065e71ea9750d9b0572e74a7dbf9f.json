@@ -1,0 +1,157 @@
+[
+  {
+    "task_id": "02b065e71ea9750d9b0572e74a7dbf9f",
+    "tokens": [
+      "▁n",
+      "=",
+      "input",
+      "()",
+      "<0x0A>",
+      "s",
+      "=",
+      "input",
+      "()",
+      "<0x0A>",
+      "count",
+      "=",
+      "0",
+      "<0x0A>",
+      "for",
+      "▁i",
+      "▁in",
+      "▁s",
+      ":",
+      "<0x0A>",
+      "▁▁▁",
+      "▁count",
+      "+=",
+      "1",
+      "<0x0A>",
+      "▁▁▁",
+      "▁if",
+      "▁i",
+      "==",
+      "'",
+      "0",
+      "':",
+      "<0x0A>",
+      "▁▁▁▁▁▁▁",
+      "▁break",
+      "<0x0A>",
+      "print",
+      "(",
+      "count",
+      ")"
+    ],
+    "entropies": [
+      NaN,
+      7.234366416931152,
+      4.360191822052002,
+      3.02319073677063,
+      0.4715385437011719,
+      3.9826555252075195,
+      1.6351439952850342,
+      2.8108115196228027,
+      0.22389933466911316,
+      0.11603404581546783,
+      4.261070728302002,
+      1.1066676378250122,
+      0.9753216505050659,
+      0.15289005637168884,
+      3.115321159362793,
+      1.155281662940979,
+      0.1149420365691185,
+      1.0368462800979614,
+      0.17384600639343262,
+      0.11482398211956024,
+      0.8134832978248596,
+      0.9404910802841187,
+      1.0641380548477173,
+      1.946526288986206,
+      0.6285375356674194,
+      2.2894277572631836,
+      1.4881566762924194,
+      1.8560199737548828,
+      1.459831953048706,
+      1.8940205574035645,
+      3.652841329574585,
+      0.44000279903411865,
+      0.2762618958950043,
+      0.2701987624168396,
+      3.27608323097229,
+      0.25764983892440796,
+      2.964052438735962,
+      0.8769424557685852,
+      1.29084050655365,
+      0.7731003761291504
+    ],
+    "code": " n=input()\n\ns=input()\n\ncount=0\n\nfor i in s:\n\n    count+=1\n\n    if i=='0':\n\n        break\n\nprint(count)",
+    "block_tree": {
+      "block_code": " n=input()\ns=input()\ncount=0\nfor i in s:\n    count+=1\n    if i=='0':\n        break\nprint(count)",
+      "start_line": 1,
+      "end_line": 8,
+      "children": [
+        {
+          "block_code": "s=input()",
+          "start_line": 2,
+          "end_line": 2,
+          "start_token": 5,
+          "end_token": 9,
+          "children": []
+        },
+        {
+          "block_code": "count=0",
+          "start_line": 3,
+          "end_line": 3,
+          "start_token": 10,
+          "end_token": 13,
+          "children": []
+        },
+        {
+          "block_code": "for i in s:\n    count+=1\n    if i=='0':\n        break",
+          "start_line": 4,
+          "end_line": 7,
+          "start_token": 14,
+          "end_token": 35,
+          "children": [
+            {
+              "block_code": "    count+=1",
+              "start_line": 5,
+              "end_line": 5,
+              "start_token": 20,
+              "end_token": 24,
+              "children": []
+            },
+            {
+              "block_code": "    if i=='0':\n        break",
+              "start_line": 6,
+              "end_line": 7,
+              "start_token": 25,
+              "end_token": 35,
+              "children": [
+                {
+                  "block_code": "        break",
+                  "start_line": 7,
+                  "end_line": 7,
+                  "start_token": 33,
+                  "end_token": 35,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "block_code": "print(count)",
+          "start_line": 8,
+          "end_line": 8,
+          "start_token": 36,
+          "end_token": 39,
+          "children": []
+        }
+      ],
+      "start_token": 0,
+      "end_token": 39
+    }
+  }
+]

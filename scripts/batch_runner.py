@@ -19,15 +19,16 @@ logging.basicConfig(
 
 # 1. 対象コードのディレクトリパス (複数指定可能)
 INPUT_DIRS = [
-    "../data/humaneval",
-    "../data/humaneval_simplified",
-    "../data/humaneval_simplified-top60",
-    "../data/xcodeeval/apr",
-    "../data/xcodeeval/code_translation",
-    "../data/xcodeeval_simplified/apr",
-    "../data/xcodeeval_simplified/code_translation",
-    "../data/xcodeeval_simplified-top50/apr",
-    "../data/xcodeeval_simplified-top50/code_translation"
+    "../data/examples"
+    # "../data/humaneval",
+    # "../data/humaneval_simplified",
+    # "../data/humaneval_simplified-top60",
+    # "../data/xcodeeval/apr",
+    # "../data/xcodeeval/code_translation",
+    # "../data/xcodeeval_simplified/apr",
+    # "../data/xcodeeval_simplified/code_translation",
+    # "../data/xcodeeval_simplified-top50/apr",
+    # "../data/xcodeeval_simplified-top50/code_translation"
 ]
 
 # 2. 出力先の最上位ディレクトリパス

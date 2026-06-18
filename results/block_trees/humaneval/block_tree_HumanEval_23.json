@@ -1,0 +1,84 @@
+[
+  {
+    "task_id": "HumanEval_23",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "def",
+      "▁str",
+      "len",
+      "(",
+      "string",
+      ":",
+      "▁str",
+      ")",
+      "▁->",
+      "▁int",
+      ":",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁len",
+      "(",
+      "string",
+      ")",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.551098823547363,
+      0.05299237370491028,
+      2.5528969764709473,
+      0.2712581753730774,
+      1.4483555555343628,
+      6.464189529418945,
+      3.3744301795959473,
+      1.0401383638381958,
+      3.1511778831481934,
+      1.1154003143310547,
+      1.395840048789978,
+      0.8905287384986877,
+      0.09154628217220306,
+      0.6736360788345337,
+      0.07362975180149078,
+      0.6955214738845825,
+      0.7630701065063477,
+      2.332821846008301,
+      0.6804083585739136,
+      0.043800048530101776,
+      0.20041275024414062,
+      0.15489332377910614,
+      0.24216482043266296
+    ],
+    "code": " from typing import *\n\ndef strlen(string: str) -> int:\n\n    return len(string)\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef strlen(string: str) -> int:\n    return len(string)",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def strlen(string: str) -> int:\n    return len(string)",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 23,
+          "children": [
+            {
+              "block_code": "    return len(string)",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 17,
+              "end_token": 23,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 23
+    }
+  }
+]

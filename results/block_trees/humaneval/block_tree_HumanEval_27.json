@@ -1,0 +1,90 @@
+[
+  {
+    "task_id": "HumanEval_27",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "def",
+      "▁f",
+      "lip",
+      "_",
+      "case",
+      "(",
+      "string",
+      ":",
+      "▁str",
+      ")",
+      "▁->",
+      "▁str",
+      ":",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁string",
+      ".",
+      "swap",
+      "case",
+      "()",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.555868148803711,
+      0.053250301629304886,
+      2.553257465362549,
+      0.27075737714767456,
+      1.448249340057373,
+      6.463662147521973,
+      2.2708852291107178,
+      2.261622190475464,
+      5.573336601257324,
+      0.592930793762207,
+      2.780034065246582,
+      0.7456342577934265,
+      0.6076639890670776,
+      0.5855267643928528,
+      0.07049429416656494,
+      0.2810042202472687,
+      0.08551798015832901,
+      0.5596809387207031,
+      0.820408046245575,
+      3.0398788452148438,
+      1.466625690460205,
+      0.5437203645706177,
+      0.5634852647781372,
+      0.02890041284263134,
+      0.11634194850921631,
+      0.2593117356300354
+    ],
+    "code": " from typing import *\n\ndef flip_case(string: str) -> str:\n\n    return string.swapcase()\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef flip_case(string: str) -> str:\n    return string.swapcase()",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def flip_case(string: str) -> str:\n    return string.swapcase()",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 26,
+          "children": [
+            {
+              "block_code": "    return string.swapcase()",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 19,
+              "end_token": 26,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 26
+    }
+  }
+]

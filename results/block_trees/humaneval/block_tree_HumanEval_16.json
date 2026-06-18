@@ -1,0 +1,102 @@
+[
+  {
+    "task_id": "HumanEval_16",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "def",
+      "▁count",
+      "_",
+      "dist",
+      "inct",
+      "_",
+      "char",
+      "acters",
+      "(",
+      "string",
+      ":",
+      "▁str",
+      ")",
+      "▁->",
+      "▁int",
+      ":",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁len",
+      "(",
+      "set",
+      "(",
+      "string",
+      ".",
+      "lower",
+      "()))",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.555868148803711,
+      0.053250301629304886,
+      2.553257465362549,
+      0.27070391178131104,
+      1.440518856048584,
+      6.462882041931152,
+      3.2479052543640137,
+      6.107976913452148,
+      0.28355059027671814,
+      1.0677939653396606,
+      5.482819557189941,
+      0.8888664245605469,
+      0.6236459612846375,
+      2.768188238143921,
+      0.6866085529327393,
+      0.3678487241268158,
+      0.6061404943466187,
+      0.072520911693573,
+      0.5547246932983398,
+      0.034303754568099976,
+      0.17539377510547638,
+      0.7696428894996643,
+      3.611563205718994,
+      0.7545309066772461,
+      0.6090882420539856,
+      0.4327039122581482,
+      0.3159092664718628,
+      0.423611044883728,
+      0.37216341495513916,
+      1.1464908123016357,
+      0.21319769322872162,
+      0.3727743327617645
+    ],
+    "code": " from typing import *\n\ndef count_distinct_characters(string: str) -> int:\n\n    return len(set(string.lower()))\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef count_distinct_characters(string: str) -> int:\n    return len(set(string.lower()))",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def count_distinct_characters(string: str) -> int:\n    return len(set(string.lower()))",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 32,
+          "children": [
+            {
+              "block_code": "    return len(set(string.lower()))",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 22,
+              "end_token": 32,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 32
+    }
+  }
+]

@@ -1,0 +1,88 @@
+[
+  {
+    "task_id": "HumanEval_41",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "<0x0A>",
+      "<0x0A>",
+      "def",
+      "▁car",
+      "_",
+      "race",
+      "_",
+      "coll",
+      "ision",
+      "(",
+      "n",
+      ":",
+      "▁int",
+      "):",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁n",
+      "**",
+      "2",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.551098823547363,
+      0.05299237370491028,
+      2.5528969764709473,
+      0.2712581753730774,
+      1.4483555555343628,
+      2.2432732582092285,
+      2.0919740200042725,
+      6.114471435546875,
+      3.8864784240722656,
+      6.40543270111084,
+      1.0617396831512451,
+      6.521405220031738,
+      0.941756546497345,
+      0.9474073648452759,
+      4.727858066558838,
+      1.4369549751281738,
+      0.3124478757381439,
+      0.8734886646270752,
+      0.08573424816131592,
+      0.2756943106651306,
+      4.566089153289795,
+      3.9252982139587402,
+      2.8221285343170166,
+      1.4542030096054077,
+      2.170196056365967
+    ],
+    "code": " from typing import *\n\n\n\n\n\ndef car_race_collision(n: int):\n\n    return n**2\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef car_race_collision(n: int):\n    return n**2",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def car_race_collision(n: int):\n    return n**2",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 6,
+          "children": [
+            {
+              "block_code": "    return n**2",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 6,
+              "end_token": 6,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 25
+    }
+  }
+]

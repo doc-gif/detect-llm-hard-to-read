@@ -1,0 +1,92 @@
+[
+  {
+    "task_id": "HumanEval_28",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "def",
+      "▁concaten",
+      "ate",
+      "(",
+      "strings",
+      ":",
+      "▁List",
+      "[",
+      "str",
+      "])",
+      "▁->",
+      "▁str",
+      ":",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁'",
+      "'.",
+      "join",
+      "(",
+      "strings",
+      ")",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.555868148803711,
+      0.053250301629304886,
+      2.553257465362549,
+      0.27075737714767456,
+      1.448249340057373,
+      6.463662147521973,
+      0.4902016520500183,
+      1.8640823364257812,
+      4.855526447296143,
+      0.7972227931022644,
+      1.9653465747833252,
+      0.2218935638666153,
+      0.6826906800270081,
+      0.9595168828964233,
+      0.09165854752063751,
+      0.33914312720298767,
+      0.0554983913898468,
+      0.39601606130599976,
+      0.7430253028869629,
+      2.416049003601074,
+      1.4581935405731201,
+      0.3303230106830597,
+      0.07392875105142593,
+      0.15497839450836182,
+      0.40679192543029785,
+      0.09052203595638275,
+      0.33682191371917725
+    ],
+    "code": " from typing import *\n\ndef concatenate(strings: List[str]) -> str:\n\n    return ''.join(strings)\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef concatenate(strings: List[str]) -> str:\n    return ''.join(strings)",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def concatenate(strings: List[str]) -> str:\n    return ''.join(strings)",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 27,
+          "children": [
+            {
+              "block_code": "    return ''.join(strings)",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 19,
+              "end_token": 27,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 27
+    }
+  }
+]

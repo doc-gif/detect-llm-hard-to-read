@@ -1,0 +1,88 @@
+[
+  {
+    "task_id": "HumanEval_34",
+    "tokens": [
+      "▁from",
+      "▁typing",
+      "▁import",
+      "▁*",
+      "<0x0A>",
+      "<0x0A>",
+      "<0x0A>",
+      "def",
+      "▁unique",
+      "(",
+      "l",
+      ":",
+      "▁list",
+      "):",
+      "<0x0A>",
+      "▁▁▁",
+      "▁return",
+      "▁sorted",
+      "(",
+      "list",
+      "(",
+      "set",
+      "(",
+      "l",
+      ")))",
+      "<0x0A>"
+    ],
+    "entropies": [
+      NaN,
+      5.551098823547363,
+      0.05299237370491028,
+      2.5528969764709473,
+      0.2712581753730774,
+      1.4483555555343628,
+      2.2432732582092285,
+      2.0919740200042725,
+      6.114471435546875,
+      1.2223091125488281,
+      4.129978179931641,
+      0.788007915019989,
+      1.2709650993347168,
+      1.2216426134109497,
+      0.14498397707939148,
+      0.2738706171512604,
+      3.047790050506592,
+      1.1721656322479248,
+      0.11093379557132721,
+      1.0131644010543823,
+      0.06604751944541931,
+      0.26460084319114685,
+      0.06648306548595428,
+      0.1009916216135025,
+      0.5756522417068481,
+      0.07246823608875275
+    ],
+    "code": " from typing import *\n\n\n\n\n\ndef unique(l: list):\n\n    return sorted(list(set(l)))\n",
+    "block_tree": {
+      "block_code": " from typing import *\ndef unique(l: list):\n    return sorted(list(set(l)))",
+      "start_line": 1,
+      "end_line": 3,
+      "children": [
+        {
+          "block_code": "def unique(l: list):\n    return sorted(list(set(l)))",
+          "start_line": 2,
+          "end_line": 3,
+          "start_token": 5,
+          "end_token": 6,
+          "children": [
+            {
+              "block_code": "    return sorted(list(set(l)))",
+              "start_line": 3,
+              "end_line": 3,
+              "start_token": 6,
+              "end_token": 6,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "start_token": 0,
+      "end_token": 25
+    }
+  }
+]
