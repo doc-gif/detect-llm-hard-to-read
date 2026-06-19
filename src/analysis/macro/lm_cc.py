@@ -2,7 +2,9 @@ import pandas as pd
 from typing import Optional
 import logging
 
-from .lm_cc_calculation import get_code_with_boundaries, CodeBlockProcessor, get_lmcc
+from macro.lm_cc_helper.calculate_code_with_boudaries import get_code_with_boundaries
+from macro.lm_cc_helper.code_block_processor import CodeBlockProcessor
+from macro.lm_cc_helper.get_lm_cc import get_lmcc
 from schema.records import ParquetSchema as PCol
 
 logger = logging.getLogger(__name__)
