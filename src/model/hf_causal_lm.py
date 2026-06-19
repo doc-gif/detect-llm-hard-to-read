@@ -113,34 +113,45 @@ class HFCausalLMAdapter(ModelAdapter):
         if n == 0:
             return InferenceOutput(surprisal=[], entropy=[])
 
-        # 💡 追記: 処理開始のログと時間計測スタート
         LOGGER.info("  -> [Full-sequence] Starting inference for %d tokens...", n)
         start_time = time.time()
 
-        input_ids = torch.tensor([token_ids], device=self._device)
+        # 💡 修正箇所1: BOSトークンを取得し、テンソルの先頭に付与する
+        bos_token_id = self._tokenizer.bos_token_id
+        has_bos = bos_token_id is not None
+
+        if has_bos:
+            input_list = [bos_token_id] + token_ids
+        else:
+            input_list = token_ids
+
+        input_ids = torch.tensor([input_list], device=self._device)
         outputs = self._model(input_ids=input_ids)
-        # logits: (1, seq_len, vocab) -> distribution predicting position t+1.
+
         logits = outputs.logits[0].float()
         log_probs = torch.log_softmax(logits, dim=-1)
         probs = log_probs.exp()
-
-        # Entropy of the predictive distribution at each position.
-        entropy_all = -(probs * log_probs).sum(dim=-1)  # (seq_len,)
+        entropy_all = -(probs * log_probs).sum(dim=-1)
 
         surprisal: List[Optional[float]] = [None] * n
         entropy: List[Optional[float]] = [None] * n
 
-        for t in range(1, n):
+        # 💡 修正箇所2: 予測ターゲットのインデックス参照を修正
+        for t in range(n):
             target = token_ids[t]
-            # Distribution at position t-1 predicts the token at position t.
-            surprisal[t] = float(-log_probs[t - 1, target].item())
-            entropy[t] = float(entropy_all[t - 1].item())
+            if has_bos:
+                # BOSが存在する場合、logits[t] が token_ids[t] を予測する分布となる
+                surprisal[t] = float(-log_probs[t, target].item())
+                entropy[t] = float(entropy_all[t].item())
+            else:
+                if t == 0:
+                    continue  # BOSがない場合、最初のトークンは文脈ゼロのため予測不能
+                surprisal[t] = float(-log_probs[t - 1, target].item())
+                entropy[t] = float(entropy_all[t - 1].item())
 
-        # Guard against numerical issues.
         surprisal = [None if (v is not None and math.isnan(v)) else v for v in surprisal]
         entropy = [None if (v is not None and math.isnan(v)) else v for v in entropy]
 
-        # 💡 追記: 経過時間の計算と終了ログ
         elapsed = time.time() - start_time
         LOGGER.info("  -> [Full-sequence] Finished inference in %.2f seconds.", elapsed)
 
@@ -157,25 +168,33 @@ class HFCausalLMAdapter(ModelAdapter):
         LOGGER.info("  -> Starting TRUE batched inference for %d windows (batch_size=%d)...", total_batches, batch_size)
         start_time = time.time()
 
-        # パディング用のトークンIDを取得（設定されていなければEOSを使う）
         pad_token_id = self._tokenizer.pad_token_id
         if pad_token_id is None:
             pad_token_id = self._tokenizer.eos_token_id or 0
 
+        bos_token_id = self._tokenizer.bos_token_id
+        has_bos = bos_token_id is not None
+
         results: List[InferenceOutput] = []
 
-        # 指定したバッチサイズ（例: 8件）ごとにチャンクとして処理し、メモリ爆発(OOM)を防ぐ
         for i in range(0, total_batches, batch_size):
             chunk = batch_token_ids[i: i + batch_size]
+
             max_len = max(len(seq) for seq in chunk)
+            if has_bos:
+                max_len += 1  # BOSを追加する分、最大長を1増やす
 
             padded_inputs = []
             attention_masks = []
             for seq in chunk:
-                pad_len = max_len - len(seq)
-                # 後ろにパディングを追加し、マスクを設定 (1: 有効, 0: 無視)
-                padded_inputs.append(seq + [pad_token_id] * pad_len)
-                attention_masks.append([1] * len(seq) + [0] * pad_len)
+                if has_bos:
+                    seq_with_bos = [bos_token_id] + seq
+                else:
+                    seq_with_bos = seq
+
+                pad_len = max_len - len(seq_with_bos)
+                padded_inputs.append(seq_with_bos + [pad_token_id] * pad_len)
+                attention_masks.append([1] * len(seq_with_bos) + [0] * pad_len)
 
             input_ids = torch.tensor(padded_inputs, device=self._device)
             attention_mask = torch.tensor(attention_masks, device=self._device)
@@ -186,16 +205,21 @@ class HFCausalLMAdapter(ModelAdapter):
             probs = log_probs.exp()
             entropy_all = -(probs * log_probs).sum(dim=-1)
 
-            # 結果を元の各シーケンスの長さに合わせて切り出し
             for j, seq in enumerate(chunk):
                 n = len(seq)
                 surprisal: List[Optional[float]] = [None] * n
                 entropy: List[Optional[float]] = [None] * n
 
-                for t in range(1, n):
+                for t in range(n):
                     target = seq[t]
-                    surprisal[t] = float(-log_probs[j, t - 1, target].item())
-                    entropy[t] = float(entropy_all[j, t - 1].item())
+                    if has_bos:
+                        surprisal[t] = float(-log_probs[j, t, target].item())
+                        entropy[t] = float(entropy_all[j, t].item())
+                    else:
+                        if t == 0:
+                            continue
+                        surprisal[t] = float(-log_probs[j, t - 1, target].item())
+                        entropy[t] = float(entropy_all[j, t - 1].item())
 
                 surprisal = [None if (v is not None and math.isnan(v)) else v for v in surprisal]
                 entropy = [None if (v is not None and math.isnan(v)) else v for v in entropy]

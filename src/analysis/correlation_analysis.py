@@ -39,7 +39,11 @@ SCORE_FILES = {
         "format": "nested"}
 }
 
-METRICS_TO_ANALYZE = [SummarySchema.LM_CC, SummarySchema.PPL, SummarySchema.LM_CC_DENSITY]
+METRICS_TO_ANALYZE = [
+    SummarySchema.LM_CC,
+    # SummarySchema.PPL,
+    # SummarySchema.LM_CC_DENSITY,
+]
 CONTROL_VARIABLE = SummarySchema.LOC
 
 
@@ -50,11 +54,11 @@ def get_significance_marker(p_val: float) -> str:
     """p値から論文用の有意水準マーカーを返す"""
     if np.isnan(p_val): return ""
     if p_val < 0.001:
-        return "***"
+        return "0.001 "
     elif p_val < 0.01:
-        return "** "
+        return "<0.01 "
     elif p_val < 0.05:
-        return "* "
+        return "<0.05 "
     else:
         return "n.s."
 
@@ -114,11 +118,19 @@ def group_by_metric(score, metric, loc, min_cnt):
     if mean_locs is not None:
         results = list(zip(mean_scores, mean_locs, mean_metrics, counts))
         results_sorted = sorted(results, key=lambda x: (x[2], -x[0]))
-        mean_scores, mean_locs, mean_metrics, counts = map(list, zip(*results_sorted))
+        mean_scores_sorted, mean_locs_sorted, mean_metrics_sorted, counts_sorted = zip(*results_sorted)
+        mean_scores = list(mean_scores_sorted)
+        mean_locs = list(mean_locs_sorted)
+        mean_metrics = list(mean_metrics_sorted)
+        counts = list(counts_sorted)
     else:
         results = list(zip(mean_scores, mean_metrics, counts))
         results_sorted = sorted(results, key=lambda x: (x[1], -x[0]))
-        mean_scores, mean_metrics, counts = map(list, zip(*results_sorted))
+        mean_scores_sorted, mean_metrics_sorted, counts_sorted = zip(*results_sorted)
+        mean_scores = list(mean_scores_sorted)
+        mean_locs = None
+        mean_metrics = list(mean_metrics_sorted)
+        counts = list(counts_sorted)
 
     return mean_scores, mean_locs, mean_metrics, counts
 
@@ -162,23 +174,25 @@ def calculate_single_correlation(score, metric, loc=None, min_cnt=10):
 
     if valid_count >= 2:
         x, y = mm_arr[valid_mask], ms_arr[valid_mask]
+        # ゼロ次相関分析の処理
         if loc is None:
             try:
                 sr = stats.spearmanr(x, y)
                 spearman_r = float(sr.correlation) if hasattr(sr, 'correlation') else float(sr[0])
                 spearman_p = float(sr.pvalue) if hasattr(sr, 'pvalue') else float(sr[1])
             except Exception:
-                pass
+                spearman_r = np.nan
+                spearman_p = np.nan
+        # 偏相関分析（制御:loc）の処理
         else:
             z = ml_arr[valid_mask]
 
-            # --- 💡 追加: 指標(x)と統制変数(z)の相関を計算 ---
+            # 指標(x:lm_cc)と統制変数(z:loc)の相関を計算
             try:
                 sr_mc = stats.spearmanr(x, z)
                 r_mc = float(sr_mc.correlation) if hasattr(sr_mc, 'correlation') else float(sr_mc[0])
             except Exception:
                 pass
-            # ------------------------------------------------
 
             df_temp = pd.DataFrame({"mean_metric": x, "mean_score": y, "mean_loc": z})
             try:
@@ -237,8 +251,8 @@ def main():
     datasets = df_summary['dataset'].unique()
 
     for ds in datasets:
-        print(f"\n{'=' * 70}\n📊 データセット: {ds}\n{'=' * 70}")
         if ds not in SCORE_FILES: continue
+        print(f"\n{'=' * 70}\n📊 データセット: {ds}\n{'=' * 70}")
 
         scores_dict = load_scores(ds, SCORE_FILES[ds])
         df_ds = df_summary.loc[df_summary['dataset'] == ds].copy()
