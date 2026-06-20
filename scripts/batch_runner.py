@@ -19,8 +19,8 @@ logging.basicConfig(
 
 # 1. 対象コードのディレクトリパス (複数指定可能)
 INPUT_DIRS = [
-    "../data/examples"
-    # "../data/humaneval",
+    # "../data/examples"
+    "../data/humaneval",
     # "../data/humaneval_simplified",
     # "../data/humaneval_simplified-top60",
     # "../data/xcodeeval/apr",
