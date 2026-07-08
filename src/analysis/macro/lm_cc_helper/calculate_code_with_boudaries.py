@@ -5,6 +5,8 @@ def get_code_with_boundaries(tokens, entropies, threshold=0.67):
     line_start_token = 0
     text = ""
     should_divide = False
+    semantic_unit_count = 1
+
     for idx, (token, entropy) in enumerate(zip(tokens, entropies)):
         # code llama
         token = token.replace("<0x0A>", "\n").replace("\u2581", " ")
@@ -24,8 +26,10 @@ def get_code_with_boundaries(tokens, entropies, threshold=0.67):
                 last_newline_pos = text.rfind('\n')
                 text = text[:last_newline_pos + 1] + "\n" + "=" * 30 + "\n" + text[last_newline_pos + 1:]
                 should_divide = False
+                semantic_unit_count += 1
+
         text += token
     if line_start_token < len(tokens):
         start_end_tokens.append((line_start_token, len(tokens) - 1))
 
-    return text, clean_code_lines, start_end_tokens
+    return text, clean_code_lines, start_end_tokens, semantic_unit_count

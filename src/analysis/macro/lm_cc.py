@@ -1,5 +1,5 @@
 import pandas as pd
-from typing import Optional
+from typing import Optional, Tuple
 import logging
 
 from macro.lm_cc_helper.calculate_code_with_boudaries import get_code_with_boundaries
@@ -10,7 +10,7 @@ from schema.records import ParquetSchema as PCol
 logger = logging.getLogger(__name__)
 
 
-def calculate(df_clean: pd.DataFrame) -> Optional[float]:
+def calculate(df_clean: pd.DataFrame) -> Optional[Tuple[float, int]]:
     """
     データフレーム内のトークンとエントロピー情報を用いて、
     先行研究のアルゴリズム (Tree-sitter AST解析) で LM-CC スコアを算出します。
@@ -26,7 +26,7 @@ def calculate(df_clean: pd.DataFrame) -> Optional[float]:
         entropies = df_clean[PCol.METRIC_ENTROPY].tolist()
 
         # 2. 境界の決定 (エントロピーが閾値0.67を超えた場所で境界線を引く)
-        code_with_boundaries, _, start_end_tokens = get_code_with_boundaries(
+        code_with_boundaries, _, start_end_tokens, semantic_unit_count = get_code_with_boundaries(
             tokens=tokens,
             entropies=entropies,
             threshold=0.67
@@ -43,7 +43,7 @@ def calculate(df_clean: pd.DataFrame) -> Optional[float]:
         # 4. ツリー構造から LM-CC スコアを計算 (深さと分岐の重み付け加算)
         score = get_lmcc(block_tree_dict)
 
-        return float(score)
+        return float(score), semantic_unit_count
 
     except Exception as e:
         # Tree-sitter のパースエラーや境界処理で失敗した場合は None を返す

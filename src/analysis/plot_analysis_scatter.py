@@ -42,6 +42,7 @@ SCORE_FILES = {
 # 散布図を作成したいメトリクスを指定
 METRICS_TO_ANALYZE = [
     SummarySchema.LM_CC,
+    SummarySchema.NUM_SEMANTIC_UNITS,
     # SummarySchema.PPL,
     # SummarySchema.LM_CC_DENSITY,
 ]

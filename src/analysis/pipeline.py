@@ -47,7 +47,7 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
     # 3. マクロ指標算出 (Macro Metrics Calculation)
     # ==========================================
     cal_perplexity = perplexity.calculate(df_clean)
-    cal_lm_cc = lm_cc.calculate(df_clean)
+    cal_lm_cc, semantic_unit_count = lm_cc.calculate(df_clean)
     cal_lm_cc_density = lm_cc_density.calculate(df_clean)
     cal_loc = loc.calculate(df_clean)
 
@@ -80,7 +80,8 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
         SCol.AVG_FIRST_TOKEN_SURPRISAL: avg_first_token_surprisal,
         SCol.AVG_CONTEXT_SURPRISAL_GAP: avg_context_surprisal_gap,
         SCol.TOTAL_TOKENS: len(df_clean),
-        SCol.NUM_FUNCTIONS: len(first_tokens_df) if not first_tokens_df.empty else 0
+        SCol.NUM_FUNCTIONS: len(first_tokens_df) if not first_tokens_df.empty else 0,
+        SCol.NUM_SEMANTIC_UNITS: semantic_unit_count,
     }
     return summary
 
