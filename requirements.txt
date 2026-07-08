@@ -14,3 +14,5 @@ tqdm
 seaborn
 matplotlib
 complexipy
+streamlit
+plotly
