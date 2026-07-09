@@ -70,68 +70,73 @@ def load_scores(dataset_name: str, config: dict) -> dict:
     return scores
 
 
-# ==========================================
-# メイン処理
-# ==========================================
-def main():
-    df_summary = pd.read_csv(SUMMARY_CSV_PATH)
+def run_analysis(csv_path: Path) -> list:
+    df_summary = pd.read_csv(csv_path)
     datasets = df_summary['dataset'].unique()
+
+    results_list = []  # 💡 結果を格納するリスト
 
     for ds in datasets:
         if ds not in SCORE_FILES: continue
-        print(f"\n{'=' * 70}\n📊 データセット: {ds}\n{'=' * 70}")
-
         scores_dict = load_scores(ds, SCORE_FILES[ds])
         df_ds = df_summary.loc[df_summary['dataset'] == ds].copy()
         df_ds['score'] = df_ds['uid'].map(scores_dict)
-
         df_ds = df_ds.dropna(subset=['score', CONTROL_VARIABLE])
-        print(f"  -> {len(df_ds)} 件のデータで分析を実行します。")
 
         for metric in METRICS_TO_ANALYZE:
             if metric not in df_ds.columns: continue
             df_target = df_ds.dropna(subset=[metric, 'score', CONTROL_VARIABLE]).copy()
             if len(df_target) < 10: continue
 
-            # データ配列の抽出
+            df_target = df_target.sort_values(by=[CONTROL_VARIABLE, metric, 'uid']).reset_index(drop=True)
+
             score_arr = df_target['score'].values
             metric_arr = df_target[metric].values
             loc_arr = df_target[CONTROL_VARIABLE].values
 
-            # 💡 先行研究の関数を呼び出して最適な偏相関とゼロ次相関を計算
             partial_corr, best_min_cnt_p = get_grouped_partial_corr(score_arr, metric_arr, loc_arr)
             zero_corr, best_min_cnt_z = get_grouped_partial_corr(score_arr, metric_arr, None)
 
-            print(f"\n  🔹 指標: {metric}")
-
-            # 偏相関の出力
+            # 偏相関の記録
             if partial_corr and partial_corr.get("partial_correlation"):
                 r_val = partial_corr["partial_correlation"].get("spearman-r")
                 p_val = partial_corr["partial_correlation"].get("spearman-pval")
                 bins = partial_corr.get("valid_groups", "N/A")
-
                 if r_val is not None and not np.isnan(r_val):
-                    sig = get_significance_marker(p_val)
-                    print(
-                        f"     [偏相関]   r = {r_val:>7.4f}, p = {p_val:.4f} ({sig:^4}) | Bins: {bins:>2}, min_cnt: {best_min_cnt_p:>2}, Control: {CONTROL_VARIABLE}")
-                else:
-                    print(f"     [偏相関]   計算不可")
-            else:
-                print(f"     [偏相関]   計算不可")
+                    results_list.append({
+                        "Dataset": ds, "Target": "Score", "Metric": metric, "Type": "Partial",
+                        "r": r_val, "p_value": p_val, "Bins": bins, "Min_Cnt": best_min_cnt_p,
+                        "Control": CONTROL_VARIABLE
+                    })
 
-            # ゼロ次相関の出力
+            # ゼロ次相関の記録
             if zero_corr and zero_corr.get("partial_correlation"):
                 r_val = zero_corr["partial_correlation"].get("spearman-r")
                 p_val = zero_corr["partial_correlation"].get("spearman-pval")
                 bins = zero_corr.get("valid_groups", "N/A")
-
                 if r_val is not None and not np.isnan(r_val):
-                    sig = get_significance_marker(p_val)
-                    print(
-                        f"     [ゼロ次相関] r = {r_val:>7.4f}, p = {p_val:.4f} ({sig:^4}) | Bins: {bins:>2}, min_cnt: {best_min_cnt_z:>2}")
-                else:
-                    print(f"     [ゼロ次相関] 計算不可")
+                    results_list.append({
+                        "Dataset": ds, "Target": "Score", "Metric": metric, "Type": "Zero-Order",
+                        "r": r_val, "p_value": p_val, "Bins": bins, "Min_Cnt": best_min_cnt_z, "Control": "None"
+                    })
+
+        # メトリクス間相関 (ゼロ次相関のみ)
+        metric1 = SummarySchema.LM_CC
+        metric2 = SummarySchema.NUM_SEMANTIC_UNITS
+        if metric1 in df_ds.columns and metric2 in df_ds.columns:
+            df_metric_corr = df_ds.dropna(subset=[metric1, metric2]).copy()
+            if len(df_metric_corr) >= 10:
+                df_metric_corr = df_metric_corr.sort_values(by=[metric1, metric2, 'uid']).reset_index(drop=True)
+                r_val, p_val = stats.spearmanr(df_metric_corr[metric1], df_metric_corr[metric2])
+                if r_val is not None and not np.isnan(r_val):
+                    results_list.append({
+                        "Dataset": ds, "Target": metric1, "Metric": metric2, "Type": "Zero-Order",
+                        "r": r_val, "p_value": p_val, "Bins": "N/A", "Min_Cnt": "N/A", "Control": "None"
+                    })
+
+    return results_list
 
 
+# 既存動作確認用
 if __name__ == "__main__":
-    main()
+    run_analysis(SUMMARY_CSV_PATH)

@@ -3,6 +3,8 @@ import sys
 from pathlib import Path
 import pandas as pd
 import traceback
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 from macro import perplexity, lm_cc, lm_cc_density, loc
 from micro import context_surprisal_gap, first_token_suprisal
@@ -25,13 +27,13 @@ ENRICHED_DIR = OUTPUT_DIR / "enriched"
 SUMMARIES_DIR = OUTPUT_DIR / "summaries"
 
 
-def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
+def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dict:
+    """1ファイルの処理（並列ワーカーで実行される関数）"""
     df = pd.read_parquet(parquet_path)
 
     # ==========================================
     # 1. データクレンジング (ノイズ除去)
     # ==========================================
-    # 予測対象外のトークン（BOSなど）を除外し、計算のベースとなる綺麗なデータを作成
     if PCol.METRIC_SURPRISAL in df.columns:
         df_clean = df[df[PCol.METRIC_SURPRISAL].notnull()].copy()
     else:
@@ -47,7 +49,7 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
     # 3. マクロ指標算出 (Macro Metrics Calculation)
     # ==========================================
     cal_perplexity = perplexity.calculate(df_clean)
-    cal_lm_cc, semantic_unit_count = lm_cc.calculate(df_clean)
+    cal_lm_cc, semantic_unit_count = lm_cc.calculate(df_clean, threshold=threshold)
     cal_lm_cc_density = lm_cc_density.calculate(df_clean)
     cal_loc = loc.calculate(df_clean)
 
@@ -64,12 +66,10 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
     out_parquet_path = ENRICHED_DIR / relative_path
     out_parquet_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # ギャップ列などが追加された「拡張版」のデータフレームを保存
     df_clean.to_parquet(out_parquet_path)
 
     uid = parquet_path.stem.replace("result_", "")
 
-    # スキーマ定義（SCol）に従ってサマリー辞書を構築
     summary = {
         SCol.UID: uid,
         SCol.DATASET: relative_path.parent.name,
@@ -86,7 +86,7 @@ def process_file(parquet_path: Path, base_in_dir: Path) -> dict:
     return summary
 
 
-def run_pipeline():
+def run_pipeline(threshold: float = 1.2515, suffix: str = ""):
     if not INPUT_DIR.exists():
         logging.error(f"入力ディレクトリが見つかりません: {INPUT_DIR}")
         sys.exit(1)
@@ -101,32 +101,50 @@ def run_pipeline():
         logging.error("❌ 処理対象のParquetファイルが見つかりません。")
         sys.exit(1)
 
-    logging.info(f"🚀 合計 {total_files} 件のParquetファイルを分析します...")
+    # 使用するCPUコア数を決定（OSを重くしないよう最大コア数から1つ残す）
+    max_workers = max(1, multiprocessing.cpu_count() - 1)
+    logging.info(f"🚀 合計 {total_files} 件のファイルを並列分析します (使用コア数: {max_workers})...")
 
     summary_list = []
     success_count = 0
     error_count = 0
 
-    for i, parquet_path in enumerate(parquet_files, 1):
-        progress = f"[{i}/{total_files}]"
-        logging.info(f"{progress} 分析中: {parquet_path.name}")
+    # 💡 ProcessPoolExecutorによるマルチプロセス処理
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
+        # タスクをキューに登録
+        future_to_path = {executor.submit(process_file, p, INPUT_DIR, threshold): p for p in parquet_files}
 
-        try:
-            summary = process_file(parquet_path, INPUT_DIR)
-            summary_list.append(summary)
-            success_count += 1
-        except Exception as e:
-            logging.error(f"{progress} ❌ エラー ({parquet_path.name}): {e}")
-            logging.error(traceback.format_exc())
-            error_count += 1
+        # 完了したものから順次結果を受け取る
+        for i, future in enumerate(as_completed(future_to_path), 1):
+            parquet_path = future_to_path[future]
+            try:
+                summary = future.result()
+                summary_list.append(summary)
+                success_count += 1
+            except Exception as e:
+                # エラー時のみ即座に出力
+                logging.error(f"\n❌ エラー ({parquet_path.name}): {e}")
+                logging.error(traceback.format_exc())
+                error_count += 1
+
+            # 💡 ログ出力の頻度を削減 (50件ごと、または最後の1件にのみ出力)
+            if i % 50 == 0 or i == total_files:
+                logging.info(f"進捗: [{i}/{total_files}] 完了 (成功: {success_count} / エラー: {error_count})")
 
     if summary_list:
         summary_df = pd.DataFrame(summary_list)
-        # SColの定義順にカラムを並び替える（オプションですが綺麗に整頓されます）
         cols = [getattr(SCol, k) for k in dir(SCol) if not k.startswith("_") and isinstance(getattr(SCol, k), str)]
         summary_df = summary_df[[c for c in cols if c in summary_df.columns]]
 
-        summary_csv_path = SUMMARIES_DIR / "analysis_summary.csv"
+        if SCol.DATASET in summary_df.columns and SCol.UID in summary_df.columns:
+            try:
+                summary_df['temp_sort_uid'] = pd.to_numeric(summary_df[SCol.UID].str.extract(r'(\d+)')[0])
+                summary_df = summary_df.sort_values(by=[SCol.DATASET, 'temp_sort_uid']).drop(columns=['temp_sort_uid'])
+            except:
+                summary_df = summary_df.sort_values(by=[SCol.DATASET, SCol.UID])
+            summary_df = summary_df.reset_index(drop=True)
+
+        summary_csv_path = SUMMARIES_DIR / f"analysis_summary{suffix}.csv"
         summary_df.to_csv(summary_csv_path, index=False)
         logging.info(f"💾 サマリーCSVを保存しました: {summary_csv_path}")
 

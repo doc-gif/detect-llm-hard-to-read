@@ -10,7 +10,7 @@ from schema.records import ParquetSchema as PCol
 logger = logging.getLogger(__name__)
 
 
-def calculate(df_clean: pd.DataFrame) -> Optional[Tuple[float, int]]:
+def calculate(df_clean: pd.DataFrame, threshold: float = 1.2515) -> Optional[Tuple[float, int]]:
     """
     データフレーム内のトークンとエントロピー情報を用いて、
     先行研究のアルゴリズム (Tree-sitter AST解析) で LM-CC スコアを算出します。
@@ -25,11 +25,12 @@ def calculate(df_clean: pd.DataFrame) -> Optional[Tuple[float, int]]:
         tokens = df_clean[PCol.TOKEN_STR].tolist()
         entropies = df_clean[PCol.METRIC_ENTROPY].tolist()
 
-        # 2. 境界の決定 (エントロピーが閾値0.67を超えた場所で境界線を引く)
+        # 2. 境界の決定 (エントロピーが閾値1.2515nats(80th percentile)を超えた場所で境界線を引く)
+        # 先行研究では、誤って67 percentileと解釈し論文を記載、ただしコードは0.67nats以上のトークンを閾値としていた。
         code_with_boundaries, _, start_end_tokens, semantic_unit_count = get_code_with_boundaries(
             tokens=tokens,
             entropies=entropies,
-            threshold=0.67
+            threshold=threshold
         )
 
         # 3. 構文解析 (Tree-sitter) によるブロック階層(ツリー構造)の構築
