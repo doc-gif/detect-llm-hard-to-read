@@ -65,47 +65,47 @@ def main():
     print("==================================================\n")
 
     # グラフの作成と保存
-    print("📈 エントロピーの分布図を生成しています...")
-    try:
-        import matplotlib.pyplot as plt
-
-        # 日本語フォントの簡易設定 (Windows: Meiryo, Mac: Hiragino)
-        plt.rcParams['font.family'] = ['Meiryo', 'Hiragino Maru Gothic Pro', 'sans-serif']
-
-        plt.figure(figsize=(12, 6))
-
-        # ヒストグラムの描画（ビンの数を100にして細かく分布を表示）
-        plt.hist(entropy_series, bins=100, color='skyblue', edgecolor='black', alpha=0.7)
-
-        # 重要な閾値を縦線でハイライト表示（50, 65, 80, 95）
-        # ※ 65は論文の67%付近の参考値として、80は本命のForking Tokensとして
-        highlight_percentiles = [50, 65, 80, 95]
-        colors = ['green', 'orange', 'red', 'purple']
-
-        for i, p in enumerate(highlight_percentiles):
-            if p in thresholds:
-                plt.axvline(x=thresholds[p], color=colors[i], linestyle='dashed', linewidth=2,
-                            label=f'{p}th Percentile ({thresholds[p]:.2f} nats)')
-
-        # グラフの装飾
-        plt.title("トークンエントロピーの分布 (Token Entropy Distribution)", fontsize=16)
-        plt.xlabel("トークンエントロピー [nats]", fontsize=14)
-        plt.ylabel("頻度 (Frequency)", fontsize=14)
-        plt.legend(fontsize=12)
-        plt.grid(axis='y', linestyle='--', alpha=0.7)
-        plt.tight_layout()
-
-        # 画像として保存 (results ディレクトリ直下)
-        output_image_path = project_root / "results" / "entropy_distribution.png"
-        # ディレクトリが存在しない場合は作成
-        output_image_path.parent.mkdir(parents=True, exist_ok=True)
-        plt.savefig(output_image_path)
-
-        print(f"✅ 分布図を保存しました: {output_image_path}")
-
-    except ImportError:
-        print("⚠️ matplotlibがインストールされていないため、分布図の作成をスキップしました。")
-        print("   グラフを作成する場合はターミナルで 'pip install matplotlib' を実行してください。")
+    # print("📈 エントロピーの分布図を生成しています...")
+    # try:
+    #     import matplotlib.pyplot as plt
+    #
+    #     # 日本語フォントの簡易設定 (Windows: Meiryo, Mac: Hiragino)
+    #     plt.rcParams['font.family'] = ['Meiryo', 'Hiragino Maru Gothic Pro', 'sans-serif']
+    #
+    #     plt.figure(figsize=(12, 6))
+    #
+    #     # ヒストグラムの描画（ビンの数を100にして細かく分布を表示）
+    #     plt.hist(entropy_series, bins=100, color='skyblue', edgecolor='black', alpha=0.7)
+    #
+    #     # 重要な閾値を縦線でハイライト表示（50, 65, 80, 95）
+    #     # ※ 65は論文の67%付近の参考値として、80は本命のForking Tokensとして
+    #     highlight_percentiles = [50, 65, 80, 95]
+    #     colors = ['green', 'orange', 'red', 'purple']
+    #
+    #     for i, p in enumerate(highlight_percentiles):
+    #         if p in thresholds:
+    #             plt.axvline(x=thresholds[p], color=colors[i], linestyle='dashed', linewidth=2,
+    #                         label=f'{p}th Percentile ({thresholds[p]:.2f} nats)')
+    #
+    #     # グラフの装飾
+    #     plt.title("トークンエントロピーの分布 (Token Entropy Distribution)", fontsize=16)
+    #     plt.xlabel("トークンエントロピー [nats]", fontsize=14)
+    #     plt.ylabel("頻度 (Frequency)", fontsize=14)
+    #     plt.legend(fontsize=12)
+    #     plt.grid(axis='y', linestyle='--', alpha=0.7)
+    #     plt.tight_layout()
+    #
+    #     # 画像として保存 (results ディレクトリ直下)
+    #     output_image_path = project_root / "results" / "entropy_distribution.png"
+    #     # ディレクトリが存在しない場合は作成
+    #     output_image_path.parent.mkdir(parents=True, exist_ok=True)
+    #     plt.savefig(output_image_path)
+    #
+    #     print(f"✅ 分布図を保存しました: {output_image_path}")
+    #
+    # except ImportError:
+    #     print("⚠️ matplotlibがインストールされていないため、分布図の作成をスキップしました。")
+    #     print("   グラフを作成する場合はターミナルで 'pip install matplotlib' を実行してください。")
 
 
 if __name__ == "__main__":
