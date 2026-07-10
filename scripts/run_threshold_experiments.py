@@ -14,6 +14,15 @@ from src.analysis.correlation_analysis import run_analysis
 def main():
     # 📝 先ほど計測した各パーセンタイルの閾値リスト
     thresholds = {
+        "p05": 0.0037,
+        "p10": 0.0114,
+        "p15": 0.0214,
+        "p20": 0.0335,
+        "p25": 0.0483,
+        "p30": 0.0675,
+        "p35": 0.0921,
+        "p40": 0.1244,
+        "p45": 0.1691,
         "p50": 0.2327,
         "p55": 0.3254,
         "p60": 0.4536,
@@ -40,8 +49,8 @@ def main():
         suffix = f"_{label}"
 
         # 1. パイプラインを実行して、この閾値用のサマリーCSVを生成
-        print("▶️ 1. Pipelineを実行中...")
-        run_pipeline(threshold=thr, suffix=suffix)
+        # print("▶️ 1. Pipelineを実行中...")
+        # run_pipeline(threshold=thr, suffix=suffix)
 
         # 2. 生成されたサマリーCSVを読み込んで相関分析を実行
         print("▶️ 2. 相関分析を実行中...")

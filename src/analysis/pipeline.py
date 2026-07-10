@@ -86,7 +86,7 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
     return summary
 
 
-def run_pipeline(threshold: float = 1.2515, suffix: str = ""):
+def run_pipeline(threshold: float = 0.0335, suffix: str = "_p20"):
     if not INPUT_DIR.exists():
         logging.error(f"入力ディレクトリが見つかりません: {INPUT_DIR}")
         sys.exit(1)

@@ -65,6 +65,12 @@ MODEL_OUTPUT_DIR = PROJECT_ROOT / "results" / "semantic_unit_model_comparison"
 TABLE_DIR = MODEL_OUTPUT_DIR / "tables"
 FIGURE_DIR = MODEL_OUTPUT_DIR / "figures"
 
+# ロバストネス確認: dataset制御ありの分析について、特定のdatasetを除外しても
+# 結論 (曲線構造の要否、hinge vs logisticの優劣) が変わらないかを確認する。
+# サンプル数が少なく semantic_unit のレンジも狭い humaneval を除外した場合を試す。
+# 空リスト [] にすれば、このロバストネス確認はスキップされる。
+ROBUSTNESS_EXCLUDE_DATASETS = ["humaneval"]
+
 
 # ==========================================
 # モデル定義
@@ -393,7 +399,9 @@ def fit_logistic_with_dataset(x: np.ndarray, y: np.ndarray, datasets: pd.Series)
 # ==========================================
 # dataset制御モデルの比較・プロット
 # ==========================================
-def compare_models_with_dataset_control(df: pd.DataFrame) -> pd.DataFrame:
+def compare_models_with_dataset_control(
+    df: pd.DataFrame, scope_label: str = "all", fig_suffix: str = "all"
+) -> pd.DataFrame:
     x = df[UNIT_COL].to_numpy(dtype=float)
     y = df[SCORE_COL].to_numpy(dtype=float)
     datasets = df[SummarySchema.DATASET]
@@ -434,27 +442,34 @@ def compare_models_with_dataset_control(df: pd.DataFrame) -> pd.DataFrame:
     result_df["delta_bic"] = result_df["bic"] - result_df["bic"].min()
     result_df = result_df.sort_values("aic").reset_index(drop=True)
 
-    logger.info("----- dataset切片制御あり (n=%d) -----", n)
+    logger.info("----- dataset切片制御あり: %s (n=%d, datasets=%s) -----",
+                scope_label, n, sorted(datasets.unique()))
     for _, row in result_df.iterrows():
         logger.info(
-            "%-14s  AIC=%.1f (Δ%.1f)  BIC=%.1f (Δ%.1f)",
-            row["model"], row["aic"], row["delta_aic"], row["bic"], row["delta_bic"],
+            "%-14s  AIC=%.1f (Δ%.1f)  BIC=%.1f (Δ%.1f)  params=%s",
+            row["model"], row["aic"], row["delta_aic"], row["bic"], row["delta_bic"], row["params"],
         )
     best = result_df.iloc[0]
-    logger.info("=> AIC/BIC 最良モデル (dataset制御あり): %s (%s)", best["model"], best["label"])
+    logger.info("=> AIC/BIC 最良モデル (dataset制御あり, %s): %s (%s)", scope_label, best["model"], best["label"])
     if best["delta_aic"] > 10 and len(result_df) > 1:
         second = result_df.iloc[1]
         logger.info(
             "   (ΔAIC=%.1f > 10 のため、%s より %s の方が強く支持される)",
             second["delta_aic"], second["model"], best["model"],
         )
+    elif len(result_df) > 1:
+        second = result_df.iloc[1]
+        logger.info(
+            "   (ΔAIC=%.1f <= 10 のため、%s と %s は統計的にほぼ同格)",
+            second["delta_aic"], second["model"], best["model"],
+        )
 
-    plot_dataset_controlled_comparison(df, fitted)
+    plot_dataset_controlled_comparison(df, fitted, fig_suffix=fig_suffix)
 
     return result_df
 
 
-def plot_dataset_controlled_comparison(df: pd.DataFrame, fitted: list) -> None:
+def plot_dataset_controlled_comparison(df: pd.DataFrame, fitted: list, fig_suffix: str = "all") -> None:
     unique_datasets = fitted[0]["datasets"]
     fig, axes = plt.subplots(1, len(unique_datasets), figsize=(6 * len(unique_datasets), 5), sharey=True)
     if len(unique_datasets) == 1:
@@ -484,7 +499,7 @@ def plot_dataset_controlled_comparison(df: pd.DataFrame, fitted: list) -> None:
     fig.tight_layout()
 
     FIGURE_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = FIGURE_DIR / "model_comparison_dataset_controlled.png"
+    out_path = FIGURE_DIR / f"model_comparison_dataset_controlled_{fig_suffix}.png"
     fig.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
     logger.info("グラフを保存しました: %s", out_path)
@@ -520,13 +535,34 @@ def main() -> None:
             result_ds.insert(0, "scope", str(ds))
             all_results.append(result_ds)
 
-    # dataset間の切片差 (難易度ベースラインの違い) を制御した上での比較
-    result_controlled = compare_models_with_dataset_control(df)
+    # dataset間の切片差 (難易度ベースラインの違い) を制御した上での比較 (全dataset)
+    result_controlled = compare_models_with_dataset_control(df, scope_label="all", fig_suffix="all")
     result_controlled.insert(0, "scope", "all_dataset_controlled")
     all_results.append(result_controlled)
 
+    # ロバストネス確認: 特定のdatasetを除外しても結論が変わらないか
+    if ROBUSTNESS_EXCLUDE_DATASETS:
+        df_robust = df.loc[~df[SummarySchema.DATASET].isin(ROBUSTNESS_EXCLUDE_DATASETS)]
+        remaining_datasets = df_robust[SummarySchema.DATASET].unique()
+        if len(df_robust) >= 30 and len(remaining_datasets) >= 2:
+            excl_label = "excl_" + "_".join(ROBUSTNESS_EXCLUDE_DATASETS)
+            logger.info("ロバストネス確認: %s を除外して再フィット (残り%d件, datasets=%s)",
+                        ROBUSTNESS_EXCLUDE_DATASETS, len(df_robust), sorted(remaining_datasets))
+            result_robust = compare_models_with_dataset_control(
+                df_robust, scope_label=excl_label, fig_suffix=excl_label
+            )
+            result_robust.insert(0, "scope", f"dataset_controlled_{excl_label}")
+            all_results.append(result_robust)
+        else:
+            logger.warning(
+                "ロバストネス確認をスキップ: 除外後のデータが不十分 (%d件, dataset数=%d)",
+                len(df_robust), len(remaining_datasets),
+            )
+
     combined = pd.concat(all_results, ignore_index=True)
-    combined_out = combined.drop(columns=["params"])  # CSV用に辞書列は除外
+    combined_out = combined.copy()
+    # params は辞書なので、CSVには文字列化して残す (完全に消さず参照できるようにする)
+    combined_out["params"] = combined_out["params"].apply(str)
     table_path = TABLE_DIR / "model_comparison_summary.csv"
     combined_out.to_csv(table_path, index=False)
     logger.info("比較結果テーブルを保存しました: %s", table_path)

@@ -57,7 +57,7 @@ def main():
 
     thresholds = {}
     # 50から95まで、5刻みでループ処理
-    for p in range(50, 100, 5):
+    for p in range(0, 100, 5):
         val = entropy_series.quantile(p / 100.0)
         thresholds[p] = val
         print(f"・{p}th Percentile (上位{100 - p:02d}%) : {val:.4f} nats")
