@@ -1,14 +1,23 @@
-"""semantic_unit の量から pass@1 を予測するモデルとして、
+"""semantic_unit の量と pass@1 の関係を調べるスクリプト。
 
+【現在のデフォルト動作: 検証ステップ1'.2（目視のみ）】
+仮説「Semantic Unitの量が増え一定値を超えると、LLMの回答精度が急に低下するのではないか」
+について、データセットごとに Semantic Unit の量を等幅ビン（n=5, 10）に分割し、
+ビンごとの pass@1 平均を折れ線グラフとして可視化して目視で傾向を確認する
+（run_visual_trend_analysis()、閾値 p67 / p80 × 3データセット × bin幅5,10 の
+全組み合わせで図を出力する）。統計的なモデル比較はこの段階のスコープ外。
+
+【将来的に使う場合: AIC/BICによるフルのモデル比較 (run_model_comparison())】
   (A) 区分線形モデル (hinge / broken-stick regression)
-      ある breakpoint を境に傾きが変わる -> 「崖」仮説に対応
-  (B) 滑らかな減衰モデル (4パラメータ・ロジスティック曲線)
+      ある breakpoint を境に "なめらかに" 傾きが変わる (真の不連続な崖ではない点に注意)
+  (B) ステップ関数モデル (真の崖仮説)
+      breakpoint を境に値が不連続にジャンプする
+  (C) 滑らかな減衰モデル (4パラメータ・ロジスティック曲線)
       連続的に減衰していく -> 「じわじわ蝕む」仮説に対応
 
-の2つをそれぞれ生データ (ビン分けする前の1レコード=1ファイル単位) にフィットし、
-AIC / BIC で当てはまりの良さをパラメータ数のペナルティ込みで比較する。
-
-参考として単純な線形回帰 (2パラメータ) もベースラインとして併記する。
+これらを生データ (ビン分けする前の1レコード=1ファイル単位) にフィットし、
+AIC / BIC で当てはまりの良さをパラメータ数のペナルティ込みで比較する
+(参考として単純な線形回帰もベースラインとして併記)。
 
 このスクリプトは {PROJECT_ROOT}/src/analysis/ 配下に、
 semantic_unit_threshold_analysis.py と同じディレクトリに配置することを想定。
@@ -94,6 +103,16 @@ def logistic4_model(x: np.ndarray, L: float, U: float, k: float, x0: float) -> n
     return L + (U - L) / (1.0 + np.exp(k * (x - x0)))
 
 
+def step_predict(x: np.ndarray, bp: float, level_high: float, level_low: float) -> np.ndarray:
+    """真の崖仮説: 不連続なステップ関数。
+    breakpoint を境に、値が連続的にではなく一気にジャンプする。
+
+    y = level_high   (x < bp)
+    y = level_low    (x >= bp)
+    """
+    return np.where(x < bp, level_high, level_low)
+
+
 # ==========================================
 # フィッティング
 # ==========================================
@@ -129,12 +148,45 @@ def fit_hinge(x: np.ndarray, y: np.ndarray) -> dict:
 
     return {
         "name": "hinge",
-        "label": "区分線形モデル (崖仮説)",
+        "label": "区分線形モデル (崖仮説・旧版/なめらか)",
         # breakpoint も自由パラメータとしてカウント (a, b, c, bp の4つ)
         "k_params": 4,
         "rss": best["rss"],
         "params": {"breakpoint": best["bp"], "a": best["a"], "b": best["b"], "c": best["c"]},
         "predict": lambda xx: hinge_predict(xx, best["bp"], best["a"], best["b"], best["c"]),
+    }
+
+
+def fit_step(x: np.ndarray, y: np.ndarray) -> dict:
+    """真の崖仮説: breakpoint を境に平均値が不連続にジャンプするステップ関数をフィットする。
+    区分線形(hinge)モデルと違い、breakpoint の前後で値がなめらかに繋がらない点が本質的に異なる。
+    """
+    lo, hi = np.percentile(x, BREAKPOINT_SEARCH_PERCENTILES)
+    candidates = np.linspace(lo, hi, BREAKPOINT_GRID_SIZE)
+
+    best = None
+    for bp in candidates:
+        mask_low = x < bp
+        mask_high = ~mask_low
+        if mask_low.sum() < 2 or mask_high.sum() < 2:
+            continue
+        level_high = float(np.mean(y[mask_low]))
+        level_low = float(np.mean(y[mask_high]))
+        y_pred = np.where(mask_low, level_high, level_low)
+        rss = float(np.sum((y - y_pred) ** 2))
+        if best is None or rss < best["rss"]:
+            best = {"bp": bp, "level_high": level_high, "level_low": level_low, "rss": rss}
+
+    if best is None:
+        return None
+
+    return {
+        "name": "step",
+        "label": "ステップ関数モデル (真の崖仮説)",
+        "k_params": 3,  # breakpoint, level_high, level_low
+        "rss": best["rss"],
+        "params": {"breakpoint": best["bp"], "level_high": best["level_high"], "level_low": best["level_low"]},
+        "predict": lambda xx: step_predict(xx, best["bp"], best["level_high"], best["level_low"]),
     }
 
 
@@ -186,7 +238,7 @@ def compare_models(df: pd.DataFrame, label: str) -> pd.DataFrame:
     y = df[SCORE_COL].to_numpy(dtype=float)
     n = len(x)
 
-    fitted = [fit_linear(x, y), fit_hinge(x, y)]
+    fitted = [fit_linear(x, y), fit_hinge(x, y), fit_step(x, y)]
     logistic_fit = fit_logistic(x, y)
     if logistic_fit is not None:
         fitted.append(logistic_fit)
@@ -194,7 +246,8 @@ def compare_models(df: pd.DataFrame, label: str) -> pd.DataFrame:
     # グラフの凡例は文字化け防止のため英語表記を使う
     plot_labels = {
         "linear": "linear (baseline)",
-        "hinge": "hinge / broken-stick (cliff hypothesis)",
+        "hinge": "hinge / broken-stick (smooth, NOT a true cliff)",
+        "step": "step function (true cliff hypothesis)",
         "logistic": "logistic decay (erosion hypothesis)",
     }
     for m in fitted:
@@ -247,21 +300,24 @@ def plot_model_comparison(x: np.ndarray, y: np.ndarray, fitted: list, label: str
     ax.scatter(x, y, s=10, alpha=0.15, color="gray", label="raw data")
 
     x_line = np.linspace(x.min(), x.max(), 400)
-    colors = {"linear": "tab:blue", "hinge": "tab:orange", "logistic": "tab:red"}
+    colors = {"linear": "tab:blue", "hinge": "tab:orange", "step": "tab:green", "logistic": "tab:red"}
     for m in fitted:
         y_line = m["predict"](x_line)
         ax.plot(x_line, y_line, color=colors.get(m["name"], "black"), linewidth=2.5, label=m["plot_label"])
         if m["name"] == "hinge":
             ax.axvline(m["params"]["breakpoint"], color=colors["hinge"], linestyle="--", alpha=0.6,
-                       label=f"breakpoint={m['params']['breakpoint']:.1f}")
+                       label=f"breakpoint(hinge)={m['params']['breakpoint']:.1f}")
+        if m["name"] == "step":
+            ax.axvline(m["params"]["breakpoint"], color=colors["step"], linestyle="--", alpha=0.6,
+                       label=f"breakpoint(step)={m['params']['breakpoint']:.1f}")
         if m["name"] == "logistic":
             ax.axvline(m["params"]["x0"], color=colors["logistic"], linestyle="--", alpha=0.6,
                        label=f"x0(midpoint)={m['params']['x0']:.1f}")
 
     ax.set_xlabel("num_semantic_units")
-    ax.set_ylabel("pass@1")
+    ax.set_ylabel("Accuracy(pass@1)")
     ax.set_ylim(-0.1, 1.1)
-    ax.set_title(f"model comparison: hinge (cliff) vs logistic (erosion) - {label}")
+    ax.set_title(f"model comparison: linear vs hinge vs step(true cliff) vs logistic - {label}")
     ax.legend(loc="upper right", fontsize=9)
     fig.tight_layout()
 
@@ -492,7 +548,7 @@ def plot_dataset_controlled_comparison(df: pd.DataFrame, fitted: list, fig_suffi
         ax.set_xlabel("num_semantic_units")
         ax.set_ylim(-0.1, 1.1)
 
-    axes[0].set_ylabel("pass@1")
+    axes[0].set_ylabel("Accuracy(pass@1)")
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=9, bbox_to_anchor=(0.5, -0.05))
     fig.suptitle("dataset-controlled model comparison (shared shape, per-dataset intercept)")
@@ -506,9 +562,9 @@ def plot_dataset_controlled_comparison(df: pd.DataFrame, fitted: list, fig_suffi
 
 
 # ==========================================
-# メイン処理
+# メイン処理: AIC/BIC モデル比較 (フル版。現在は 1'.2 のスコープ外だが将来使えるよう保持)
 # ==========================================
-def main() -> None:
+def run_model_comparison() -> None:
     if MERGED_CSV_PATH.exists():
         logger.info("マージ済みキャッシュを読み込みます: %s", MERGED_CSV_PATH)
         df = pd.read_csv(MERGED_CSV_PATH)
@@ -568,5 +624,107 @@ def main() -> None:
     logger.info("比較結果テーブルを保存しました: %s", table_path)
 
 
+# ==========================================
+# メイン処理: 検証ステップ1'.2 (目視のみ) 用のビン分けトレンド可視化
+# ==========================================
+# 検証ステップ1'.2: Semantic Unitの量が増え一定値を超えると、
+#                   LLMの回答精度が急に低下するのではないか。
+# 検証アプローチ: データセットごとに Semantic Unit の量をビン分けし、
+#                 ビンごとの pass@1 平均を折れ線グラフで可視化して目視で傾向を確認する。
+#                 (統計的なモデル比較は行わない。AIC/BICでの検証は run_model_comparison() 側で扱う)
+
+# Semantic Unit / LM-CC の算出に使うトークンエントロピー閾値 (percentile)。
+# [1] LM-CC 提唱論文 (Xie et al., 2026) のデフォルト設定 p67
+# [2] LM-CC が Semantic Unit の概念で参考にした論文の設定 p80
+VISUAL_SUMMARY_CSV_PATHS = {
+    "p67": PROJECT_ROOT / "results" / "summaries" / "analysis_summary_p67.csv",
+    "p80": PROJECT_ROOT / "results" / "summaries" / "analysis_summary_p80.csv",
+}
+
+# 対象データセット (タスクの種類が異なるため、pool せずデータセットごとに個別で見る)
+VISUAL_DATASETS = ["humaneval", "xcodeeval_apr", "xcodeeval_code_translation"]
+
+# ビン分けの基準 (Semantic Unit 分布を n ごとの等幅ビンに分割する)
+VISUAL_BIN_SIZES = [5, 10]
+
+VISUAL_OUTPUT_DIR = PROJECT_ROOT / "results" / "semantic_unit_visual_trend"
+VISUAL_FIGURE_DIR = VISUAL_OUTPUT_DIR / "figures"
+
+
+def compute_bin_trend(x: np.ndarray, y: np.ndarray, bin_size: int) -> pd.DataFrame:
+    """num_semantic_units を bin_size 幅の等幅ビンに分け、ビンごとの pass@1 平均・件数を返す。
+    (縦軸=サンプル数 n ではなく、縦軸=pass@1平均・横軸=semantic_unit を可視化する目的専用)
+    """
+    max_val = float(np.max(x))
+    n_bins = int(np.ceil((max_val + 1) / bin_size))
+    edges = np.arange(0, (n_bins + 1) * bin_size, bin_size)
+
+    bin_index = pd.cut(x, bins=edges, right=False, include_lowest=True)
+    tmp = pd.DataFrame({"bin": bin_index, "y": y})
+    grouped = tmp.groupby("bin", observed=True)["y"].agg(n="count", pass_at_1_mean="mean").reset_index()
+    grouped["bin_mid"] = grouped["bin"].apply(lambda iv: (iv.left + iv.right) / 2.0)
+    grouped = grouped.loc[grouped["n"] > 0].sort_values("bin_mid").reset_index(drop=True)
+    return grouped[["bin_mid", "n", "pass_at_1_mean"]]
+
+
+def plot_visual_trend(df: pd.DataFrame, bin_size: int, threshold_label: str, dataset_label: str) -> None:
+    x = df[UNIT_COL].to_numpy(dtype=float)
+    y = df[SCORE_COL].to_numpy(dtype=float)
+
+    trend = compute_bin_trend(x, y, bin_size)
+
+    fig, ax = plt.subplots(figsize=(8, 5.5))
+
+    # 生データはうっすらと散布図で背景に表示するのみ (主役はビンごとの平均の折れ線)
+    ax.scatter(x, y, s=14, alpha=0.12, color="gray", label="raw data (Accuracy(pass@1) per file)")
+
+    # ビンごとの Accuracy(pass@1) 平均の折れ線 (これが今回見たい主役)
+    ax.plot(trend["bin_mid"], trend["pass_at_1_mean"], color="tab:red", linewidth=2.5,
+             marker="o", markersize=5, label=f"Accuracy(pass@1) mean per bin (width={bin_size})")
+
+    ax.set_xlabel("num_semantic_units")
+    ax.set_ylabel("Accuracy(pass@1)")
+    ax.set_ylim(-0.05, 1.05)
+    ax.set_title(f"{dataset_label} | threshold={threshold_label} | bin width={bin_size}")
+    ax.legend(loc="upper right", fontsize=9)
+    fig.tight_layout()
+
+    VISUAL_FIGURE_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = VISUAL_FIGURE_DIR / f"trend_{threshold_label}_{dataset_label}_bin{bin_size}.png"
+    fig.savefig(out_path, dpi=150)
+    plt.close(fig)
+    logger.info("グラフを保存しました: %s", out_path)
+
+
+def run_visual_trend_analysis() -> None:
+    for threshold_label, csv_path in VISUAL_SUMMARY_CSV_PATHS.items():
+        if not csv_path.exists():
+            logger.warning("閾値 %s のサマリーCSVが見つからないためスキップ: %s", threshold_label, csv_path)
+            continue
+
+        logger.info("===== threshold=%s のデータを読み込み中 (%s) =====", threshold_label, csv_path)
+        merged = load_and_merge_summary(csv_path)
+        merged = merged.dropna(subset=[UNIT_COL, SCORE_COL])
+
+        # 1. データセットごとのプロット
+        for ds in VISUAL_DATASETS:
+            df_ds = merged.loc[merged[SummarySchema.DATASET] == ds]
+            if len(df_ds) < 10:
+                logger.warning("threshold=%s, dataset=%s はサンプル数が少なすぎるためスキップ (%d件)",
+                               threshold_label, ds, len(df_ds))
+                continue
+            for bin_size in VISUAL_BIN_SIZES:
+                plot_visual_trend(df_ds, bin_size, threshold_label, ds)
+
+        # 2. 全データセット合算 (ALL) のプロットを追加
+        logger.info("===== threshold=%s, dataset=ALL (合算) の処理 =====", threshold_label)
+        if len(merged) >= 10:
+            for bin_size in VISUAL_BIN_SIZES:
+                plot_visual_trend(merged, bin_size, threshold_label, "ALL_datasets")
+
+
 if __name__ == "__main__":
-    main()
+    # 検証ステップ1'.2 (目視のみ) のためのビン分けトレンド可視化。
+    # AIC/BICによるフルのモデル比較を行いたい場合は run_model_comparison() を呼び出す。
+    run_visual_trend_analysis()
+    # run_model_comparison()

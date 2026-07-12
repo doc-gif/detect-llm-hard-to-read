@@ -4,6 +4,7 @@ import json
 import logging
 from pathlib import Path
 import matplotlib.pyplot as plt
+import japanize_matplotlib
 import seaborn as sns
 import warnings
 
@@ -19,7 +20,7 @@ warnings.filterwarnings("ignore", message="The covariance matrix is rank-deficie
 # ==========================================
 # correlation_analysis.py と同じパス解決
 PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
-SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
+SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary_p80.csv"
 
 # 💡 プロット画像の保存先 (detect-llm-hard-to-read/results/plots)
 PLOT_OUTPUT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "plots"
@@ -92,25 +93,25 @@ def plot_scatter(dataset_name, metric_name, all_metrics, all_scores, mean_metric
 
     # タイトルと軸ラベルの設定
     plt.title(f"{metric_name} vs Accuracy (Pass@1)\n{dataset_name}", fontsize=14, pad=15)
-    plt.xlabel(f"{metric_name} Score", fontsize=12)
+    plt.xlabel(f"{metric_name}", fontsize=12)
     plt.ylabel("Accuracy (Pass@1)", fontsize=12)
 
     # y軸（正答率）の範囲を0.0〜1.05に固定
     plt.ylim(-0.05, 1.05)
 
-    # 💡 凡例をグラフの下（X軸ラベルのさらに下）の中央に2列で配置
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2, frameon=True, fontsize=11)
-
-    # 💡 相関係数とp値のテキストを1行にまとめ、凡例のさらに下に配置
-    textstr = f"Partial Spearman $r$ = {r_val:.3f}   |   $p$-value "
-    if p_val < 0.001:
-        textstr += "< 0.001"
-    else:
-        textstr += f"= {p_val:.3f}"
-
-    props = dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='gray')
-    plt.gca().text(0.5, -0.28, textstr, transform=plt.gca().transAxes, fontsize=12,
-                   verticalalignment='top', horizontalalignment='center', bbox=props)
+    # # 💡 凡例をグラフの下（X軸ラベルのさらに下）の中央に2列で配置
+    # plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2, frameon=True, fontsize=11)
+    #
+    # # 💡 相関係数とp値のテキストを1行にまとめ、凡例のさらに下に配置
+    # textstr = f"Partial Spearman $r$ = {r_val:.3f}   |   $p$-value "
+    # if p_val < 0.001:
+    #     textstr += "< 0.001"
+    # else:
+    #     textstr += f"= {p_val:.3f}"
+    #
+    # props = dict(boxstyle='round,pad=0.5', facecolor='white', alpha=0.9, edgecolor='gray')
+    # plt.gca().text(0.5, -0.28, textstr, transform=plt.gca().transAxes, fontsize=12,
+    #                verticalalignment='top', horizontalalignment='center', bbox=props)
 
     plt.tight_layout()
 

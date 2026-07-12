@@ -86,7 +86,7 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
     return summary
 
 
-def run_pipeline(threshold: float = 0.0335, suffix: str = "_p20"):
+def run_pipeline(threshold: float = 1.3238, suffix: str = "_p80"):
     if not INPUT_DIR.exists():
         logging.error(f"入力ディレクトリが見つかりません: {INPUT_DIR}")
         sys.exit(1)
@@ -94,7 +94,7 @@ def run_pipeline(threshold: float = 0.0335, suffix: str = "_p20"):
     ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
     SUMMARIES_DIR.mkdir(parents=True, exist_ok=True)
 
-    parquet_files = list(INPUT_DIR.rglob("*.parquet"))
+    parquet_files = list(INPUT_DIR.rglob("result_HumanEval_2.parquet"))
     total_files = len(parquet_files)
 
     if total_files == 0:
