@@ -163,15 +163,20 @@ def build_frequency_table(df: pd.DataFrame, bin_size: int) -> pd.DataFrame:
     """num_semantic_units を bin_size 幅の [a, b) ビンに分け、
     ビンごとの pass@1 平均・件数などを集計した度数分布表を返す。
     """
-    max_val = df[UNIT_COL].max()
+    raw_max = df[UNIT_COL].max()
+
+    # 【変更】横軸が最低でも200まで描画されるように、最大値の足切りライン(下限)を200に設定
+    max_val = max(200, raw_max)
+
     # 右端 [a, b) を確実にカバーするため、max_val を含む次の境界まで edges を用意
     n_bins = int(np.ceil((max_val + 1) / bin_size))
     edges = np.arange(0, (n_bins + 1) * bin_size, bin_size)
 
     bin_index = pd.cut(df[UNIT_COL], bins=edges, right=False, include_lowest=True)
 
+    # observed=False により、データがない区間も維持する
     grouped = (
-        df.groupby(bin_index, observed=True)[SCORE_COL]
+        df.groupby(bin_index, observed=False)[SCORE_COL]
         .agg(n="count", pass_at_1_mean="mean", pass_at_1_std="std")
         .reset_index()
         .rename(columns={UNIT_COL: "bin"})
@@ -180,12 +185,11 @@ def build_frequency_table(df: pd.DataFrame, bin_size: int) -> pd.DataFrame:
     grouped["bin_start"] = grouped["bin"].apply(lambda iv: iv.left)
     grouped["bin_end"] = grouped["bin"].apply(lambda iv: iv.right)
     grouped = grouped.drop(columns=["bin"])
-    grouped = grouped.loc[grouped["n"] > 0].reset_index(drop=True)
 
     # 参考情報として lm_cc の平均もあわせて記録しておく
     if LM_CC_COL in df.columns:
         lm_cc_index = pd.cut(df[UNIT_COL], bins=edges, right=False, include_lowest=True)
-        lm_cc_mean = df.groupby(lm_cc_index, observed=True)[LM_CC_COL].mean().reset_index(drop=True)
+        lm_cc_mean = df.groupby(lm_cc_index, observed=False)[LM_CC_COL].mean().reset_index(drop=True)
         grouped["lm_cc_mean"] = lm_cc_mean
 
     return grouped[["bin_start", "bin_end", "n", "pass_at_1_mean", "pass_at_1_std", "lm_cc_mean"]]
@@ -196,25 +200,32 @@ def build_frequency_table(df: pd.DataFrame, bin_size: int) -> pd.DataFrame:
 # ==========================================
 def plot_frequency_table(freq_df: pd.DataFrame, bin_size: int, dataset_label: str, output_path: Path) -> None:
     """n (棒グラフ) と pass@1 平均 (折れ線) を重ねたグラフを保存する。"""
-    fig, ax1 = plt.subplots(figsize=(max(8, len(freq_df) * 0.5), 6))
+
+    # 全データセットで1つの階級（ビン）の物理的な幅を完全に統一
+    # 1ビンあたり0.3インチを割り当て、左右の余白（2.0インチ）を加算
+    bar_width_inches = 0.3
+    margin_inches = 2.0
+    fig_width = len(freq_df) * bar_width_inches + margin_inches
+
+    # 算出した可変の横幅を用いてプロット領域を作成（縦幅は6インチで固定）
+    fig, ax1 = plt.subplots(figsize=(fig_width, 6))
 
     x = np.arange(len(freq_df))
     labels = [f"[{int(r.bin_start)},{int(r.bin_end)})" for r in freq_df.itertuples()]
 
-    ax1.bar(x, freq_df["n"], color="lightgray", alpha=0.7, label="n (sample count)")
+    ax1.bar(x, freq_df["n"], color="lightgray", alpha=0.7)
     ax1.set_ylabel("n (sample count)")
     ax1.set_xlabel(f"num_semantic_units bin (width={bin_size})")
     ax1.set_xticks(x)
-    ax1.set_xticklabels(labels, rotation=45, ha="right")
+
+    # 階級数が多い場合はラベルが重なるため、全て表示しつつ視認性を確保するよう調整
+    ax1.set_xticklabels(labels, rotation=90, ha="center", fontsize=8)
 
     ax2 = ax1.twinx()
-    ax2.plot(x, freq_df["pass_at_1_mean"], color="tab:red", marker="o", linewidth=2, label="pass@1 mean")
-    ax2.set_ylabel("pass@1 (mean)")
+    # データがない区間（NaN）は自動で線が途切れて描画され、グラフの断絶が視覚化される
+    ax2.plot(x, freq_df["pass_at_1_mean"], color="tab:red", marker="o", linewidth=2)
+    ax2.set_ylabel("Accuracy(pass@1) (mean)")
     ax2.set_ylim(-0.05, 1.05)
-
-    lines1, labels1 = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax2.legend(lines1 + lines2, labels1 + labels2, loc="upper right")
 
     ax1.set_title(f"num_semantic_units vs pass@1 (bin={bin_size}, dataset={dataset_label})")
     fig.tight_layout()
