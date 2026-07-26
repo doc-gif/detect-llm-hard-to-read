@@ -16,7 +16,7 @@ warnings.filterwarnings("ignore", message="The covariance matrix is rank-deficie
 # ⚙️ 設定エリア
 # ==========================================
 PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
-SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
+SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary_p67.csv"
 
 SCORE_FILES = {
     "humaneval": {"path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
@@ -37,6 +37,9 @@ METRICS_TO_ANALYZE = [
     SummarySchema.NUM_SEMANTIC_UNITS,
     # SummarySchema.PPL,
     # SummarySchema.LM_CC_DENSITY,
+    SummarySchema.CYCLOMATIC_COMPLEXITY,
+    SummarySchema.COGNITIVE_COMPLEXITY,
+    SummarySchema.LOC
 ]
 CONTROL_VARIABLE = SummarySchema.LOC
 
@@ -92,22 +95,22 @@ def run_analysis(csv_path: Path) -> list:
 
             score_arr = df_target['score'].values
             metric_arr = df_target[metric].values
-            loc_arr = df_target[CONTROL_VARIABLE].values
-
-            partial_corr, best_min_cnt_p = get_grouped_partial_corr(score_arr, metric_arr, loc_arr)
+            # loc_arr = df_target[CONTROL_VARIABLE].values
+            #
+            # partial_corr, best_min_cnt_p = get_grouped_partial_corr(score_arr, metric_arr, loc_arr)
             zero_corr, best_min_cnt_z = get_grouped_partial_corr(score_arr, metric_arr, None)
 
-            # 偏相関の記録
-            if partial_corr and partial_corr.get("partial_correlation"):
-                r_val = partial_corr["partial_correlation"].get("spearman-r")
-                p_val = partial_corr["partial_correlation"].get("spearman-pval")
-                bins = partial_corr.get("valid_groups", "N/A")
-                if r_val is not None and not np.isnan(r_val):
-                    results_list.append({
-                        "Dataset": ds, "Target": "Score", "Metric": metric, "Type": "Partial",
-                        "r": r_val, "p_value": p_val, "Bins": bins, "Min_Cnt": best_min_cnt_p,
-                        "Control": CONTROL_VARIABLE
-                    })
+            # # 偏相関の記録
+            # if partial_corr and partial_corr.get("partial_correlation"):
+            #     r_val = partial_corr["partial_correlation"].get("spearman-r")
+            #     p_val = partial_corr["partial_correlation"].get("spearman-pval")
+            #     bins = partial_corr.get("valid_groups", "N/A")
+            #     if r_val is not None and not np.isnan(r_val):
+            #         results_list.append({
+            #             "Dataset": ds, "Target": "Score", "Metric": metric, "Type": "Partial",
+            #             "r": r_val, "p_value": p_val, "Bins": bins, "Min_Cnt": best_min_cnt_p,
+            #             "Control": CONTROL_VARIABLE
+            #         })
 
             # ゼロ次相関の記録
             if zero_corr and zero_corr.get("partial_correlation"):
@@ -137,6 +140,60 @@ def run_analysis(csv_path: Path) -> list:
     return results_list
 
 
-# 既存動作確認用
+# ==========================================
+# 実行と結果出力
+# ==========================================
 if __name__ == "__main__":
-    run_analysis(SUMMARY_CSV_PATH)
+    import sys
+
+    # 💡 コマンドライン引数で別のCSVパスが指定された場合はそちらを優先する
+    target_csv = Path(sys.argv[1]) if len(sys.argv) > 1 else SUMMARY_CSV_PATH
+
+    logging.info(f"📊 解析対象ファイル: {target_csv}")
+    if not target_csv.exists():
+        logging.error(f"❌ 指定されたファイルが見つかりません: {target_csv}")
+        sys.exit(1)
+
+    # 分析の実行
+    results = run_analysis(target_csv)
+
+    if not results:
+        logging.warning("⚠️ 有効な相関結果が得られませんでした。データ件数や列名を確認してください。")
+    else:
+        # 結果をDataFrameに変換
+        df_results = pd.DataFrame(results)
+
+        # 有意水準マーカーを追加
+        df_results["Sig"] = df_results["p_value"].apply(get_significance_marker)
+
+        # 1. 回答精度(Score)との相関のみを抽出
+        df_score_corr = df_results[df_results["Target"] == "Score"].copy()
+
+        # 2. 相関係数の「絶対値(abs)」を表す作業列を作り、データセット名 ＞ 絶対値の降順 で並び替え
+        df_score_corr["r_abs"] = df_score_corr["r"].abs()
+        df_score_corr = df_score_corr.sort_values(
+            by=["Dataset", "r_abs"], ascending=[True, False]
+        ).reset_index(drop=True)
+
+        # コンソールに見やすく表示
+        print("\n" + "=" * 80)
+        print("📈 相関分析結果 (LLM回答精度 vs 各指標: rの絶対値ランキング順)")
+        print("=" * 80)
+
+        display_cols = ["Dataset", "Metric", "Type", "r", "p_value", "Sig", "Control", "Bins"]
+        print(df_score_corr[display_cols].to_string(index=False))
+        print("=" * 80)
+
+        # 3. メトリクス間相関（lm_cc vs num_semantic_units）があれば下部に別途表示
+        df_metric_corr = df_results[df_results["Target"] != "Score"]
+        if not df_metric_corr.empty:
+            print("\n" + "-" * 80)
+            print("🔗 メトリクス間相関 (lm_cc vs num_semantic_units)")
+            print("-" * 80)
+            print(df_metric_corr[["Dataset", "Target", "Metric", "r", "p_value", "Sig"]].to_string(index=False))
+            print("-" * 80 + "\n")
+
+        # 💡 必要に応じて結果をCSVとして保存（コメントアウトを解除）
+        # output_path = target_csv.parent / f"correlation_results_{target_csv.stem}.csv"
+        # df_results.to_csv(output_path, index=False)
+        # logging.info(f"💾 相関結果を保存しました: {output_path}")

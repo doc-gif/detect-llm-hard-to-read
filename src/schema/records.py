@@ -1,3 +1,4 @@
+# schema/records.py
 """Dataclasses describing the raw data collected in Phase 1.
 
 These structures are intentionally *flat and extensible*. Token-level
@@ -130,6 +131,7 @@ class CollectionResult:
             "tokens": [t.to_dict() for t in self.tokens],
         }
 
+
 class ParquetSchema:
     """
     Parquetファイルとして保存された後の、DataFrameのカラム名を定義するスキーマ。
@@ -154,18 +156,32 @@ class ParquetSchema:
     # --- Phase 2 で追加される拡張メトリクス ---
     CALC_SURPRISAL_GAP = "surprisal_gap"
 
+    # --- ParquetWriter が FileMetadata を非正規化して埋め込む meta_* 列 ---
+    # (writer/parquet_writer.py: `row[f"meta_{key}"] = value` を参照)
+    META_PREFIX = "meta_"
+    META_PROJECT = f"{META_PREFIX}project"
+    META_FILE = f"{META_PREFIX}file"
+    META_LANGUAGE = f"{META_PREFIX}language"
+    META_MODEL_NAME = f"{META_PREFIX}model_name"
+    META_MODEL_REVISION = f"{META_PREFIX}model_revision"
+    META_TOKENIZER_NAME = f"{META_PREFIX}tokenizer_name"
+    META_CONTEXT_STRATEGY = f"{META_PREFIX}context_strategy"
+    META_TOTAL_TOKENS = f"{META_PREFIX}total_tokens"
+    META_CREATED_AT = f"{META_PREFIX}created_at"
+    META_COLLECTOR_VERSION = f"{META_PREFIX}collector_version"
+
 
 class SummarySchema:
     """
     Phase 2 の分析結果として出力されるサマリーCSV (`analysis_summary.csv`) のカラム名定義。
 
     【📊 CSVデータの構造イメージ (1行 = 1ソースコードファイル)】
-    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+-----+-------------------+
-    | uid      | dataset    | ppl   | lm_cc      | lm_cc_density    | avg_first_token_surprisal | avg_context_surprisal_gap | total_tokens | num_functions | loc | num_semantic_unit |
-    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+-----+-------------------+
-    | 0a4af5.. | apr        | 1.05  | 12.4       | 6.2              | 0.12                      | 0.05                      | 150          | 2             | 12  | 20                |
-    | HumanE_0 | humaneval  | 2.10  | 8.5        | 8.5              | 0.88                      | 0.10                      | 45           | 1             | 10  | 30                |
-    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+-----+-------------------+
+    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+-----+-------------------+-----------------------+----------------------+
+    | uid      | dataset    | ppl   | lm_cc      | lm_cc_density    | avg_first_token_surprisal | avg_context_surprisal_gap | total_tokens | num_functions | loc | num_semantic_unit | cyclomatic_complexity | cognitive_complexity |
+    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+-----+-------------------+-----------------------+----------------------+
+    | 0a4af5.. | apr        | 1.05  | 12.4       | 6.2              | 0.12                      | 0.05                      | 150          | 2             | 12  | 20                | 4                      | 3                    |
+    | HumanE_0 | humaneval  | 2.10  | 8.5        | 8.5              | 0.88                      | 0.10                      | 45           | 1             | 10  | 30                | 2                      | 1                    |
+    +----------+------------+-------+------------+------------------+---------------------------+---------------------------+--------------+---------------+-----+-------------------+-----------------------+----------------------+
     """
     UID = "uid"
     DATASET = "dataset"
@@ -178,3 +194,7 @@ class SummarySchema:
     NUM_FUNCTIONS = "num_functions"
     LOC = "loc"
     NUM_SEMANTIC_UNITS = "num_semantic_units"
+
+    # --- 循環的複雑度 / 認知的複雑度 (Lizard / cognitive-complexity 由来) ---
+    CYCLOMATIC_COMPLEXITY = "cyclomatic_complexity"
+    COGNITIVE_COMPLEXITY = "cognitive_complexity"

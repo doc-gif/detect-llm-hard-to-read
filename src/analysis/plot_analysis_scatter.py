@@ -46,6 +46,9 @@ METRICS_TO_ANALYZE = [
     SummarySchema.NUM_SEMANTIC_UNITS,
     # SummarySchema.PPL,
     # SummarySchema.LM_CC_DENSITY,
+    SummarySchema.CYCLOMATIC_COMPLEXITY,
+    SummarySchema.COGNITIVE_COMPLEXITY,
+    SummarySchema.LOC
 ]
 CONTROL_VARIABLE = SummarySchema.LOC
 

@@ -151,7 +151,7 @@ class CodeBlockProcessor:
 
         clean_code = '\n'.join(code_lines)
         tree = self.parser.parse(bytes(clean_code, 'utf8'))
-        print(code_with_boundaries)
+        # print(code_with_boundaries)
         # 主处理流程
         root_block = {
             "block_code": clean_code,

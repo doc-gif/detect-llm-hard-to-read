@@ -1,3 +1,4 @@
+# src/analysis/pipeline.py
 import logging
 import sys
 from pathlib import Path
@@ -6,7 +7,7 @@ import traceback
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
-from macro import perplexity, lm_cc, lm_cc_density, loc
+from macro import perplexity, lm_cc, lm_cc_density, loc, cyclomatic_complexity, cognitive_complexity
 from micro import context_surprisal_gap, first_token_suprisal
 
 from schema.records import ParquetSchema as PCol
@@ -53,6 +54,14 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
     cal_lm_cc_density = lm_cc_density.calculate(df_clean)
     cal_loc = loc.calculate(df_clean)
 
+    # 💡 Cyclomatic Complexity / Cognitive Complexity は、Phase 1 の
+    # ParquetWriter が全行に埋め込んでいる meta_file（元ソースファイルの
+    # 絶対パス）から元ファイルをそのまま読み込んで静的解析する。
+    # df / df_clean どちらでも meta_file の値は同じなので、ここでは df_clean
+    # をそのまま渡す。
+    cal_cyclomatic_complexity = cyclomatic_complexity.calculate(df_clean)
+    cal_cognitive_complexity = cognitive_complexity.calculate(df_clean)
+
     # ==========================================
     # 4. ミクロ指標算出 (Micro Metrics Aggregation)
     # ==========================================
@@ -82,11 +91,13 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
         SCol.TOTAL_TOKENS: len(df_clean),
         SCol.NUM_FUNCTIONS: len(first_tokens_df) if not first_tokens_df.empty else 0,
         SCol.NUM_SEMANTIC_UNITS: semantic_unit_count,
+        SCol.CYCLOMATIC_COMPLEXITY: cal_cyclomatic_complexity,
+        SCol.COGNITIVE_COMPLEXITY: cal_cognitive_complexity,
     }
     return summary
 
 
-def run_pipeline(threshold: float = 1.3238, suffix: str = "_p80"):
+def run_pipeline(threshold: float = 0.6813, suffix: str = "_p67"):
     if not INPUT_DIR.exists():
         logging.error(f"入力ディレクトリが見つかりません: {INPUT_DIR}")
         sys.exit(1)
@@ -94,7 +105,7 @@ def run_pipeline(threshold: float = 1.3238, suffix: str = "_p80"):
     ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
     SUMMARIES_DIR.mkdir(parents=True, exist_ok=True)
 
-    parquet_files = list(INPUT_DIR.rglob("result_HumanEval_2.parquet"))
+    parquet_files = list(INPUT_DIR.rglob("result_*.parquet"))
     total_files = len(parquet_files)
 
     if total_files == 0:
