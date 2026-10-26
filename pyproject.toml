@@ -1,0 +1,5 @@
+# パッケージとしてはインストールしない (src/ を import ルートにして直接実行する)。
+# ここではツール設定だけを持つ。
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

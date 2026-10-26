@@ -63,15 +63,27 @@ def _build_token_records(
             byte_offset = offset_index.char_to_byte(char_start)
             byte_end = offset_index.char_to_byte(char_end)
             token_byte_len = byte_end - byte_offset
-            node = adapter.node_at_point(tree, line - 1, column)
+
+            # AST の参照位置は「トークン内の最初の非空白文字」にする。
+            # SentencePiece のトークンは "▁return" のように先頭に空白を含むため、
+            # トークン開始位置 (空白) で引くと return_statement ではなく外側の
+            # block などを指してしまう (collector 1.0.0 の挙動)。
+            token_text = source[char_start:char_end]
+            leading_ws = len(token_text) - len(token_text.lstrip())
+            anchor = char_start + leading_ws if leading_ws < len(token_text) else char_start
+            anchor_byte = offset_index.char_to_byte(anchor)
+            # Tree-sitter の列はバイト単位 (非 ASCII 文字を含む行で文字列と一致しない)
+            ts_row, ts_byte_column = offset_index.char_to_ts_point(anchor)
+            node = adapter.node_at_point(tree, ts_row, ts_byte_column)
+
             record.line = line
             record.column = column
             record.ast_type = adapter.ast_type(node)
             record.nesting_depth = adapter.nesting_depth(node)
-            record.function_id = adapter.function_id_for_point(functions, byte_offset)
-            record.is_statement_start = (
-                node is not None and adapter.is_statement_start_node(node)
-            )
+            # 関数スパンは "def" の位置から始まるので、ここも先頭空白を除いた位置で判定する
+            # ("▁def" の byte_offset は空白を指し、関数の外と判定されてしまう)
+            record.function_id = adapter.function_id_for_point(functions, anchor_byte)
+            record.is_statement_start = adapter.is_statement_start_at(node, anchor_byte)
             record.is_function_start = adapter.is_function_start_for_point(
                 functions, byte_offset, token_byte_len
             )
@@ -86,10 +98,16 @@ def _compute_isolated_surprisal(
     source: str,
     records: List[TokenRecord],
     windows: List[ContextWindow],
+    char_start_index: Dict[int, TokenRecord],
 ) -> None:
     """Re-infer each context window in isolation and fill isolated_surprisal.
 
     Mutates ``records`` in place. Tokens outside any window keep ``None``.
+    Snippet tokens are aligned to full-file tokens by their global character
+    start offset (``char_start_index``); snippet tokens whose start does not
+    coincide with a full-file token boundary are ignored.
+    Windows are processed in order, so for nested functions the later
+    (inner) window's value wins.
     """
     for window in windows:
         snippet = source[window.char_start : window.char_end]
@@ -104,43 +122,27 @@ def _compute_isolated_surprisal(
             if ls == 0 and le == 0:
                 continue
             global_start = window.char_start + ls
-            target = _find_record_by_char_start(records, global_start)
+            target = char_start_index.get(global_start)
             if target is not None:
                 target.token_metrics["isolated_surprisal"] = local_inf.surprisal[
                     local_idx
                 ]
 
 
-def _find_record_by_char_start(
-    records: List[TokenRecord], global_char_start: int
-) -> Optional[TokenRecord]:
-    """Best-effort match of a global char start to a token record.
+def _index_records_by_char_start(
+    records: List[TokenRecord], tokenized
+) -> Dict[int, TokenRecord]:
+    """Build a ``char_start -> record`` index for isolated alignment.
 
-    Note:
-        Tokenization of the isolated snippet can differ slightly from the
-        full-file tokenization at boundaries. We match on the resolved
-        ``column``/``line`` derived char start when possible; here we rely on
-        the precomputed mapping built by the caller.
+    Special tokens (offset ``(0, 0)``) are skipped, matching
+    :func:`_build_token_records`.
     """
-    return _CHAR_START_INDEX.get(global_char_start)
-
-
-# Module-level index populated per file (kept simple and explicit).
-_CHAR_START_INDEX: Dict[int, TokenRecord] = {}
-
-
-def _index_records_by_char_start(source: str, records: List[TokenRecord]) -> None:
-    """Build a char_start -> record index for isolated alignment."""
-    _CHAR_START_INDEX.clear()
-    offset_index = OffsetIndex.build(source)
-    # Reconstruct char_start from (line, column) for non-special tokens.
-    line_starts = OffsetIndex.build(source)._line_start_chars  # noqa: SLF001
-    for record in records:
-        if record.line is None or record.column is None:
+    index: Dict[int, TokenRecord] = {}
+    for record, (char_start, char_end) in zip(records, tokenized.offsets):
+        if char_start == 0 and char_end == 0:
             continue
-        char_start = line_starts[record.line - 1] + record.column
-        _CHAR_START_INDEX[char_start] = record
-    del offset_index
+        index[char_start] = record
+    return index
 
 
 def collect(
@@ -171,9 +173,9 @@ def collect(
     strategy = create_context_strategy(context_strategy_name)
     windows = strategy.build_windows(source, functions)
 
-    _index_records_by_char_start(source, records)
+    char_start_index = _index_records_by_char_start(records, tokenized)
     LOGGER.info("Running isolated inference over %d windows", len(windows))
-    _compute_isolated_surprisal(model, source, records, windows)
+    _compute_isolated_surprisal(model, source, records, windows, char_start_index)
 
     metadata = FileMetadata(
         project=project,
@@ -236,9 +238,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = parse_args(argv)
     configure_logging(getattr(logging, args.log_level.upper(), logging.INFO))
 
-    import logging as std_logging
     for logger_name in ["__main__", "httpx", "httpcore", "transformers", "huggingface_hub"]:
-        std_logging.getLogger(logger_name).setLevel(std_logging.WARNING)
+        logging.getLogger(logger_name).setLevel(logging.WARNING)
 
     try:
         source_path = Path(args.source).expanduser().resolve()

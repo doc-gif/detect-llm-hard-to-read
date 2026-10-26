@@ -15,39 +15,25 @@
    pass@1 平均 (折れ線) を重ねたグラフを画像として保存する。
    -> 急落する箇所があるかどうかは、このグラフを目視で判断する。
 
-このスクリプトは {PROJECT_ROOT}/src/analysis/ 配下に配置することを想定。
-{PROJECT_ROOT} は実行環境によらず自動算出する。
+パスは src/paths.py、スコアファイルは src/analysis/scores.py で一元管理している。
 """
 from __future__ import annotations
 
-import json
 import logging
 import sys
 from pathlib import Path
-from typing import Optional
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-# ==========================================
-# ⚙️ PROJECT_ROOT の自動算出
-# ==========================================
-# このファイルは {PROJECT_ROOT}/src/analysis/semantic_unit_threshold_analysis.py
-# に配置される想定。parents[2] が PROJECT_ROOT になる。
-THIS_FILE = Path(__file__).resolve()
-PROJECT_ROOT = THIS_FILE.parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
 
-# lm-cc プロジェクトなど、PROJECT_ROOT の兄弟ディレクトリを参照するための基点
-# (correlation_analysis.py の PROJECTS_DIR と同じ考え方)
-SIBLING_PROJECTS_DIR = PROJECT_ROOT.parent
+import paths  # noqa: E402
+from analysis.scores import MAIN_DATASETS, load_scores  # noqa: E402
+from schema.records import SummarySchema  # noqa: E402
 
-# import 解決のため、PROJECT_ROOT と PROJECT_ROOT/src を sys.path に追加しておく
-for p in (str(PROJECT_ROOT), str(PROJECT_ROOT / "src")):
-    if p not in sys.path:
-        sys.path.insert(0, p)
-
-from schema.records import SummarySchema  # noqa: E402  (sys.path 追加後に import)
+PROJECT_ROOT = paths.PROJECT_ROOT
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 logger = logging.getLogger(__name__)
@@ -57,23 +43,11 @@ logger = logging.getLogger(__name__)
 # ==========================================
 
 # 入力: percentile 80 / token entropy=1.3238 で絞り込み済みのサマリーCSV
-SUMMARY_CSV_PATH = PROJECT_ROOT / "results" / "summaries" / "analysis_summary_p80.csv"
+SUMMARY_CSV_PATH = paths.summary_csv("_p80")
 
-# pass@1 スコアの取得元 (correlation_analysis.py と同一の3種類のみを対象とする)
-SCORE_FILES = {
-    "humaneval": {
-        "path": SIBLING_PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
-        "format": "simple",
-    },
-    "xcodeeval_apr": {
-        "path": SIBLING_PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
-        "format": "nested",
-    },
-    "xcodeeval_code_translation": {
-        "path": SIBLING_PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
-        "format": "nested",
-    },
-}
+# pass@1 スコアを付ける対象データセット (correlation_analysis.py と同一の3種類)
+# スコアファイルの定義は analysis/scores.py の SCORE_FILES
+TARGET_DATASETS = list(MAIN_DATASETS)
 
 # ビン分けに使う semantic_unit 列 (num_semantic_units)
 UNIT_COL = SummarySchema.NUM_SEMANTIC_UNITS
@@ -100,26 +74,6 @@ FIGURE_DIR = OUTPUT_DIR / "figures"
 # ==========================================
 # データ読み込み・マージ
 # ==========================================
-def load_scores(dataset_name: str, config: dict) -> dict:
-    """correlation_analysis.py と同じロジックで pass@1 スコアを読み込む。"""
-    path = Path(config["path"])
-    if not path.exists():
-        logger.warning("スコアファイルが見つかりません (dataset=%s): %s", dataset_name, path)
-        return {}
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    scores: dict = {}
-    if config["format"] == "simple":
-        # humaneval 形式: { "HumanEval_0__xxx": 1.0, ... }
-        for k, v in data.items():
-            scores[k.split("__")[0]] = v
-    elif config["format"] == "nested":
-        # xcodeeval 形式: { "uid": {"pass@1": 0.5, ...}, ... }
-        for k, v in data.items():
-            scores[k] = v.get("pass@1", 0.0)
-    return scores
-
 
 def load_and_merge_summary(csv_path: Path) -> pd.DataFrame:
     """analysis_summary_p80.csv を読み込み、dataset ごとに pass@1 をマージする。"""
@@ -131,12 +85,12 @@ def load_and_merge_summary(csv_path: Path) -> pd.DataFrame:
 
     merged_frames = []
     for ds in datasets:
-        if ds not in SCORE_FILES:
+        if ds not in TARGET_DATASETS:
             n_skipped = len(df[df[SummarySchema.DATASET] == ds])
-            logger.warning("dataset '%s' は SCORE_FILES に無いためスキップ (%d行)", ds, n_skipped)
+            logger.warning("dataset '%s' は TARGET_DATASETS に無いためスキップ (%d行)", ds, n_skipped)
             continue
 
-        scores_dict = load_scores(ds, SCORE_FILES[ds])
+        scores_dict = load_scores(ds)
         df_ds = df.loc[df[SummarySchema.DATASET] == ds].copy()
         df_ds[SCORE_COL] = df_ds[SummarySchema.UID].map(scores_dict)
 
@@ -147,7 +101,7 @@ def load_and_merge_summary(csv_path: Path) -> pd.DataFrame:
         merged_frames.append(df_ds)
 
     if not merged_frames:
-        raise RuntimeError("マージできたデータが1件もありません。SCORE_FILES のパスを確認してください。")
+        raise RuntimeError("マージできたデータが1件もありません。analysis/scores.py の SCORE_FILES (LM_CC_ROOT) を確認してください。")
 
     merged = pd.concat(merged_frames, ignore_index=True)
     merged = merged.dropna(subset=[UNIT_COL, SCORE_COL])

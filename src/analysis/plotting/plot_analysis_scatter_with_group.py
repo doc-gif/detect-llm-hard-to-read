@@ -1,16 +1,25 @@
+"""LM-CC vs pass@1 の散布図に抽出グループ A/B/C の枠を重ね、各グループの行を CSV に書き出す。
+
+出力: results/plots/scatter_grouped_*.png, results/extracted_groups/extracted_groups_*.csv
+(extracted_groups は viewer_app.py の入力になる)
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
 import pandas as pd
 import numpy as np
-import json
 import logging
-from pathlib import Path
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import seaborn as sns
 import warnings
 
-# correlation_analysis.py で使用しているモジュールをインポート
+import paths
+from analysis.scores import MAIN_DATASETS, load_scores
 from schema.records import SummarySchema
-from src.analysis.util.correlation import get_grouped_partial_corr, group_by_metric
+from analysis.stats.correlation import get_grouped_partial_corr, group_by_metric
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 warnings.filterwarnings("ignore", message="The covariance matrix is rank-deficient")
@@ -18,25 +27,12 @@ warnings.filterwarnings("ignore", message="The covariance matrix is rank-deficie
 # ==========================================
 # ⚙️ 設定エリア
 # ==========================================
-PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
-SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
+SUMMARY_CSV_PATH = paths.summary_csv()
 
-PLOT_OUTPUT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "plots"
-PLOT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+PLOT_OUTPUT_DIR = paths.PLOTS_DIR
+EXTRACT_OUTPUT_DIR = paths.EXTRACTED_GROUPS_DIR
 
-EXTRACT_OUTPUT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "extracted_groups"
-EXTRACT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-SCORE_FILES = {
-    "humaneval": {"path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
-                  "format": "simple"},
-    "xcodeeval_apr": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
-        "format": "nested"},
-    "xcodeeval_code_translation": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
-        "format": "nested"}
-}
+TARGET_DATASETS = list(MAIN_DATASETS)
 
 METRICS_TO_ANALYZE = [SummarySchema.LM_CC]
 CONTROL_VARIABLE = SummarySchema.LOC
@@ -45,17 +41,6 @@ CONTROL_VARIABLE = SummarySchema.LOC
 # ==========================================
 # 共通関数
 # ==========================================
-def load_scores(dataset_name: str, config: dict) -> dict:
-    path = Path(config["path"])
-    if not path.exists(): return {}
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    scores = {}
-    if config["format"] == "simple":
-        for k, v in data.items(): scores[k.split("__")[0]] = v
-    elif config["format"] == "nested":
-        for k, v in data.items(): scores[k] = v.get("pass@1", 0.0)
-    return scores
 
 
 # ==========================================
@@ -159,14 +144,16 @@ def plot_scatter(dataset_name, metric_name, all_metrics, all_scores, mean_metric
 # メイン処理
 # ==========================================
 def main():
+    PLOT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    EXTRACT_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     df_summary = pd.read_csv(SUMMARY_CSV_PATH)
     datasets = df_summary['dataset'].unique()
 
     for ds in datasets:
-        if ds not in SCORE_FILES: continue
+        if ds not in TARGET_DATASETS: continue
         print(f"\n{'=' * 70}\n📊 データセット: {ds}\n{'=' * 70}")
 
-        scores_dict = load_scores(ds, SCORE_FILES[ds])
+        scores_dict = load_scores(ds)
         df_ds = df_summary.loc[df_summary['dataset'] == ds].copy()
         df_ds['score'] = df_ds['uid'].map(scores_dict)
 

@@ -19,7 +19,7 @@ from typing import Iterator, List, Optional, Union
 import pandas as pd
 from cognitive_complexity.api import get_cognitive_complexity
 
-from macro.complexity_helper.source_reconstruction import load_source_from_meta
+from analysis.macro.complexity_helper.source_reconstruction import load_source_from_meta
 
 logger = logging.getLogger(__name__)
 

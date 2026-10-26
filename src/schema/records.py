@@ -11,7 +11,13 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Optional
 
-COLLECTOR_VERSION = "1.0.0"
+# 1.1.0: AST 情報 (ast_type / nesting_depth / is_statement_start) をトークン内の
+#        最初の非空白文字で引くよう修正し、Tree-sitter にバイト単位の列を渡すよう修正。
+#        1.0.0 の is_statement_start は「文の先頭」ではなく「先頭の空白が文ノードの
+#        内側にあるトークン」を指していた。
+#        function_id も同様に先頭空白位置で判定していたため、インデントされた
+#        "▁def" トークンが関数外 (null) になっていた。
+COLLECTOR_VERSION = "1.1.0"
 
 
 class Fields:
@@ -48,7 +54,9 @@ class TokenRecord:
         ast_type: Tree-sitter node type covering the token.
         nesting_depth: Structural nesting depth of the token in the AST.
         function_id: Identifier of the enclosing function, if any.
-        is_statement_start: Whether the token starts a statement.
+        is_statement_start: Whether a statement node starts at the token's
+            first non-whitespace character.
+        is_function_start: Whether a function definition starts inside the token.
         token_metrics: Open-ended mapping of scalar metrics. Phase 1 fills
             ``surprisal``, ``entropy`` and ``isolated_surprisal``.
     """

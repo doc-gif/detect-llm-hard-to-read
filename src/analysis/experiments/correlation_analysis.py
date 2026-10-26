@@ -1,13 +1,22 @@
+"""summary CSV の各指標と LLM 正答率 (pass@1) のグループ化 Spearman 相関を算出する。
+
+実行: ``python src/analysis/experiments/correlation_analysis.py [summary.csv]``
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
 import pandas as pd
 import numpy as np
-import json
 import logging
-from pathlib import Path
 from scipy import stats
 import warnings
 
+import paths
+from analysis.scores import MAIN_DATASETS, load_scores
 from schema.records import SummarySchema
-from src.analysis.util.correlation import get_grouped_partial_corr
+from analysis.stats.correlation import get_grouped_partial_corr
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 warnings.filterwarnings("ignore", message="The covariance matrix is rank-deficient")
@@ -15,22 +24,11 @@ warnings.filterwarnings("ignore", message="The covariance matrix is rank-deficie
 # ==========================================
 # ⚙️ 設定エリア
 # ==========================================
-PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
-SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary_p67.csv"
+SUMMARY_CSV_PATH = paths.summary_csv("_p67")
 
-SCORE_FILES = {
-    "humaneval": {"path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
-                  "format": "simple"},
-    # "humaneval_simplified-top60": {"path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json", "format": "simple"},
-    "xcodeeval_apr": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
-        "format": "nested"},
-    # "xcodeeval_simplified-top50_apr": {"path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json", "format": "nested"},
-    "xcodeeval_code_translation": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
-        "format": "nested"},
-    # "xcodeeval_simplified-top50_code_translation": {"path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json", "format": "nested"}
-}
+# 分析対象のデータセット (スコアファイルの定義は analysis/scores.py の SCORE_FILES)
+# 簡略化版も見たい場合は "humaneval_simplified-top60" などを追加する
+TARGET_DATASETS = list(MAIN_DATASETS)
 
 METRICS_TO_ANALYZE = [
     SummarySchema.LM_CC,
@@ -60,19 +58,6 @@ def get_significance_marker(p_val: float) -> str:
         return "n.s."
 
 
-def load_scores(dataset_name: str, config: dict) -> dict:
-    path = Path(config["path"])
-    if not path.exists(): return {}
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    scores = {}
-    if config["format"] == "simple":
-        for k, v in data.items(): scores[k.split("__")[0]] = v
-    elif config["format"] == "nested":
-        for k, v in data.items(): scores[k] = v.get("pass@1", 0.0)
-    return scores
-
-
 def run_analysis(csv_path: Path) -> list:
     df_summary = pd.read_csv(csv_path)
     datasets = df_summary['dataset'].unique()
@@ -80,8 +65,8 @@ def run_analysis(csv_path: Path) -> list:
     results_list = []  # 💡 結果を格納するリスト
 
     for ds in datasets:
-        if ds not in SCORE_FILES: continue
-        scores_dict = load_scores(ds, SCORE_FILES[ds])
+        if ds not in TARGET_DATASETS: continue
+        scores_dict = load_scores(ds)
         df_ds = df_summary.loc[df_summary['dataset'] == ds].copy()
         df_ds['score'] = df_ds['uid'].map(scores_dict)
         df_ds = df_ds.dropna(subset=['score', CONTROL_VARIABLE])
@@ -144,8 +129,6 @@ def run_analysis(csv_path: Path) -> list:
 # 実行と結果出力
 # ==========================================
 if __name__ == "__main__":
-    import sys
-
     # 💡 コマンドライン引数で別のCSVパスが指定された場合はそちらを優先する
     target_csv = Path(sys.argv[1]) if len(sys.argv) > 1 else SUMMARY_CSV_PATH
 

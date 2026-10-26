@@ -1,15 +1,20 @@
-import pandas as pd
+"""results/enriched の全トークンエントロピーからパーセンタイル閾値を算出して表示する。
+
+ここで得た値が scripts/run_threshold_experiments.py の閾値リストになっている。
+"""
+import sys
 from pathlib import Path
-import os
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
+import pandas as pd
+
+import paths
 
 
 def main():
-    # 実行ディレクトリ (src/analysis) からプロジェクトルートへのパスを解決
-    current_dir = Path(__file__).resolve().parent
-    project_root = current_dir.parent.parent
-
     # Parquetファイルが格納されているベースディレクトリ
-    enriched_dir = project_root / "results" / "enriched"
+    enriched_dir = paths.ENRICHED_DIR
 
     # 検索対象の3つのディレクトリ
     dirs_to_search = [

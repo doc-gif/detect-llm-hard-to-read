@@ -1,16 +1,23 @@
+"""閾値 (パーセンタイル) ごとの相関係数の推移を描く。
+
+入力: results/experiments/threshold_correlation_results.csv (scripts/run_threshold_experiments.py の出力)
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from pathlib import Path
+
+import paths
 
 
 def main():
     # パス設定
-    current_dir = Path(__file__).resolve().parent
-    project_root = current_dir.parent.parent
-
-    results_csv_path = project_root / "results" / "experiments" / "threshold_correlation_results.csv"
-    output_dir = project_root / "results" / "experiments" / "plots"
+    results_csv_path = paths.EXPERIMENTS_DIR / "threshold_correlation_results.csv"
+    output_dir = paths.EXPERIMENTS_DIR / "plots"
 
     if not results_csv_path.exists():
         print(f"❌ 結果CSVが見つかりません。先に run_threshold_experiments.py を実行してください。")

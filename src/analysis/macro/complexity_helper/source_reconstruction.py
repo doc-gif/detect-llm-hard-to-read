@@ -17,6 +17,7 @@ from typing import Optional, Tuple
 
 import pandas as pd
 
+from paths import resolve_data_path
 from schema.records import ParquetSchema as PCol
 
 logger = logging.getLogger(__name__)
@@ -30,7 +31,9 @@ def load_source_from_meta(
 
     `ParquetWriter` はファイル単位のメタデータ（元ファイルの絶対パス含む）を
     全トークン行に非正規化して埋め込んでいるため、どの行からでも
-    （先頭行で十分）元パスを取得できる。
+    （先頭行で十分）元パスを取得できる。記録されたパスが存在しない場合
+    （別マシンで Phase 1 を実行した場合など）は、パス中の ``data/`` 以降を
+    このリポジトリの ``data/`` に付け替えて探す（`paths.resolve_data_path`）。
 
     Args:
         df: `meta_file` 列を含むトークン単位の DataFrame。
@@ -51,7 +54,8 @@ def load_source_from_meta(
         logger.warning("Empty '%s' value; cannot locate original source file.", file_col)
         return None
 
-    path = Path(str(path_str))
+    # meta_file は Phase 1 実行マシンの絶対パスなので、この環境の data/ に付け替える
+    path = resolve_data_path(str(path_str))
     try:
         return path.read_text(encoding="utf-8"), path
     except OSError as e:

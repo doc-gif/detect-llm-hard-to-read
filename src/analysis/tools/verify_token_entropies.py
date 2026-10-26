@@ -1,8 +1,15 @@
+"""out/humaneval のトークン列・エントロピーが先行研究 lm-cc の値と一致するか検証する。"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
 import json
 import numpy as np
 import pandas as pd
-from pathlib import Path
 import logging
+
+import paths
 
 # --- ログの設定 ---
 logging.basicConfig(
@@ -13,8 +20,8 @@ logging.basicConfig(
 # ==========================================
 # ⚙️ 設定エリア (環境に合わせてパスを変更してください)
 # ==========================================
-BASELINE_JSON_PATH = "/Users/hyoishitobi/PycharmProjects/lm-cc/results/humaneval-ier/entropy/entropies-CodeLlama-7b-hf-1.0.json"
-MY_OUT_DIR = "../out/humaneval"
+BASELINE_JSON_PATH = paths.LM_CC_RESULTS_DIR / "humaneval-ier" / "entropy" / "entropies-CodeLlama-7b-hf-1.0.json"
+MY_OUT_DIR = paths.OUT_DIR / "humaneval"
 
 # 許容する最大誤差（float16 や MPS/CUDA の演算誤差を考慮して 1e-3 とする）
 ERROR_TOLERANCE = 1e-3

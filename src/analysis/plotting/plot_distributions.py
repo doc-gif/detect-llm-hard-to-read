@@ -1,11 +1,19 @@
-import pandas as pd
-import numpy as np
-import json
-import logging
+"""LM-CC / PPL vs pass@1 の散布図 (raw と ビン処理済み) をデータセットごとに描く。
+
+出力: results/plots/<dataset>/<metric>_{raw,processed}.png
+"""
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
+import pandas as pd
+import logging
 import matplotlib.pyplot as plt
 import seaborn as plt_sns
 
+import paths
+from analysis.scores import SCORE_FILES, load_scores
 from schema.records import SummarySchema
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -13,53 +21,13 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 # ==========================================
 # ⚙️ 設定エリア
 # ==========================================
-from pathlib import Path
-
-PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
-
-SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
+SUMMARY_CSV_PATH = paths.summary_csv()
 
 # グラフを保存する大元の出力先ディレクトリ
-OUTPUT_PLOT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "plots"
+OUTPUT_PLOT_DIR = paths.PLOTS_DIR
 
-SCORE_FILES = {
-    "humaneval": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
-        "format": "simple"
-    },
-    # "humaneval_simplified": {
-    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
-    #     "format": "simple"
-    # },
-    "humaneval_simplified-top60": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
-        "format": "simple"
-    },
-    "xcodeeval_apr": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
-        "format": "nested"
-    },
-    # "xcodeeval_simplified_apr": {
-    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
-    #     "format": "nested"
-    # },
-    "xcodeeval_simplified-top50_apr": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
-        "format": "nested"
-    },
-    "xcodeeval_code_translation": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
-        "format": "nested"
-    },
-    # "xcodeeval_simplified_code_translation": {
-    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
-    #     "format": "nested"
-    # },
-    "xcodeeval_simplified-top50_code_translation": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
-        "format": "nested"
-    }
-}
+# スコアファイルが登録されている全データセット (簡略化版を含む) を対象にする
+TARGET_DATASETS = list(SCORE_FILES)
 
 METRIC_LABELS = {
     SummarySchema.LM_CC: "Language Model Cognitive Complexity (LM-CC)",
@@ -70,22 +38,6 @@ METRIC_LABELS = {
 # ==========================================
 # 関数定義
 # ==========================================
-def load_scores(dataset_name: str, config: dict) -> dict:
-    path = Path(config["path"])
-    if not path.exists():
-        return {}
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    scores = {}
-    if config["format"] == "simple":
-        for k, v in data.items():
-            uid = k.split("__")[0]
-            scores[uid] = v
-    elif config["format"] == "nested":
-        for k, v in data.items():
-            scores[k] = v.get("pass@1", 0.0)
-    return scores
 
 
 def create_scatter(df: pd.DataFrame, x_col: str, y_col: str, ax: plt.Axes, title: str, x_label: str,
@@ -152,10 +104,10 @@ def main():
     print("🚀 分割された分布図の生成を開始します...")
 
     for ds in datasets:
-        if ds not in SCORE_FILES:
+        if ds not in TARGET_DATASETS:
             continue
 
-        scores_dict = load_scores(ds, SCORE_FILES[ds])
+        scores_dict = load_scores(ds)
         df_ds = df_summary[df_summary['dataset'] == ds].copy()
         df_ds['score'] = df_ds['uid'].map(scores_dict)
 

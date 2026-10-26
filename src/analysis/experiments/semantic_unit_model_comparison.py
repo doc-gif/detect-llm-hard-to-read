@@ -19,9 +19,7 @@
 AIC / BIC で当てはまりの良さをパラメータ数のペナルティ込みで比較する
 (参考として単純な線形回帰もベースラインとして併記)。
 
-このスクリプトは {PROJECT_ROOT}/src/analysis/ 配下に、
-semantic_unit_threshold_analysis.py と同じディレクトリに配置することを想定。
-(そちらのマージ処理・パス解決ロジックを再利用するため)
+semantic_unit_threshold_analysis.py のマージ処理・パス定義を再利用する。
 """
 from __future__ import annotations
 
@@ -38,11 +36,9 @@ from scipy.optimize import curve_fit
 # ==========================================
 # semantic_unit_threshold_analysis.py の資産を再利用
 # ==========================================
-THIS_FILE = Path(__file__).resolve()
-if str(THIS_FILE.parent) not in sys.path:
-    sys.path.insert(0, str(THIS_FILE.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
 
-from semantic_unit_threshold_analysis import (  # noqa: E402
+from analysis.experiments.semantic_unit_threshold_analysis import (  # noqa: E402
     PROJECT_ROOT,
     SUMMARY_CSV_PATH,
     OUTPUT_DIR,
