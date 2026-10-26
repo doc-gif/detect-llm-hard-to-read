@@ -1,11 +1,11 @@
-# データセット × 変換をまとめて回すためのテンプレート (計測はユーザーの Mac で実行する)
+# データセットと変換の組み合わせをまとめて実行するためのテンプレート (計測はユーザーの Mac で実行する)
 #   python scripts/equivalence_experiment.py scan --config configs/equivalence/template.toml --dataset all
 #   python scripts/equivalence_experiment.py all  --config configs/equivalence/template.toml --dataset all
 #   python scripts/equivalence_experiment.py all  --config configs/equivalence/template.toml --dataset xcodeeval_apr --limit 20
 #
-# --dataset / --transform で差し替えると、組み合わせごとに results/equivalence/<変換>_<データセット>/ になる。
-# 計測条件 (transform / measure / thresholds / behavior / accuracy) を変えるときは
-# 名前も変えること (例: --name "ifelse_paren_{dataset}")。同じディレクトリで条件を混ぜるとエラーにしている。
+# --dataset や --transform で差し替えると、組み合わせごとに results/equivalence/<変換名>_<データセット名>/ に出力する。
+# 計測条件 (transform / measure / thresholds / behavior / accuracy) を変えるときは、実験名も変えること
+# (例: --name "ifelse_paren_{dataset}")。条件の異なる結果を同じディレクトリに出力しようとするとエラーになる。
 
 [experiment]
 name = "{transform}_{dataset}"        # {transform} / {dataset} は変換名・データセット名に置き換わる
