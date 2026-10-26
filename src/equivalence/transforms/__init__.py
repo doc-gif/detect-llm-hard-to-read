@@ -1,7 +1,7 @@
 """等価変換の登録と生成。"""
 from __future__ import annotations
 
-from typing import Any, Dict, Type
+from typing import Any, Dict, List, Type
 
 from .base import (
     STATUS_FAILED,
@@ -28,10 +28,14 @@ def create_transformation(name: str, **options: Any) -> Transformation:
     return _REGISTRY[name](**options)
 
 
+def available_transformations() -> List[str]:
+    return sorted(_REGISTRY)
+
+
 register_transformation(IfElseSwap)
 
 __all__ = [
     "STATUS_OK", "STATUS_NOT_APPLICABLE", "STATUS_FAILED",
     "Candidate", "LineMapping", "Transformation", "TransformOutcome",
-    "IfElseSwap", "register_transformation", "create_transformation",
+    "IfElseSwap", "register_transformation", "create_transformation", "available_transformations",
 ]

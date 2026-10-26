@@ -74,6 +74,7 @@ SU が回答精度に因果的な影響を持つかどうかは、このコー�
 ## 処理の流れ
 
 ```
+scan       候補の一覧だけを見る (dry-run。実験ディレクトリを作らない)      (CPU)
 transform  変換候補の列挙と適用、構文・AST・行数の検査               (CPU)
 behavior   既存テストで元コードと変換後コードを実行して比較           (CPU)
 measure    Phase 1 (collect_metrics.collect) で元・変換後を計測      (要モデル: Mac)
@@ -99,6 +100,61 @@ python scripts/equivalence_experiment.py all --config $CFG --targets HumanEval_1
 
 モデル無しで全段階を試すときはダミーモデルの設定を使う (エントロピーの値に意味は無い):
 `python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample_dummy.toml`
+
+### 候補の一覧 (scan)
+
+変換をどのデータセットに試すか決める前に、適用できる候補の数と、適用できない理由の内訳を見る。
+候補ごとに `apply` まで行うので、変換後の検査で落ちるもの (`failed`) も分かる。動作確認・計測はしない。
+実験ディレクトリは作らず、`--out` を付けたときだけ候補ごとの CSV を書く。
+
+```bash
+python scripts/equivalence_experiment.py scan --dataset all --transform if_else_swap
+python scripts/equivalence_experiment.py scan --dataset humaneval xcodeeval_apr --out /tmp/candidates.csv
+python scripts/equivalence_experiment.py scan --config $CFG          # 設定の dataset・ids・変換オプションで
+```
+
+表示はデータセット × 変換ごとの `files` (ファイル数) / `files_with_candidates` / `files_with_ok` /
+`candidates` / `ok` / `not_applicable` / `failed` と、理由ごとの件数 (理由の行番号などの部分は落として集計)。
+
+### データセット × 変換をまとめて回す (`--dataset` / `--transform` / `--name`)
+
+1つの設定ファイル (または既定値) を、データセット・変換を差し替えて回せる。どちらも複数指定でき、
+`all` は登録済みの全部。組み合わせごとに別の実験ディレクトリになる。
+
+```bash
+# テンプレートの設定 (CodeLlama / MPS) を全データセットに
+python scripts/equivalence_experiment.py all --config configs/equivalence/template.toml --dataset all
+# 設定ファイルなし (DEFAULT_CONFIG) でも動く
+python scripts/equivalence_experiment.py transform --dataset xcodeeval_apr --transform if_else_swap
+python scripts/equivalence_experiment.py status    --dataset xcodeeval_apr --transform if_else_swap
+```
+
+- 実験名 (`experiment.name`) の `{transform}` / `{dataset}` は変換名・データセット名に置き換わる。
+  既定は `"{transform}_{dataset}"`。`--name` で上書きできる (例: `--name "ifelse_v2_{dataset}"`)
+- `--dataset` / `--transform` で設定ファイルと違う値にしたのに名前にその置き換え (`{dataset}` / `{transform}`) が
+  無いときは、既定の `"{transform}_{dataset}"` を使う (条件の違う結果が同じディレクトリに入らないように)。
+  組み合わせで名前が重複するときはエラー
+- データセットを差し替えたときは `ids` を `"all"`、`targets` を空に戻す (ID は元の設定のデータセットのもの)。
+  `--ids` / `--targets` / `--limit` を付ければそちらを使う
+- 変換を差し替えたときは `transform.options` を空 (その変換の既定値) に戻す
+- 後の段階 (measure, compare, status など) も、同じ `--config` / `--dataset` / `--transform` / `--name` で実行する
+
+### 計測結果の再利用 (キャッシュ)
+
+measure 段階は、計測したトークン表を `<output_root>/_cache/measure/` にも保存し、同じ条件で同じコードを
+計測するときはモデルを使わずにそこからコピーする。元コードは変換の種類が違っても同じなので、
+2つ目以降の変換では元コードの計測が省ける (全部キャッシュにあればモデルも読み込まない)。
+
+- キャッシュキー: コードのバイト列の SHA-256、`[measure]` の `model` / `model_kind` / `revision` / `device` /
+  `dtype` / `context_strategy`、collector の版 (`COLLECTOR_VERSION`)、torch / transformers の版。
+  どれかが違えば別キーになり、計測し直す (dtype や device が違う結果を混ぜない)
+- コピー時に `meta_project` / `meta_file` だけはその実験の値に書き換える。それ以外 (エントロピー、
+  `meta_created_at` など) は最初に計測したときの値のまま
+- `status/measure.json` に `cache_hit` / `cache_key` を記録する。キャッシュの各ファイルの隣の `<key>.json` に
+  キーの元になった値がある
+- `measure.cache = false` で使わない。`measure.cache_dir` で場所を変えられる (相対パスは `output_root` から)。
+  この2つは同じ実験ディレクトリの途中で変えてもよい
+- 実験ディレクトリを別のマシンに渡すときはキャッシュは無くてもよい (各実験の `measure/` に実体がある)
 
 段階をまたいで同じ実験ディレクトリを使うので、Windows と Mac で分担するときは
 `results/equivalence/<name>/` をそのまま受け渡す (パスはすべて相対で扱い、改行は `\n` で保存している)。
@@ -131,7 +187,7 @@ LOC は変換時に行数で、計測後に既存と同じ定義 (`macro/loc.py`
 | `codes/<uid>/original.py`, `<variant>.py` | 元コードと変換後コード |
 | `transforms.csv`, `transforms/<uid>.json` | 全候補の状態・理由・変換箇所・変換内容 (条件の前後、本体の移動先の行)・行対応 |
 | `behavior.csv`, `behavior/<uid>/*.json` | 判定と、ケースごとの観測結果 |
-| `measure/<uid>/*.parquet` | Phase 1 と同じ形式のトークン表 |
+| `measure/<uid>/*.parquet` | Phase 1 と同じ形式のトークン表 (キャッシュから再利用した場合も同じ形式) |
 | `compare/summary.csv` | 変換1件 = 1行。LOC・トークン数・平均エントロピー・PPL・SU 数・LM-CC の 変換前 / 変換後 / 差分、`su_change_<閾値>` (decreased / increased / unchanged) |
 | `compare/regions.csv` | 変換箇所との位置関係 (before / if_header / then_body / between / else_body / after) ごとの集計。`after` が変換箇所より後に続く部分 |
 | `compare/<uid>/<variant>/tokens_before.csv`, `tokens_after.csv` | 各トークンの文字列・行・列・エントロピー・閾値ごとの境界トークンか・SU 番号・region・相手側の対応行 |
@@ -212,7 +268,8 @@ CT は `generate_ct.py` / `evaluate_ct.py` (`--task code_translation`、details 
 1. `src/equivalence/transforms/` に `Transformation` を継承したクラスを作る
    (`find_candidates` で候補を理由付きで列挙、`apply` で1候補だけ適用して `line_map` と検査結果を返す)
 2. `transforms/__init__.py` で `register_transformation` する
-3. 設定の `transform.name` / `transform.options` で指定する
+3. `scan --transform <名前> --dataset all` で候補数と適用できない理由を確認する
+4. 設定の `transform.name` / `transform.options` (または `--transform`) で指定する
 
 `line_map` の `region` は比較・レポートでそのまま使われる (if/else 以外の名前でもよい)。
 

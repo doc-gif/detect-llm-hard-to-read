@@ -21,7 +21,8 @@ from typing import Any, Dict, Optional
 import paths
 
 #: 同じ実験ディレクトリ内で変えてもよい設定 (対象の追加など)
-MUTABLE_KEYS = {("experiment", "ids"), ("experiment", "targets"), ("experiment", "limit"), ("behavior", "workers")}
+MUTABLE_KEYS = {("experiment", "ids"), ("experiment", "targets"), ("experiment", "limit"), ("behavior", "workers"),
+                ("measure", "cache"), ("measure", "cache_dir")}
 
 _PACKAGES = ["torch", "transformers", "tree-sitter", "tree-sitter-python", "pandas", "numpy", "pyarrow", "openai"]
 
