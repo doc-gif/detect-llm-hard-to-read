@@ -86,7 +86,7 @@ BOS トークンがあるモデルでは BOS を先頭に付けて推論する�
 
 `meta_collector_version` でどの版の Phase 1 で作られたかが分かります。
 **コミット済みの `out/` は 1.0.0** で、`ast_type` / `nesting_depth` / `is_statement_start`
-に既知の問題があります (`CLAUDE.md` の「既知の注意点」参照)。
+に既知の問題があります (`AGENTS.md` の「既知の注意点」参照)。
 
 ## Phase 2: ファイル単位の指標 (`results/summaries/`)
 

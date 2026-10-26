@@ -5,7 +5,7 @@ LLM 自身のトークン予測の不確かさ (surprisal / entropy) から、�
 LLM の正答率 (pass@1) との相関を調べます。
 
 - 設計・データ形式・指標の定義: [docs/architecture.md](docs/architecture.md)
-- AI エージェント向けの作業ガイド (規約・既知の注意点): [CLAUDE.md](CLAUDE.md)
+- AI エージェント向けの作業ガイド (規約・既知の注意点): [AGENTS.md](AGENTS.md) (Claude Code は `CLAUDE.md` 経由で同じ内容を読み込みます)
 
 ## セットアップ
 
