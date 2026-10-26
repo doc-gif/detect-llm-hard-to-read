@@ -31,6 +31,10 @@ python scripts/run_threshold_experiments.py
 # Phase 1 (要 GPU / Apple MPS と CodeLlama-7b。ユーザーの Mac で実行するもの)
 python src/collect_metrics.py --model codellama/CodeLlama-7b-hf --source data/examples/example1.py --output /tmp/x.parquet
 python scripts/batch_runner.py           # INPUT_DIRS / DEVICE は先頭の設定エリアで編集
+
+# 等価変換の前後比較 (docs/equivalence_experiment.md)。measure 段階だけがモデルを使う
+python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample.toml
+python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample_dummy.toml  # ダミーモデルで通す
 ```
 
 lm-cc は既定でこのリポジトリと同じ親ディレクトリの `lm-cc/` を参照する。別の場所なら
@@ -62,6 +66,13 @@ lm-cc は既定でこのリポジトリと同じ親ディレクトリの `lm-cc/
 - `results/` と `out/` はコミットされた研究成果物。スクリプトを試すときに上書きしない
   (上書きしたら `git checkout -- results/` で戻す)。
 
+- 等価変換の実験 (`src/equivalence/`) は Phase 1 / Phase 2 の関数 (`collect_metrics.collect`,
+  `analysis.macro.*`, `get_code_with_boundaries`) を呼んで使う。SU や LOC の定義を独自に書き直さない
+  (`tests/test_equivalence_compare.py` で summary CSV と同じ値になることを確認している)。
+  新しい変換は `src/equivalence/transforms/` に追加する。結果は `results/equivalence/<name>/` に出し、
+  条件を変えるときは別の `experiment.name` にする。
+- `model` の `dummy` は動作確認専用 (エントロピーに意味は無い)。研究の計測には使わない。
+
 ## 既知の注意点 (データ)
 
 - **`out/` は collector 1.0.0 で作られている** (`meta_collector_version`)。1.0.0 には次の問題があり、
@@ -82,6 +93,10 @@ lm-cc は既定でこのリポジトリと同じ親ディレクトリの `lm-cc/
   上書きしていたため 162 問中 17 問のスコアが先行研究と違っていた。
   **コミット済みの `results/experiments/threshold_correlation_results.csv` や `results/plots/` の
   HumanEval の数値は旧仕様のまま**。xcodeeval 系は影響なし。
+- **HumanEval の `data/humaneval/<ID>.py` は、先行研究の pass@1 (接尾辞なしのケース) のプロンプトに入った
+  lm-cc `dataset/humaneval/<ID>/main.py` と一致しないものがある** (162 問中 83 問。`__0`/`__1` の `main.py`
+  と同じで、空行・空白が違う。HumanEval_1, 105, 124, 150 は AST も違う)。また HumanEval_10, 33 は
+  計測用ソースの実行結果が `output.txt` と一致しない。詳細は `docs/equivalence_experiment.md`。
 - `results/block_trees/` は古い Phase 1 出力 (BOS 修正前) から作られたもので、現在の `out/` とは
   エントロピーが一致しない。必要なら `experiments/generate_block_tree.py` で作り直す。
 - `analysis/stats/metrics.py` の `get_code_cc` などは `radon` / `black` の CLI を呼ぶ

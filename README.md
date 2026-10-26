@@ -65,6 +65,15 @@ python src/analysis/pipeline.py --threshold 1.2515 --suffix _p80
 
 どのスクリプトもリポジトリ内のどこからでも実行できます (パスは `src/paths.py` で一元管理)。
 
+### 等価変換の前後比較 (SU・エントロピー・回答精度)
+
+条件を否定して if/else を入れ替えるなど、動作と LOC を保つ変換の前後で、エントロピーと SU が
+どこでどう変わるかを追跡します。詳細は [docs/equivalence_experiment.md](docs/equivalence_experiment.md)。
+
+```bash
+python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample.toml
+```
+
 ## テスト
 
 ```bash
