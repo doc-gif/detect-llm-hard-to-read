@@ -35,6 +35,8 @@ python scripts/batch_runner.py           # INPUT_DIRS / DEVICE は先頭の設�
 # 等価変換の前後比較 (docs/equivalence_experiment.md)。measure 段階だけがモデルを使う
 python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample.toml
 python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample_dummy.toml  # ダミーモデルで通す
+python scripts/equivalence_experiment.py scan --dataset all --transform if_else_swap   # 候補数と理由だけ (ファイルを書かない)
+python scripts/equivalence_experiment.py all --config configs/equivalence/template.toml --dataset all  # 全データセット
 ```
 
 lm-cc は既定でこのリポジトリと同じ親ディレクトリの `lm-cc/` を参照する。別の場所なら
@@ -69,7 +71,9 @@ lm-cc は既定でこのリポジトリと同じ親ディレクトリの `lm-cc/
 - 等価変換の実験 (`src/equivalence/`) は Phase 1 / Phase 2 の関数 (`collect_metrics.collect`,
   `analysis.macro.*`, `get_code_with_boundaries`) を呼んで使う。SU や LOC の定義を独自に書き直さない
   (`tests/test_equivalence_compare.py` で summary CSV と同じ値になることを確認している)。
-  新しい変換は `src/equivalence/transforms/` に追加する。結果は `results/equivalence/<name>/` に出し、
+  新しい変換は `src/equivalence/transforms/` に追加する (`scan` で候補数を確認できる)。
+  measure は `results/equivalence/_cache/measure/` の計測結果を、モデル・dtype・コードの中身などが同じときだけ
+  再利用する。キーに入る条件を増やすときは `measure.CACHE_CONFIG_KEYS` に足す。結果は `results/equivalence/<name>/` に出し、
   条件を変えるときは別の `experiment.name` にする。
 - `model` の `dummy` は動作確認専用 (エントロピーに意味は無い)。研究の計測には使わない。
 

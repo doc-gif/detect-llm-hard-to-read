@@ -1,0 +1,54 @@
+# データセットと変換の組み合わせをまとめて実行するためのテンプレート (計測はユーザーの Mac で実行する)
+#   python scripts/equivalence_experiment.py scan --config configs/equivalence/template.toml --dataset all
+#   python scripts/equivalence_experiment.py all  --config configs/equivalence/template.toml --dataset all
+#   python scripts/equivalence_experiment.py all  --config configs/equivalence/template.toml --dataset xcodeeval_apr --limit 20
+#
+# --dataset や --transform で差し替えると、組み合わせごとに results/equivalence/<変換名>_<データセット名>/ に出力する。
+# 計測条件 (transform / measure / thresholds / behavior / accuracy) を変えるときは、実験名も変えること
+# (例: --name "ifelse_paren_{dataset}")。条件の異なる結果を同じディレクトリに出力しようとするとエラーになる。
+
+[experiment]
+name = "{transform}_{dataset}"        # {transform} / {dataset} は変換名・データセット名に置き換わる
+dataset = "humaneval"                 # --dataset で上書きできる ("all" で全データセット)
+ids = "all"
+targets = []
+output_root = "results/equivalence"   # リポジトリからの相対パス
+
+[transform]
+name = "if_else_swap"
+
+[transform.options]
+unwrap_not = true          # 条件が not X なら X にする
+negation_style = "auto"    # auto: 原子的な式は not X、それ以外は not (X) / always_paren: 常に not (X)
+
+[behavior]
+timeout_sec = 10.0         # 1テストケースあたり
+workers = 4                # テストケースを並列に実行するプロセス数 (結果には影響しない)
+
+[measure]
+# エントロピーを計測するモデル (回答モデルとは別)。scripts/batch_runner.py と同じ設定
+model = "codellama/CodeLlama-7b-hf"
+model_kind = "hf_causal_lm"
+revision = ""
+device = "mps"
+dtype = "float16"
+context_strategy = "function_scope"
+allowed_behavior = ["match"]   # 動作確認でこの判定になった変換後コードだけを計測する
+# 同じ条件 (モデル・dtype など) で同じコードを計測した結果を再利用する。元コードは変換が違っても同じなので
+# 2つ目以降の変換では計測しない。cache_dir は output_root からの相対パス
+cache = true
+cache_dir = "_cache/measure"
+
+# SU の境界判定に使う固定閾値 [nats] (既存分析の p67 / p80)。変換結果に合わせて変えない
+[thresholds]
+p67 = 0.6813
+p80 = 1.2515
+
+[accuracy]
+# 回答モデル (lm-cc と同じ OpenAI 互換 API。環境変数 OPENAI_API_KEY / OPENAI_BASE_URL / OPENAI_MODEL_NAME)
+answer_model = "deepseek-v3"
+trials = 5                 # lm-cc の IER は 5 回
+temperature = 0.0
+max_tokens = 1024
+ier_cases = "base"         # base: 接尾辞なしのケースだけ (先行研究の pass@1) / all: __0, __1 も
+require_behavior_match = true

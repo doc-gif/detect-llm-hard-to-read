@@ -36,7 +36,8 @@ logger = logging.getLogger("equivalence")
 ORIGINAL = "original"
 
 DEFAULT_CONFIG: Dict[str, Any] = {
-    "experiment": {"name": None, "dataset": None, "ids": "all", "targets": [], "output_root": "results/equivalence"},
+    # name の {transform} / {dataset} は変換名・データセット名に置き換える
+    "experiment": {"name": "{transform}_{dataset}", "dataset": None, "ids": "all", "targets": [], "output_root": "results/equivalence"},
     "transform": {"name": "if_else_swap", "options": {}},
     "behavior": {"timeout_sec": 10.0, "workers": 4},
     "measure": {
@@ -44,6 +45,8 @@ DEFAULT_CONFIG: Dict[str, Any] = {
         "device": "mps", "dtype": "float16", "context_strategy": "function_scope",
         # この判定の変換後コードだけを計測する
         "allowed_behavior": ["match"],
+        # 同じ条件で同じコードを計測した結果を再利用する (cache_dir は output_root からの相対パス)
+        "cache": True, "cache_dir": "_cache/measure",
     },
     # 既存の分析と同じ固定閾値 [nats]。変換結果を見て変えない
     "thresholds": {"p67": 0.6813, "p80": 1.2515},
@@ -58,18 +61,71 @@ def _merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]:
     return out
 
 
-def load_config(path: Path, overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-    import tomllib
+def load_config(path: Optional[Path] = None, overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """TOML 設定 (省略時は ``DEFAULT_CONFIG``) に上書きを重ね、``experiment.name`` を展開する。"""
+    return build_configs(path, overrides=overrides)[0]
 
-    with open(path, "rb") as f:
-        config = _merge(DEFAULT_CONFIG, tomllib.load(f))
-    if overrides:
-        config = _merge(config, overrides)
+
+def build_configs(path: Optional[Path], datasets: Optional[List[str]] = None, transforms: Optional[List[str]] = None,
+                  name: Optional[str] = None, overrides: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+    """データセット × 変換の組ごとに設定を作る (CLI の ``--dataset`` / ``--transform``)。
+
+    - ``datasets`` / ``transforms`` が None なら設定ファイルの値。``["all"]`` は登録済みの全部
+    - データセットを差し替えたときは ids を "all"、targets を空に戻す (ID は別データセットのものなので)。
+      ``overrides`` に ids / targets があればそちらを使う
+    - 変換を差し替えたときは transform.options を空に戻す (別の変換のオプションなので)
+    - 名前は ``name`` > 設定ファイルの name。差し替えたのに名前に {dataset} / {transform} が無ければ
+      既定の "{transform}_{dataset}" を使う (別条件の結果が同じディレクトリに入らないように)
+    """
+    import tomllib
+    from equivalence.transforms import available_transformations
+
+    file_cfg: Dict[str, Any] = {}
+    if path is not None:
+        with open(path, "rb") as f:
+            file_cfg = tomllib.load(f)
+    base = _merge(DEFAULT_CONFIG, file_cfg)
+    if datasets == ["all"]:
+        datasets = list(ds.DATASETS)
+    if transforms == ["all"]:
+        transforms = available_transformations()
+    changed = ((["{dataset}"] if any(d != base["experiment"]["dataset"] for d in datasets or []) else [])
+               + (["{transform}"] if any(t != base["transform"]["name"] for t in transforms or []) else []))
+    name_template = name or base["experiment"]["name"]
+    if not name and any(p not in name_template for p in changed):
+        name_template = DEFAULT_CONFIG["experiment"]["name"]
+
+    configs = []
+    for dataset in datasets or [base["experiment"]["dataset"]]:
+        for transform in transforms or [base["transform"]["name"]]:
+            o: Dict[str, Any] = {"experiment": {"name": name_template}}
+            if datasets and dataset != base["experiment"]["dataset"]:
+                o["experiment"].update({"dataset": dataset, "ids": "all", "targets": []})
+            if transforms and transform != base["transform"]["name"]:
+                o["transform"] = {"name": transform, "options": {}}
+            config = _merge(base, o)
+            if overrides:
+                config = _merge(config, overrides)
+            exp = config["experiment"]
+            if not exp.get("name") or not exp.get("dataset"):
+                raise ValueError("experiment.name と experiment.dataset は必須 (dataset は --dataset でも指定できる)")
+            ds.get_dataset(exp["dataset"])
+            exp["name"] = exp["name"].format(transform=config["transform"]["name"], dataset=exp["dataset"])
+            configs.append(config)
+    names = [c["experiment"]["name"] for c in configs]
+    if len(set(names)) != len(names):
+        raise ValueError(f"実験名が重複する: {names} (名前に {{dataset}} / {{transform}} を入れる)")
+    return configs
+
+
+def target_ids(config: Dict[str, Any]) -> List[str]:
+    """設定の対象 ID (ids → targets の uid を追加 → limit で先頭 N 件)。"""
     exp = config["experiment"]
-    if not exp.get("name") or not exp.get("dataset"):
-        raise ValueError("experiment.name と experiment.dataset は必須")
-    ds.get_dataset(exp["dataset"])
-    return config
+    ids = ds.list_ids(ds.get_dataset(exp["dataset"])) if exp.get("ids") in (None, "all") else list(exp["ids"])
+    ids += [t.split(":")[0] for t in exp.get("targets") or [] if t.split(":")[0] not in ids]
+    if exp.get("limit"):
+        ids = ids[: int(exp["limit"])]
+    return ids
 
 
 class Experiment:
@@ -77,24 +133,24 @@ class Experiment:
         self.config = config
         exp = config["experiment"]
         self.spec = ds.get_dataset(exp["dataset"])
-        root = Path(exp["output_root"])
-        if not root.is_absolute():
-            root = paths.PROJECT_ROOT / root
-        self.run_dir = root / exp["name"]
+        self.output_root = Path(exp["output_root"])
+        if not self.output_root.is_absolute():
+            self.output_root = paths.PROJECT_ROOT / self.output_root
+        self.run_dir = self.output_root / exp["name"]
         self.state = RunState(self.run_dir, config)
         self.transformation = create_transformation(config["transform"]["name"], **config["transform"]["options"])
         self.thresholds: Dict[str, float] = {k: float(v) for k, v in config["thresholds"].items()}
+
+    def _resolve(self, path_str: str) -> Path:
+        """``output_root`` からの相対パスを解決する (絶対パスはそのまま)。"""
+        path = Path(path_str)
+        return path if path.is_absolute() else self.output_root / path
 
     # ------------------------------------------------------------------
     # 対象
     # ------------------------------------------------------------------
     def target_ids(self) -> List[str]:
-        exp = self.config["experiment"]
-        ids = ds.list_ids(self.spec) if exp.get("ids") in (None, "all") else list(exp["ids"])
-        ids += [t.split(":")[0] for t in exp.get("targets") or [] if t.split(":")[0] not in ids]
-        if exp.get("limit"):
-            ids = ids[: int(exp["limit"])]
-        return ids
+        return target_ids(self.config)
 
     def _selected_variants(self) -> Dict[str, Optional[set]]:
         """uid -> 対象の variant_id 集合 (None は全候補)。"""
@@ -313,7 +369,7 @@ class Experiment:
     def run_measure(self, only_failed: bool = False, model=None) -> Dict[str, int]:
         from equivalence import measure
 
-        started, counts = now(), {"measured": 0, "skipped": 0, "errors": 0}
+        started, counts = now(), {"measured": 0, "cached": 0, "skipped": 0, "errors": 0}
         mcfg = self.config["measure"]
         todo = []
         for uid, variant_id, reason in self.measure_items():
@@ -327,22 +383,31 @@ class Experiment:
             if only_failed and self.state.status("measure").get(key, {}).get("status") != "failed":
                 continue
             todo.append((uid, variant_id, key))
-        if todo and model is None:
-            model = measure.load_model(mcfg)
+        cache = measure.MeasureCache(self._resolve(mcfg.get("cache_dir") or "_cache/measure")) \
+            if mcfg.get("cache", True) else None
         for uid, variant_id, key in todo:
             t0 = time.time()
-            try:
-                out = self.measure_path(uid, variant_id)
-                out.parent.mkdir(parents=True, exist_ok=True)
-                n = measure.measure_file(model, self.code_path(uid, variant_id), out, mcfg, project=key)
-                self.state.set("measure", key, "ok", tokens=n, seconds=round(time.time() - t0, 2),
-                               model=mcfg["model"], model_kind=mcfg["model_kind"], device=mcfg.get("device"),
-                               dtype=mcfg.get("dtype"))
-                counts["measured"] += 1
-            except Exception as exc:  # noqa: BLE001
-                logger.exception("measure failed: %s", key)
-                self.state.set("measure", key, "failed", reason=f"{type(exc).__name__}: {exc}")
-                counts["errors"] += 1
+            src, out = self.code_path(uid, variant_id), self.measure_path(uid, variant_id)
+            out.parent.mkdir(parents=True, exist_ok=True)
+            ckey, parts = measure.cache_key(src.read_bytes(), mcfg)
+            n = cache.get(ckey, out, src, project=key) if cache is not None else None
+            hit = n is not None
+            if not hit:
+                if model is None:  # 全部キャッシュにあればモデルを読み込まない (読み込みの失敗は全体を止める)
+                    model = measure.load_model(mcfg)
+                try:
+                    n = measure.measure_file(model, src, out, mcfg, project=key)
+                except Exception as exc:  # noqa: BLE001
+                    logger.exception("measure failed: %s", key)
+                    self.state.set("measure", key, "failed", reason=f"{type(exc).__name__}: {exc}")
+                    counts["errors"] += 1
+                    continue
+                if cache is not None:
+                    cache.put(ckey, parts, out, n)
+            self.state.set("measure", key, "ok", tokens=n, seconds=round(time.time() - t0, 2),
+                           model=mcfg["model"], model_kind=mcfg["model_kind"], device=mcfg.get("device"),
+                           dtype=mcfg.get("dtype"), cache_hit=hit, cache_key=ckey)
+            counts["cached" if hit else "measured"] += 1
         self._log("measure", started, counts)
         return counts
 

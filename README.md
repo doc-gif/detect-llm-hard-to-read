@@ -67,8 +67,8 @@ python src/analysis/pipeline.py --threshold 1.2515 --suffix _p80
 
 ### 等価変換の前後比較 (SU・エントロピー・回答精度)
 
-条件を否定して if/else を入れ替えるなど、動作と LOC を保つ変換の前後で、エントロピーと SU が
-どこでどう変わるかを追跡します。詳細は [docs/equivalence_experiment.md](docs/equivalence_experiment.md)。
+条件を否定して if/else を入れ替えるなど、動作と LOC を保つ変換を行い、その前後でエントロピーと SU が
+どこでどう変わるかを調べます。手順の詳細は [docs/equivalence_experiment.md](docs/equivalence_experiment.md) を参照してください。
 
 ```bash
 python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample.toml
