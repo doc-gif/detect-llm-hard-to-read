@@ -141,3 +141,14 @@ def test_python2_source_fails_with_reason():
     outs = _apply_all(src)
     assert outs and all(o.status in (STATUS_FAILED, STATUS_NOT_APPLICABLE) for o in outs)
     assert any("構文解析できない" in (o.reason or "") or "構文エラー" in (o.reason or "") for o in outs)
+
+
+def test_not_spanning_lines_fails_instead_of_raising():
+    # not を外すと行継続 (バックスラッシュ改行) ごと消えて行数が減るケースは failed として記録する
+    src = "def f(x):\n    if not \\\n            x:\n        a = 1\n    else:\n        a = 2\n    return a\n"
+    (out,) = _apply_all(src)
+    assert out.status == STATUS_FAILED and "行数" in out.reason
+    (out2,) = _apply_all(src, unwrap_not=False)  # not (...) を付ける方法なら行数は変わらない
+    assert out2.status == STATUS_OK
+    for x in (0, 1):
+        assert _run(src, "f", x) == _run(out2.transformed_source, "f", x)

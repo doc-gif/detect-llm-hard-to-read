@@ -252,6 +252,13 @@ class IfElseSwap(Transformation):
         else_lines = lines[else_s:else_e + 1]
         rest = lines[else_e + 1:]
         new_lines = new_prefix_lines + else_lines + between + then_lines + rest
+        if len(new_lines) != len(lines):
+            # 例: ``if not \<改行> x:`` の not を外すと行継続ごと消えて行数が減る。行対応を作る前に止める
+            outcome.reason = (f"条件の否定で行数が変わる ({len(lines)} → {len(new_lines)} 行)。"
+                              "条件が複数行にまたがる not 式など")
+            outcome.checks = {"line_count_before": len(lines), "line_count_after": len(new_lines),
+                              "line_count_equal": False}
+            return outcome
         new_bytes = b"\n".join(new_lines)
         try:
             new_source = new_bytes.decode("utf-8")
