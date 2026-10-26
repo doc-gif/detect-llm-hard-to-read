@@ -44,6 +44,8 @@ def create_model_adapter(kind: str, **kwargs) -> ModelAdapter:
 
 
 register_model("hf_causal_lm", ".hf_causal_lm:HFCausalLMAdapter")
+# 動作確認専用 (値に意味は無い)。torch が無い環境で Phase 1 以降を通しで試すときに使う
+register_model("dummy", ".dummy:DummyAdapter")
 
 
 def __getattr__(name: str):

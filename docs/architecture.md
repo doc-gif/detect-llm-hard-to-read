@@ -54,6 +54,8 @@ Phase 2 以降は CPU のみで、コミット済みの `out/` から再現で�
 | `src/analysis/plotting/` | 散布図・閾値グラフ |
 | `src/analysis/tools/` | データ欠落チェック、先行研究との一致検証などの補助スクリプト |
 | `src/analysis/viewer_app.py` | Streamlit の定性分析ビューア |
+| `src/equivalence/` | 等価変換の前後比較実験 (変換・動作確認・計測・比較・回答精度)。`docs/equivalence_experiment.md` |
+| `configs/equivalence/` | 等価変換実験の設定 (TOML) |
 | `scripts/` | 長時間のバッチ (Phase 1 一括実行、閾値ごとの相関実験) |
 | `tests/` | pytest。モデル不要。コミット済みデータを使う回帰テストを含む |
 
@@ -141,5 +143,6 @@ pass@1 は lm-cc リポジトリの `results/` にあり、`analysis/scores.py` 
 - 新しい isolated 戦略: `src/context/` に `ContextStrategy` を実装し `register_strategy`
 - 新しいファイル単位指標: `src/analysis/macro/<name>.py` に `calculate(df_clean)` を作り、
   `pipeline.process_file` と `SummarySchema` に列を追加
+- 新しい等価変換: `src/equivalence/transforms/` に `Transformation` を実装し `register_transformation`
 - 新しいデータセット: `data/<name>/` に置いて `scripts/batch_runner.py` の `INPUT_DIRS` に追加。
   正答率があるなら `analysis/scores.py` の `SCORE_FILES` に登録
