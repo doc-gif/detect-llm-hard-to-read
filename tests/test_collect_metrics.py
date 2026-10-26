@@ -119,3 +119,13 @@ def test_statement_start_with_leading_space_tokens(tmp_path):
     assert flags["y"].is_statement_start  # 代入文 (expression_statement) の先頭
     assert not flags["x:"].is_statement_start  # if 条件の途中は文の先頭ではない
     assert flags["if"].nesting_depth == 1 and flags["return"].nesting_depth == 2
+
+
+def test_indented_def_token_belongs_to_its_function(tmp_path):
+    src = tmp_path / "sample.py"
+    src.write_text("class A:\n    def m(self):\n        return 1\n", encoding="utf-8")
+    result = collect_metrics.collect(src, LeadingSpaceModel(), "function_scope", project="t")
+    def_tok = next(r for r in result.tokens if r.token_str.strip() == "def")
+    assert def_tok.token_str[0].isspace()  # 先頭に空白を含むトークン ("▁def" 相当)
+    assert def_tok.is_function_start
+    assert def_tok.function_id == "m"

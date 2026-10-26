@@ -15,6 +15,8 @@ from typing import Any, Dict, List, Optional
 #        最初の非空白文字で引くよう修正し、Tree-sitter にバイト単位の列を渡すよう修正。
 #        1.0.0 の is_statement_start は「文の先頭」ではなく「先頭の空白が文ノードの
 #        内側にあるトークン」を指していた。
+#        function_id も同様に先頭空白位置で判定していたため、インデントされた
+#        "▁def" トークンが関数外 (null) になっていた。
 COLLECTOR_VERSION = "1.1.0"
 
 

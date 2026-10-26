@@ -80,7 +80,9 @@ def _build_token_records(
             record.column = column
             record.ast_type = adapter.ast_type(node)
             record.nesting_depth = adapter.nesting_depth(node)
-            record.function_id = adapter.function_id_for_point(functions, byte_offset)
+            # 関数スパンは "def" の位置から始まるので、ここも先頭空白を除いた位置で判定する
+            # ("▁def" の byte_offset は空白を指し、関数の外と判定されてしまう)
+            record.function_id = adapter.function_id_for_point(functions, anchor_byte)
             record.is_statement_start = adapter.is_statement_start_at(node, anchor_byte)
             record.is_function_start = adapter.is_function_start_for_point(
                 functions, byte_offset, token_byte_len

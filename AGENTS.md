@@ -71,6 +71,9 @@ lm-cc は既定でこのリポジトリと同じ親ディレクトリの `lm-cc/
     トークン」(例: `if x` の `▁x`) を指しており、代入文はほぼ拾えていない。
     → これを使う **`lm_cc_density` は 1.0.0 のデータでは信頼できない**。`lm_cc` / `ppl` /
     `num_semantic_units` / `loc` はトークン文字列・エントロピー・行番号だけを使うので影響しない。
+  - `function_id` も先頭空白の位置で判定していたため、インデントされた `▁def` トークンが関数外 (null)
+    になっていた (関数先頭トークン 2803 件中 485 件)。`num_functions` / `avg_first_token_surprisal` は
+    `function_id` を使わないので影響しない。
   - Tree-sitter に文字単位の列を渡していたため、非 ASCII 文字を含む行 (15ファイル) で AST 情報がずれていた。
 - `meta_file` は Phase 1 実行マシンの絶対パス (`/Users/...`)。`paths.resolve_data_path` が
   `data/` 以降を付け替えて読むので、別マシンでも cyclomatic / cognitive complexity は計算できる。
