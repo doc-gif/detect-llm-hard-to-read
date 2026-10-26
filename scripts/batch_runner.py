@@ -1,10 +1,17 @@
+"""data/ 配下のソースコードを1ファイルずつ src/collect_metrics.py に渡して Phase 1 を一括実行する。
+
+出力: out/<data からの相対ディレクトリを "_" で連結>/result_<ファイル名>.parquet
+既に出力があるファイルはスキップするので、途中で止めても再実行で続きから処理できる。
+"""
 import subprocess
 from pathlib import Path
 import logging
 import sys
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-from src.language import supported_extensions
+# src/ を import ルートにする
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+import paths
+from language import supported_extensions
 
 # ログの設定
 logging.basicConfig(
@@ -17,36 +24,40 @@ logging.basicConfig(
 # ⚙️ 設定エリア (ここで測定対象や出力を直接指定します)
 # =========================================================
 
-# 1. 対象コードのディレクトリパス (複数指定可能)
+# 1. 対象コードのディレクトリ (data/ からの相対パス。複数指定可能)
 INPUT_DIRS = [
-    # "../data/examples"
-    "../data/humaneval",
-    # "../data/humaneval_simplified",
-    # "../data/humaneval_simplified-top60",
-    # "../data/xcodeeval/apr",
-    # "../data/xcodeeval/code_translation",
-    # "../data/xcodeeval_simplified/apr",
-    # "../data/xcodeeval_simplified/code_translation",
-    # "../data/xcodeeval_simplified-top50/apr",
-    # "../data/xcodeeval_simplified-top50/code_translation"
+    # "examples",
+    "humaneval",
+    # "humaneval_simplified",
+    # "humaneval_simplified-top60",
+    # "xcodeeval/apr",
+    # "xcodeeval/code_translation",
+    # "xcodeeval_simplified/apr",
+    # "xcodeeval_simplified/code_translation",
+    # "xcodeeval_simplified-top50/apr",
+    # "xcodeeval_simplified-top50/code_translation"
 ]
 
-# 2. 出力先の最上位ディレクトリパス
-OUTPUT_DIR = "../out"
+# 2. 出力先の最上位ディレクトリ
+OUTPUT_DIR = paths.OUT_DIR
 
 # 3. 測定に使うモデルと出力形式
 MODEL_NAME = "codellama/CodeLlama-7b-hf"
 OUTPUT_FORMAT = "parquet"  # "json" に変更可能
+
+# 4. 推論デバイスと精度 ("mps" は Apple Silicon。CUDA 環境なら "cuda")
+DEVICE = "mps"
+DTYPE = "float16"
 
 
 # =========================================================
 
 
 def run_batch():
-    # パスの解決 (scriptsディレクトリ基準)
-    script_dir = Path(__file__).resolve().parent
-    project_root = script_dir.parent
+    project_root = paths.PROJECT_ROOT
 
+    # 以前は "../data/humaneval" のようにカレントディレクトリ基準で解決していたため、
+    # scripts/ 以外から実行すると入力が見つからなかった。現在は data/ 基準で解決する。
     output_dir = Path(OUTPUT_DIR).resolve()
     # 大元の出力ディレクトリを作成
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -66,7 +77,7 @@ def run_batch():
     extensions = supported_extensions()
 
     for dir_str in INPUT_DIRS:
-        in_dir = Path(dir_str).resolve()
+        in_dir = (paths.DATA_DIR / dir_str).resolve()
         if not in_dir.exists():
             logging.warning(f"⚠️ 指定された入力ディレクトリが見つかりません (スキップします): {in_dir}")
             continue
@@ -93,7 +104,7 @@ def run_batch():
 
     total_files = len(target_files)
 
-    data_root = (project_root / "data").resolve()
+    data_root = paths.DATA_DIR.resolve()
 
     for i, (filepath, base_dir) in enumerate(target_files, 1):
         project_name = filepath.stem
@@ -135,19 +146,18 @@ def run_batch():
             "--output", str(output_file),
             "--format", OUTPUT_FORMAT,
             "--project", project_name,
-            "--device", "mps",
-            "--dtype", "float16"
+            "--device", DEVICE,
+            "--dtype", DTYPE,
         ]
 
         try:
+            # 子プロセスのログ (stderr) はそのまま端末に流れる
             subprocess.run(cmd, check=True)
             logging.info(f"{progress_prefix} ✅ 完了: {project_name}")
             success_count += 1
         except subprocess.CalledProcessError as e:
+            # エラー内容は直前に子プロセスが stderr に出力している
             logging.error(f"{progress_prefix} ❌ エラー発生 ({project_name}) - 終了コード: {e.returncode}")
-            if e.stderr:
-                stderr_tail = "\n".join(e.stderr.strip().split("\n")[-3:])
-                logging.error(f"エラー内容:\n{stderr_tail}")
             error_count += 1
         except Exception as e:
             logging.error(f"{progress_prefix} ⚠️ 予期せぬエラー ({project_name}): {e}")

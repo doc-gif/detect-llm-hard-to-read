@@ -1,14 +1,27 @@
 # src/analysis/pipeline.py
+"""Phase 2: out/ のトークン単位 Parquet からファイル単位の指標を算出する。
+
+出力:
+    results/enriched/<dataset>/result_*.parquet  (surprisal_gap 列を追加したトークン表)
+    results/summaries/analysis_summary{suffix}.csv (1行 = 1ファイル)
+
+実行: ``python src/analysis/pipeline.py [--threshold 0.6813] [--suffix _p67]``
+"""
+import argparse
 import logging
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # src/ を import ルートにする
+
 import pandas as pd
 import traceback
 import multiprocessing
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
-from macro import perplexity, lm_cc, lm_cc_density, loc, cyclomatic_complexity, cognitive_complexity
-from micro import context_surprisal_gap, first_token_suprisal
+from analysis.macro import perplexity, lm_cc, lm_cc_density, loc, cyclomatic_complexity, cognitive_complexity
+from analysis.micro import context_surprisal_gap, first_token_surprisal
+import paths
 
 from schema.records import ParquetSchema as PCol
 from schema.records import SummarySchema as SCol
@@ -20,15 +33,16 @@ logging.basicConfig(
 )
 
 # --- 設定エリア ---
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-INPUT_DIR = PROJECT_ROOT / "out"
-OUTPUT_DIR = PROJECT_ROOT / "results"
+INPUT_DIR = paths.OUT_DIR
+ENRICHED_DIR = paths.ENRICHED_DIR
+SUMMARIES_DIR = paths.SUMMARIES_DIR
 
-ENRICHED_DIR = OUTPUT_DIR / "enriched"
-SUMMARIES_DIR = OUTPUT_DIR / "summaries"
+#: LM-CC の境界判定に使うエントロピー閾値 [nats] (全トークンの 67 パーセンタイル)
+DEFAULT_THRESHOLD = 0.6813
+DEFAULT_SUFFIX = "_p67"
 
 
-def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dict:
+def process_file(parquet_path: Path, base_in_dir: Path, threshold: float, enriched_dir: Path = ENRICHED_DIR) -> dict:
     """1ファイルの処理（並列ワーカーで実行される関数）"""
     df = pd.read_parquet(parquet_path)
 
@@ -44,7 +58,7 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
     # 2. データ成形 (Transformation)
     # ==========================================
     df_clean = context_surprisal_gap.add_contextual_surprisal_gap(df_clean)
-    first_tokens_df = first_token_suprisal.extract_first_token_surprisal(df_clean)
+    first_tokens_df = first_token_surprisal.extract_first_token_surprisal(df_clean)
 
     # ==========================================
     # 3. マクロ指標算出 (Macro Metrics Calculation)
@@ -66,13 +80,13 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
     # 4. ミクロ指標算出 (Micro Metrics Aggregation)
     # ==========================================
     avg_context_surprisal_gap = context_surprisal_gap.calculate_avg(df_clean)
-    avg_first_token_surprisal = first_token_suprisal.calculate_avg(first_tokens_df)
+    avg_first_token_surprisal = first_token_surprisal.calculate_avg(first_tokens_df)
 
     # ==========================================
     # 5. 保存と結果の返却
     # ==========================================
     relative_path = parquet_path.relative_to(base_in_dir)
-    out_parquet_path = ENRICHED_DIR / relative_path
+    out_parquet_path = enriched_dir / relative_path
     out_parquet_path.parent.mkdir(parents=True, exist_ok=True)
 
     df_clean.to_parquet(out_parquet_path)
@@ -97,15 +111,21 @@ def process_file(parquet_path: Path, base_in_dir: Path, threshold: float) -> dic
     return summary
 
 
-def run_pipeline(threshold: float = 0.6813, suffix: str = "_p67"):
-    if not INPUT_DIR.exists():
-        logging.error(f"入力ディレクトリが見つかりません: {INPUT_DIR}")
+def run_pipeline(
+    threshold: float = DEFAULT_THRESHOLD,
+    suffix: str = DEFAULT_SUFFIX,
+    input_dir: Path = INPUT_DIR,
+    enriched_dir: Path = ENRICHED_DIR,
+    summaries_dir: Path = SUMMARIES_DIR,
+):
+    if not input_dir.exists():
+        logging.error(f"入力ディレクトリが見つかりません: {input_dir}")
         sys.exit(1)
 
-    ENRICHED_DIR.mkdir(parents=True, exist_ok=True)
-    SUMMARIES_DIR.mkdir(parents=True, exist_ok=True)
+    enriched_dir.mkdir(parents=True, exist_ok=True)
+    summaries_dir.mkdir(parents=True, exist_ok=True)
 
-    parquet_files = list(INPUT_DIR.rglob("result_*.parquet"))
+    parquet_files = list(input_dir.rglob("result_*.parquet"))
     total_files = len(parquet_files)
 
     if total_files == 0:
@@ -123,7 +143,7 @@ def run_pipeline(threshold: float = 0.6813, suffix: str = "_p67"):
     # 💡 ProcessPoolExecutorによるマルチプロセス処理
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
         # タスクをキューに登録
-        future_to_path = {executor.submit(process_file, p, INPUT_DIR, threshold): p for p in parquet_files}
+        future_to_path = {executor.submit(process_file, p, input_dir, threshold, enriched_dir): p for p in parquet_files}
 
         # 完了したものから順次結果を受け取る
         for i, future in enumerate(as_completed(future_to_path), 1):
@@ -150,12 +170,17 @@ def run_pipeline(threshold: float = 0.6813, suffix: str = "_p67"):
         if SCol.DATASET in summary_df.columns and SCol.UID in summary_df.columns:
             try:
                 summary_df['temp_sort_uid'] = pd.to_numeric(summary_df[SCol.UID].str.extract(r'(\d+)')[0])
-                summary_df = summary_df.sort_values(by=[SCol.DATASET, 'temp_sort_uid']).drop(columns=['temp_sort_uid'])
-            except:
+                # uid 内の最初の数字列で並べる (HumanEval_2 < HumanEval_10)。xcodeeval の
+                # ハッシュ uid は同値が出るので、uid 自体も第3キーにして行順を決定的にする
+                # (as_completed の完了順に依存しないように)。
+                summary_df = summary_df.sort_values(
+                    by=[SCol.DATASET, 'temp_sort_uid', SCol.UID], kind="mergesort"
+                ).drop(columns=['temp_sort_uid'])
+            except (ValueError, TypeError):
                 summary_df = summary_df.sort_values(by=[SCol.DATASET, SCol.UID])
             summary_df = summary_df.reset_index(drop=True)
 
-        summary_csv_path = SUMMARIES_DIR / f"analysis_summary{suffix}.csv"
+        summary_csv_path = summaries_dir / f"analysis_summary{suffix}.csv"
         summary_df.to_csv(summary_csv_path, index=False)
         logging.info(f"💾 サマリーCSVを保存しました: {summary_csv_path}")
 
@@ -166,5 +191,27 @@ def run_pipeline(threshold: float = 0.6813, suffix: str = "_p67"):
     logging.info("=" * 40)
 
 
+def parse_args(argv=None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Phase 2: ファイル単位の指標を算出して summary CSV を出力する")
+    parser.add_argument("--threshold", type=float, default=DEFAULT_THRESHOLD,
+                        help=f"LM-CC の境界判定に使うエントロピー閾値 [nats] (既定: {DEFAULT_THRESHOLD})")
+    parser.add_argument("--suffix", default=DEFAULT_SUFFIX,
+                        help=f"出力 CSV 名の接尾辞 analysis_summary{{suffix}}.csv (既定: {DEFAULT_SUFFIX})")
+    parser.add_argument("--input-dir", type=Path, default=INPUT_DIR, help="Phase 1 の Parquet があるディレクトリ")
+    parser.add_argument("--results-dir", type=Path, default=None,
+                        help="出力先 (enriched/ と summaries/ をこの下に作る。既定: results/)")
+    return parser.parse_args(argv)
+
+
 if __name__ == "__main__":
-    run_pipeline()
+    args = parse_args()
+    enriched, summaries = ENRICHED_DIR, SUMMARIES_DIR
+    if args.results_dir is not None:
+        enriched, summaries = args.results_dir / "enriched", args.results_dir / "summaries"
+    run_pipeline(
+        threshold=args.threshold,
+        suffix=args.suffix,
+        input_dir=args.input_dir,
+        enriched_dir=enriched,
+        summaries_dir=summaries,
+    )

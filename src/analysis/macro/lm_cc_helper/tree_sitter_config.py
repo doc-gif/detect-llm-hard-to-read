@@ -1,15 +1,6 @@
-import os
-import platform
-from tree_sitter import Language, Parser
+"""LM-CC のブロック解析で使う Tree-sitter (Python) パーサ。"""
 import tree_sitter_python
-
-current_directory = os.getcwd()
-ext = '.dll' if platform.system() == 'Windows' else '.so'
-
-TREE_SITTER_PATH_PYTHON = os.path.join(current_directory, 'tree_sitter/build/python' + ext)
-
+from tree_sitter import Language, Parser
 
 PYTHON_LANGUAGE = Language(tree_sitter_python.language())
-py_parser = Parser()
-py_parser.language = PYTHON_LANGUAGE
-
+py_parser = Parser(PYTHON_LANGUAGE)

@@ -2,23 +2,27 @@ import pandas as pd
 from typing import Optional, Tuple
 import logging
 
-from macro.lm_cc_helper.calculate_code_with_boudaries import get_code_with_boundaries
-from macro.lm_cc_helper.code_block_processor import CodeBlockProcessor
-from macro.lm_cc_helper.get_lm_cc import get_lmcc
+from analysis.macro.lm_cc_helper.calculate_code_with_boundaries import get_code_with_boundaries
+from analysis.macro.lm_cc_helper.code_block_processor import CodeBlockProcessor
+from analysis.macro.lm_cc_helper.get_lm_cc import get_lmcc
 from schema.records import ParquetSchema as PCol
 
 logger = logging.getLogger(__name__)
 
 
-def calculate(df_clean: pd.DataFrame, threshold: float = 1.2515) -> Optional[Tuple[float, int]]:
+def calculate(df_clean: pd.DataFrame, threshold: float = 1.2515) -> Tuple[Optional[float], Optional[int]]:
     """
     データフレーム内のトークンとエントロピー情報を用いて、
     先行研究のアルゴリズム (Tree-sitter AST解析) で LM-CC スコアを算出します。
+
+    Returns:
+        ``(lm_cc, num_semantic_units)``。算出できない場合は ``(None, None)``。
+        (呼び出し側が常にタプル展開できるよう、失敗時も2要素を返す)
     """
     # 必須カラムが存在するかチェック
     if df_clean.empty or PCol.TOKEN_STR not in df_clean.columns or PCol.METRIC_ENTROPY not in df_clean.columns:
         logger.warning("LM-CC calculation skipped: Missing required columns (TOKEN or METRIC_ENTROPY).")
-        return None
+        return None, None
 
     try:
         # 1. データフレームからトークンとエントロピーのリストを抽出
@@ -49,4 +53,4 @@ def calculate(df_clean: pd.DataFrame, threshold: float = 1.2515) -> Optional[Tup
     except Exception as e:
         # Tree-sitter のパースエラーや境界処理で失敗した場合は None を返す
         logger.error(f"Failed to calculate LM-CC: {e}")
-        return None
+        return None, None

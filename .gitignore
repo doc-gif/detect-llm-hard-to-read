@@ -1,2 +1,9 @@
 __pycache__/
 .venv/
+.pytest_cache/
+*.log
+
+# PyCharm の個人設定 (共有する設定ファイルはコミットしたまま)
+.idea/workspace.xml
+.idea/shelf/
+.idea/usage.statistics.xml

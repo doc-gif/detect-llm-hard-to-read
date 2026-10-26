@@ -1,17 +1,24 @@
+"""抽出グループ (results/extracted_groups) のコードをエントロピー付きで眺める Streamlit ビューア。
+
+実行: ``streamlit run src/analysis/viewer_app.py``
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # src/ を import ルートにする
+
 import streamlit as st
 import pandas as pd
-from pathlib import Path
 import plotly.graph_objects as go
+
+import paths
 
 # ==========================================
 # ⚙️ 設定エリア
 # ==========================================
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
-
-# 各種ディレクトリへの絶対パスを構築
-CSV_DIR = PROJECT_ROOT / "results" / "extracted_groups"
-DATA_ROOT = PROJECT_ROOT / "data"
-PARQUET_ROOT = PROJECT_ROOT / "out"  # エントロピーデータ格納用ディレクトリ
+CSV_DIR = paths.EXTRACTED_GROUPS_DIR
+DATA_ROOT = paths.DATA_DIR
+PARQUET_ROOT = paths.OUT_DIR  # エントロピーデータ格納用ディレクトリ
 
 st.set_page_config(page_title="LM-CC 定性分析ビューア", layout="wide")
 
@@ -77,7 +84,8 @@ def build_highlighted_html(raw_code, df_parquet, threshold):
         if pd.isna(row.token_str): continue
 
         tok_str = str(row.token_str)
-        tok_str = tok_str.replace(' ', ' ').replace('<0x0A>', '\n').replace('<s>', '').replace('</s>', '')
+        # SentencePiece の空白記号 "▁" (U+2581) を通常の空白に戻す
+        tok_str = tok_str.replace('\u2581', ' ').replace('<0x0A>', '\n').replace('<s>', '').replace('</s>', '')
         search_str = tok_str.strip()
 
         if not search_str:

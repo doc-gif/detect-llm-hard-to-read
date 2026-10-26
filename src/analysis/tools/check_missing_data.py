@@ -1,58 +1,25 @@
+"""先行研究のスコアファイルにある uid が summary CSV に揃っているか (推論漏れが無いか) を確認する。"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
 import pandas as pd
 import json
 import logging
-from pathlib import Path
+
+import paths
+from analysis.scores import SCORE_FILES
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 # ==========================================
 # ⚙️ 設定エリア
-# ==========================================\
-PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
+# ==========================================
+SUMMARY_CSV_PATH = paths.summary_csv()
 
-SUMMARY_CSV_PATH = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "summaries" / "analysis_summary.csv"
+# スコアファイルの定義は analysis/scores.py の SCORE_FILES (簡略化版を含む全データセットを確認する)
 
-# グラフを保存する大元の出力先ディレクトリ
-OUTPUT_PLOT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "plots"
-
-SCORE_FILES = {
-    "humaneval": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier" / "results_score.json",
-        "format": "simple"
-    },
-    # "humaneval_simplified": {
-    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
-    #     "format": "simple"
-    # },
-    "humaneval_simplified-top60": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "humaneval-ier-simplified" / "results_score_simplified.json",
-        "format": "simple"
-    },
-    "xcodeeval_apr": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr" / "python_test_filtered_results.json",
-        "format": "nested"
-    },
-    # "xcodeeval_simplified_apr": {
-    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
-    #     "format": "nested"
-    # },
-    "xcodeeval_simplified-top50_apr": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "apr-simplified" / "python_test_filtered_results.json",
-        "format": "nested"
-    },
-    "xcodeeval_code_translation": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation" / "python2c_test_filtered_results.json",
-        "format": "nested"
-    },
-    # "xcodeeval_simplified_code_translation": {
-    #     "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
-    #     "format": "nested"
-    # },
-    "xcodeeval_simplified-top50_code_translation": {
-        "path": PROJECTS_DIR / "lm-cc" / "results" / "xcodeeval" / "code_translation-simplified" / "python2c_test_filtered_results.json",
-        "format": "nested"
-    }
-}
 
 def load_expected_uids(dataset_name: str, config: dict) -> set:
     """JSONから期待されるすべてのUID（タスクID）を抽出し、Set(集合)として返す"""

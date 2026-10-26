@@ -49,3 +49,16 @@ class OffsetIndex:
         """Convert a character offset to a UTF-8 byte offset."""
         clamped = max(0, min(char_offset, len(self.text)))
         return len(self.text[:clamped].encode("utf-8"))
+
+    def char_to_ts_point(self, char_offset: int) -> Tuple[int, int]:
+        """Convert a character offset to a Tree-sitter point ``(row, byte_column)``.
+
+        Tree-sitter columns are measured in UTF-8 *bytes*, so on lines that
+        contain non-ASCII characters they differ from the character column
+        returned by :meth:`char_to_line_column`.
+        """
+        line, _ = self.char_to_line_column(char_offset)
+        line_start = self._line_start_chars[line - 1]
+        clamped = max(line_start, min(char_offset, len(self.text)))
+        byte_column = len(self.text[line_start:clamped].encode("utf-8"))
+        return line - 1, byte_column

@@ -1,14 +1,19 @@
+"""エントロピー閾値 (パーセンタイル) ごとに相関分析を回し、結果を1つの CSV にまとめる。
+
+各閾値の summary CSV (results/summaries/analysis_summary_pXX.csv) が既にある前提。
+作り直す場合は下の run_pipeline(...) のコメントアウトを外す。
+出力: results/experiments/threshold_correlation_results.csv
+"""
 import sys
 import pandas as pd
 from pathlib import Path
 
-# プロジェクトルートをPYTHONPATHに追加してモジュールを読み込めるようにする
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(PROJECT_ROOT))
+# src/ を import ルートにする
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-# 先ほど改修した関数をインポート
-from src.analysis.pipeline import run_pipeline
-from src.analysis.correlation_analysis import run_analysis
+import paths
+from analysis.pipeline import run_pipeline  # noqa: F401  (下のコメントアウト部で使用)
+from analysis.experiments.correlation_analysis import run_analysis
 
 
 def main():
@@ -38,7 +43,7 @@ def main():
 
     all_results = []
 
-    out_dir = PROJECT_ROOT / "results" / "experiments"
+    out_dir = paths.EXPERIMENTS_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
 
     for label, thr in thresholds.items():
@@ -54,7 +59,7 @@ def main():
 
         # 2. 生成されたサマリーCSVを読み込んで相関分析を実行
         print("▶️ 2. 相関分析を実行中...")
-        summary_csv = PROJECT_ROOT / "results" / "summaries" / f"analysis_summary{suffix}.csv"
+        summary_csv = paths.summary_csv(suffix)
 
         if summary_csv.exists():
             experiment_results = run_analysis(summary_csv)

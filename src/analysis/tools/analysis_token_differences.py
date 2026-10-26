@@ -1,23 +1,30 @@
+"""Phase 1 のトークンエントロピーと先行研究 lm-cc のエントロピーの差を集計・可視化する。
+
+出力: results/token_analysis/
+"""
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
 import json
 import pandas as pd
 import numpy as np
-from pathlib import Path
 from scipy.stats import spearmanr, pearsonr
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tqdm import tqdm
 
+import paths
+
 # ==========================================
 # 1. パスと設定
 # ==========================================
-PROJECTS_DIR = Path(__file__).resolve().parent.parent.parent.parent
+BASE_DIR_MINE = paths.OUT_DIR
+BASE_DIR_PRIOR = paths.LM_CC_RESULTS_DIR
 
-BASE_DIR_MINE = PROJECTS_DIR / "detect-llm-hard-to-read" / "out"
-BASE_DIR_PRIOR = PROJECTS_DIR / "lm-cc" / "results"
-
-# 出力先ディレクトリの作成
-OUTPUT_DIR = PROJECTS_DIR / "detect-llm-hard-to-read" / "results" / "token_analysis"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+# 出力先ディレクトリ
+OUTPUT_DIR = paths.TOKEN_ANALYSIS_DIR
 
 DATASETS = [
     # {
@@ -81,7 +88,8 @@ def calculate_entropy_metrics(ds_name, task_id, prior_entropies, my_entropies, m
     is_length_match = (len_prior == len_mine)
 
     if min_len < 2:
-        return None, []
+        # 呼び出し側は4要素で展開するので、失敗時も4要素を返す
+        return None, [], None, None
 
     prior = prior[:min_len]
     mine = mine[:min_len]
@@ -180,6 +188,7 @@ def plot_results(df_summary, worst_tasks_data):
 # 4. メイン処理
 # ==========================================
 def run_analysis():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     all_summaries = []
     all_details = []
 

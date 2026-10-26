@@ -17,7 +17,7 @@ from typing import List, Optional
 import lizard
 import pandas as pd
 
-from macro.complexity_helper.source_reconstruction import load_source_from_meta
+from analysis.macro.complexity_helper.source_reconstruction import load_source_from_meta
 
 logger = logging.getLogger(__name__)
 

@@ -100,6 +100,20 @@ class LanguageAdapter(ABC):
             current = current.parent
         return depth
 
+    def is_statement_start_at(self, node: Optional[Node], byte_offset: int) -> bool:
+        """Return True if a statement node starts exactly at ``byte_offset``.
+
+        ``node`` is the smallest node at ``byte_offset`` (usually a leaf such as
+        the ``return`` keyword). Walks up the ancestors that start at the same
+        byte and checks whether any of them is a statement node.
+        """
+        current = node
+        while current is not None and current.start_byte == byte_offset:
+            if self.is_statement_start_node(current):
+                return True
+            current = current.parent
+        return False
+
     def function_id_for_point(
         self, functions: List[FunctionSpan], byte_offset: int
     ) -> Optional[str]:

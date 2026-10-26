@@ -1,24 +1,30 @@
-import os
+"""out/ の Parquet から LM-CC のブロックツリー JSON (先行研究 lm-cc と同じ形式) を生成する。
+
+出力: results/block_trees/<dataset>/block_tree_<task_id>.json
+"""
 import json
-import glob
-import pandas as pd
+import sys
 from pathlib import Path
 
-# 先行研究のスクリプトから必要なモジュールをインポート
-# ※ 配置場所に合わせて import パスを適宜修正してください
-from macro.lm_cc_calculation import get_code_with_boundaries, CodeBlockProcessor
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # src/ を import ルートにする
+
+import pandas as pd
+
+import paths
+from analysis.macro.lm_cc_helper.calculate_code_with_boundaries import get_code_with_boundaries
+from analysis.macro.lm_cc_helper.code_block_processor import CodeBlockProcessor
 from schema.records import ParquetSchema as PCol
 
 # ---------------------------------------------------------
 # ⚙️ 設定エリア
 # ---------------------------------------------------------
-# プロジェクトのルートディレクトリを自動取得（または手動で設定）
-PROJECT_DIR = Path(__file__).resolve().parent.parent.parent
-BASE_OUT_DIR = PROJECT_DIR / "out"
-BASE_RESULTS_DIR = PROJECT_DIR / "results"
+BASE_OUT_DIR = paths.OUT_DIR
 
 # 出力先のベースディレクトリ
-OUTPUT_BASE_DIR = BASE_RESULTS_DIR / "block_trees"
+OUTPUT_BASE_DIR = paths.BLOCK_TREES_DIR
+
+# 境界判定のエントロピー閾値 [nats] (先行研究のコードと同じ 0.67)
+THRESHOLD = 0.67
 
 # 処理対象の Parquet ファイルが格納されているディレクトリのリスト
 # 辞書のキーが「データセット名（出力時のフォルダ名）」になります
@@ -35,7 +41,7 @@ DATA_DIRECTORIES = {
 }
 
 
-def process_parquet_to_blocktree(parquet_file: Path, processor: CodeBlockProcessor) -> dict:
+def process_parquet_to_blocktree(parquet_file: Path, processor: CodeBlockProcessor) -> tuple[dict, str]:
     """1つのParquetファイルを読み込み、ブロックツリーの辞書を生成する"""
     df = pd.read_parquet(parquet_file)
 
@@ -51,10 +57,10 @@ def process_parquet_to_blocktree(parquet_file: Path, processor: CodeBlockProcess
     task_id = parquet_file.stem.replace("result_", "")
 
     # 1. 境界情報の取得
-    code_with_boundaries, clean_code_lines, start_end_tokens = get_code_with_boundaries(
+    code_with_boundaries, clean_code_lines, start_end_tokens, _ = get_code_with_boundaries(
         tokens=tokens,
         entropies=entropies,
-        threshold=0.67
+        threshold=THRESHOLD
     )
 
     # オリジナルのコード文字列を復元

@@ -4,7 +4,8 @@ import re
 import tempfile
 import os
 from complexipy import code_complexity
-from src.analysis.util.utils import get_total_branch, get_depth_sum, format_python_code
+from analysis.macro.lm_cc_helper.get_lm_cc import get_lmcc  # noqa: F401  (correlation.py が import する)
+from analysis.stats.utils import format_python_code
 
 
 def get_file_cc(file_path):
@@ -133,19 +134,4 @@ def get_code_hc_difficulty(code):
             os.remove(temp_name)
         except Exception:
             pass
-
-def get_lmcc(tree_node):
-    ALPHA = 0.8
-    total_branch = get_total_branch(tree_node)
-    depth_sum = get_depth_sum(tree_node, depth=1)
-    return depth_sum*(1-ALPHA) + total_branch*ALPHA
-
-
-
-
-
-
-
-
-
 
