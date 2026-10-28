@@ -1,0 +1,32 @@
+# loc_variation_9pairs.zip の 9 組 (処理を変えず、書式と LOC を変える) を計測・比較する設定。
+# 既存の if/else 入れ替え実験 (if_else_samples.toml) とは別の実験である。
+[experiment]
+package = "loc_variation_9pairs.zip"
+# 既存の data/ out/ results/ の既存ディレクトリとは別の、新しいディレクトリへ出す。
+output = "results/loc_variation_9pairs"
+# tests.json の args を渡す関数名。manifest の行に "entry" があればそちらを使う。
+entry = "run"
+
+[behavior]
+timeout_sec = 10.0
+
+# 計測結果 (Parquet) の検査規則。entropy は常に全トークンが有限値でなければならない。
+# surprisal も既定では全トークンが有限値であること。BOS を持たないモデルでは先頭トークンの surprisal が
+# 欠損する (その場合 entropy の先頭も欠損するので、この規則を true にしても entropy の検査は通らない)。
+# 先頭トークンだけの surprisal 欠損を許すときは true にする。2 番目以降の欠損は許さない。
+[validation]
+allow_leading_surprisal_missing = false
+
+# モデルを読み込む計測は、scripts/run_loc_variation.py measure --run-model を付けたときだけ動く。
+[measure]
+model = "codellama/CodeLlama-7b-hf"
+model_kind = "hf_causal_lm"
+revision = "6c284d1468fe6c413cf56183e69b194dcfa27fe6"
+device = "mps"
+dtype = "float16"
+context_strategy = "function_scope"
+
+# p67 (0.6813) を主な比較に使い、保存 summary の p80 (1.3238) も別の列で記録する。
+[thresholds]
+p67 = 0.6813
+p80_saved = 1.3238

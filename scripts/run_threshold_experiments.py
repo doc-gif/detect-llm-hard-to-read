@@ -1,50 +1,28 @@
-"""エントロピー閾値 (パーセンタイル) ごとに相関分析を回し、結果を1つの CSV にまとめる。
-
-各閾値の summary CSV (results/summaries/analysis_summary_pXX.csv) が既にある前提。
-作り直す場合は下の run_pipeline(...) のコメントアウトを外す。
-出力: results/experiments/threshold_correlation_results.csv
-"""
+import argparse
 import sys
 import pandas as pd
 from pathlib import Path
 
-# src/ を import ルートにする
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+# プロジェクトルートをPYTHONPATHに追加してモジュールを読み込めるようにする
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path[:0] = [str(PROJECT_ROOT), str(PROJECT_ROOT / "src"), str(PROJECT_ROOT / "src" / "analysis")]
 
-import paths
-from analysis.pipeline import run_pipeline  # noqa: F401  (下のコメントアウト部で使用)
-from analysis.experiments.correlation_analysis import run_analysis
+# 先ほど改修した関数をインポート
+from src.analysis.correlation_analysis import run_analysis
+from src.analysis.thresholds import SAVED_SUMMARY_THRESHOLDS
+from src.analysis.score_io import new_output_dir
 
 
-def main():
-    # 📝 先ほど計測した各パーセンタイルの閾値リスト
-    thresholds = {
-        "p05": 0.0037,
-        "p10": 0.0114,
-        "p15": 0.0214,
-        "p20": 0.0335,
-        "p25": 0.0483,
-        "p30": 0.0675,
-        "p35": 0.0921,
-        "p40": 0.1244,
-        "p45": 0.1691,
-        "p50": 0.2327,
-        "p55": 0.3254,
-        "p60": 0.4536,
-        "p65": 0.6154,
-        "p67": 0.6813,
-        "p70": 0.7781,
-        "p75": 0.9829,
-        "p80": 1.2515,
-        "p85": 1.5920,
-        "p90": 2.1097,
-        "p95": 3.2355
-    }
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="Analyze saved summaries with their recorded thresholds.")
+    parser.add_argument("--output-dir", type=Path, help="New directory; existing paths are refused.")
+    args = parser.parse_args(argv)
+    # 保存CSVと照合した数値閾値を使う。pXXは過去のファイル名に対応する。
+    thresholds = SAVED_SUMMARY_THRESHOLDS
 
     all_results = []
 
-    out_dir = paths.EXPERIMENTS_DIR
-    out_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = new_output_dir(PROJECT_ROOT / "results" / "experiments", args.output_dir)
 
     for label, thr in thresholds.items():
         print(f"\n=======================================================")
@@ -55,11 +33,12 @@ def main():
 
         # 1. パイプラインを実行して、この閾値用のサマリーCSVを生成
         # print("▶️ 1. Pipelineを実行中...")
+        # from src.analysis.pipeline import run_pipeline
         # run_pipeline(threshold=thr, suffix=suffix)
 
         # 2. 生成されたサマリーCSVを読み込んで相関分析を実行
         print("▶️ 2. 相関分析を実行中...")
-        summary_csv = paths.summary_csv(suffix)
+        summary_csv = PROJECT_ROOT / "results" / "summaries" / f"analysis_summary{suffix}.csv"
 
         if summary_csv.exists():
             experiment_results = run_analysis(summary_csv)
@@ -83,7 +62,7 @@ def main():
         df_results = df_results[cols_order]
 
         final_csv_path = out_dir / "threshold_correlation_results.csv"
-        df_results.to_csv(final_csv_path, index=False)
+        df_results.to_csv(final_csv_path, index=False, mode="x")
 
         print(f"\n🎉 全ての実験が完了しました！")
         print(f"📁 統合結果CSVを保存しました: {final_csv_path}")

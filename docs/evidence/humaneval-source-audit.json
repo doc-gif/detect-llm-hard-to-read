@@ -1,0 +1,113 @@
+{
+  "humaneval": {
+    "counts": {
+      "files": 162,
+      "matches_any_text": 162,
+      "matches_base_text": 79,
+      "matches_any_ast": 162,
+      "matches_base_ast": 158,
+      "matches_all_variants_ast": 157
+    },
+    "examples": [
+      {
+        "uid": "HumanEval_1",
+        "exact": [
+          "HumanEval_1__1",
+          "HumanEval_1__0"
+        ],
+        "ast": [
+          "HumanEval_1__1",
+          "HumanEval_1__0"
+        ],
+        "variants": [
+          "HumanEval_1__1",
+          "HumanEval_1",
+          "HumanEval_1__0"
+        ]
+      },
+      {
+        "uid": "HumanEval_156",
+        "exact": [
+          "HumanEval_156"
+        ],
+        "ast": [
+          "HumanEval_156",
+          "HumanEval_156__0"
+        ],
+        "variants": [
+          "HumanEval_156",
+          "HumanEval_156__1",
+          "HumanEval_156__0"
+        ]
+      },
+      {
+        "uid": "HumanEval_124",
+        "exact": [
+          "HumanEval_124__0"
+        ],
+        "ast": [
+          "HumanEval_124__0"
+        ],
+        "variants": [
+          "HumanEval_124__0",
+          "HumanEval_124__1",
+          "HumanEval_124"
+        ]
+      },
+      {
+        "uid": "HumanEval_105",
+        "exact": [
+          "HumanEval_105__0",
+          "HumanEval_105__1"
+        ],
+        "ast": [
+          "HumanEval_105__0",
+          "HumanEval_105__1"
+        ],
+        "variants": [
+          "HumanEval_105__0",
+          "HumanEval_105__1",
+          "HumanEval_105"
+        ]
+      },
+      {
+        "uid": "HumanEval_150",
+        "exact": [
+          "HumanEval_150__1",
+          "HumanEval_150__0"
+        ],
+        "ast": [
+          "HumanEval_150__1",
+          "HumanEval_150__0"
+        ],
+        "variants": [
+          "HumanEval_150__1",
+          "HumanEval_150__0",
+          "HumanEval_150"
+        ]
+      }
+    ]
+  },
+  "humaneval_simplified": {
+    "counts": {
+      "files": 63,
+      "matches_any_text": 63,
+      "matches_base_text": 63,
+      "matches_any_ast": 63,
+      "matches_base_ast": 63,
+      "matches_all_variants_ast": 63
+    },
+    "examples": []
+  },
+  "humaneval_simplified-top60": {
+    "counts": {
+      "files": 60,
+      "matches_any_text": 60,
+      "matches_base_text": 60,
+      "matches_any_ast": 60,
+      "matches_base_ast": 60,
+      "matches_all_variants_ast": 60
+    },
+    "examples": []
+  }
+}

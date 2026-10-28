@@ -1,0 +1,15 @@
+--- original.py
++++ swapped.py
+@@ -17,9 +17,9 @@
+ x1 = int((x1-1) * (curX / abs(curX)))
+ y1 = int((y1-1) * (curY / abs(curY)))
+ 
+-if x1 < 0 :
++if not (x1 < 0) :
++    print('0 ' + str(y1) + ' ' + str(x1) + ' 0')
++else:
+     print(str(x1) + ' 0 0 ' + str(y1))
+-else:
+-    print('0 ' + str(y1) + ' ' + str(x1) + ' 0')
+ 
+ 

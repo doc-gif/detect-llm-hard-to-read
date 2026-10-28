@@ -1,0 +1,688 @@
+{
+  "model_id": "p80__humaneval__A",
+  "threshold_label": "p80",
+  "dataset": "humaneval",
+  "model": "A",
+  "n_codes": 158,
+  "n_clusters": 158,
+  "n_parameters": 2,
+  "columns": [
+    "intercept",
+    "su10"
+  ],
+  "converged": true,
+  "status": "estimated",
+  "reasons": [],
+  "rank": 2,
+  "separation": "none",
+  "scaled_design_condition": 5.561061686413835,
+  "iterations": 7,
+  "covariance_correction": 1.0128205128205128,
+  "df_inference": 157,
+  "sandwich_check_max_abs": 5.551115123125783e-15,
+  "hessian_condition": 30.85441705776388,
+  "max_abs_eta": 4.037039015021915,
+  "max_se": 1.0894572583660436,
+  "score_max_abs": 3.774758283725532e-15,
+  "response_mean": 0.9670886075949368,
+  "fitted_mean": 0.9670886075949368,
+  "quasi_loglik": -22.23799049283786,
+  "quasi_dispersion": 0.6387580376499675,
+  "independent_score_root_max_abs": 8.881784197001252e-16,
+  "warnings": [],
+  "beta": [
+    4.677904719372123,
+    -1.602164260875517
+  ],
+  "covariance": [
+    [
+      1.0317100313662666,
+      -1.0350548094507999
+    ],
+    [
+      -1.0350548094508012,
+      1.1869171178064564
+    ]
+  ],
+  "centers": {
+    "0": 5.0,
+    "1": 8.0,
+    "2": 10.0
+  },
+  "code_keys": [
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_0"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_10"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_100"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_101"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_102"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_103"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_104"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_106"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_107"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_108"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_109"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_11"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_110"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_111"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_112"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_113"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_114"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_115"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_116"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_117"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_118"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_119"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_12"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_120"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_121"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_122"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_123"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_125"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_126"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_127"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_128"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_129"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_13"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_130"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_131"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_132"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_133"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_134"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_135"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_136"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_137"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_138"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_139"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_14"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_140"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_141"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_142"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_143"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_144"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_145"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_146"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_147"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_148"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_149"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_15"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_151"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_152"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_153"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_154"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_155"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_156"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_157"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_158"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_159"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_16"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_160"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_161"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_162"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_163"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_17"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_18"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_19"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_2"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_20"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_21"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_22"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_23"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_24"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_25"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_26"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_27"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_28"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_29"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_3"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_30"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_31"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_32"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_33"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_34"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_35"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_36"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_37"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_39"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_4"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_40"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_41"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_42"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_43"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_44"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_45"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_46"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_47"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_48"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_49"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_5"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_51"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_52"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_53"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_54"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_55"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_56"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_57"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_58"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_59"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_6"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_60"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_61"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_62"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_63"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_64"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_65"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_66"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_67"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_68"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_69"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_7"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_70"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_71"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_72"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_73"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_74"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_75"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_76"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_77"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_78"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_79"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_8"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_80"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_81"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_82"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_83"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_84"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_85"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_86"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_87"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_88"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_89"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_9"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_90"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_91"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_92"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_93"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_94"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_95"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_96"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_97"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_98"
+    },
+    {
+      "dataset": "humaneval",
+      "uid": "HumanEval_99"
+    }
+  ],
+  "analysis_input_sha256": "1c46016f72ff64781a084ad38f080f1eac98de149fae8a33b7b6c5fe641bc192",
+  "config_sha256": "51236a963108ac0d06403cf44d52bb0ad567b556b32d4a55a8281bfb0949203a"
+}

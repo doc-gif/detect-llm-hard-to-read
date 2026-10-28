@@ -1,0 +1,92 @@
+{
+ "HumanEval_47": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:50.870610+00:00",
+  "tokens": 85,
+  "seconds": 2.07,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_47__ifelse_L4": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:52.072539+00:00",
+  "tokens": 87,
+  "seconds": 1.2,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_123": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:53.778557+00:00",
+  "tokens": 124,
+  "seconds": 1.71,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_123__ifelse_L3": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:55.230886+00:00",
+  "tokens": 126,
+  "seconds": 1.45,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_123__ifelse_L8": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:56.655486+00:00",
+  "tokens": 126,
+  "seconds": 1.42,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_126": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:58.309913+00:00",
+  "tokens": 116,
+  "seconds": 1.65,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_126__ifelse_L10": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:34:59.693890+00:00",
+  "tokens": 117,
+  "seconds": 1.38,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_159": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:35:00.579918+00:00",
+  "tokens": 50,
+  "seconds": 0.89,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_159__ifelse_L3": {
+  "status": "ok",
+  "updated_at": "2026-10-26T10:35:01.341863+00:00",
+  "tokens": 51,
+  "seconds": 0.76,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ }
+}

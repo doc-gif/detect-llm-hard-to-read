@@ -1,0 +1,34 @@
+{
+  "lm-cc": {
+    "scripts/audit_saved_calculations.py": "00abe39b5b1ddb170d142241944122f9ccb7b7f0a5686adfcdfa07215ad39c0f",
+    "scripts/audit_saved_lmcc_metrics.py": "2f93de83281a941f23ed2f71528b2eb3b3fb1e714b1dcb28e657f405b9865752",
+    "scripts/plot_lmcc_scatter.py": "1d99467ff15cc3020184ebebac47ab73cd6553a9326bff9d11d5e77ad3ea471f",
+    "scripts/run_lmcc_correlation.py": "38cdc7e0af3c1b149e904316caaa259bf848b5896c18393e440a89f0b1ec24d4",
+    "scripts/tasks/ier/get_scores.py": "abfe7abdcb10d43c9965a0e62b13dbeb7c3509de33d365ad1205f85fb84815e4",
+    "scripts/utils/code_integrity.py": "7d2f629b548b55a34832901ca80beb257fdf1fcdb9c6aa16f9664b7d7b84e9e8",
+    "scripts/utils/correlation.py": "2c0dd1193aac3811752d131950a0cb4f8d3247a71536ac9e42294479738a3fa3",
+    "scripts/utils/entropy.py": "9f5fdb7c47cf08d32dda9a198c00c50c1c3d010d65c86f69a5ecf832e62f64cd",
+    "scripts/utils/score_io.py": "400a1696d07f55f44ec9e1ab6b28feb35d69c0b8da337721337d16d0df11aa5f",
+    "tests/test_grouped_statistics.py": "e8946f230275cad70a94eb1bdbed3e1b009ed6ff1e2caf5c6e9d6312547b787f",
+    "tests/test_preprocessing_integrity.py": "126d43e9fd2dc8d7c8d3cba59814af2a37f19df602f0f52bbeebd94249511bfa",
+    "tests/test_score_integrity.py": "f1abe027370e9eec90758dd1c90bdf5d1f961a0fbbd7aa0fd77d3c4003cf5aef"
+  },
+  "detect-llm-hard-to-read": {
+    "scripts/audit_saved_analysis.py": "fedb8b196db8c3d12293f1ba6e748d6e1ff7f7f4635b3a7749b7e5d1db9a10d4",
+    "scripts/audit_saved_semantic_metrics.py": "02820a16c4988d6fe6b8f7892613dbbf22820227d9798fa556e18215dc146982",
+    "scripts/run_threshold_experiments.py": "828a3341b810d4b83a33a286a222f281cc756abb6253094d3de1afad3c6dd6b3",
+    "src/analysis/check_missing_data.py": "987d7832c5ad8c60fcd4cb0973ceacbd16890ccdeb9e15bef60175adc28ae288",
+    "src/analysis/correlation_analysis.py": "df36c7c69fee3565e6eb237c462064b42a6e92cca5a64a087abe258cc6168819",
+    "src/analysis/generate_block_tree.py": "bcd6aa3c248f6b755eec2cac9eb1ec08b90e34e8bdf70c1bcb26831f761b5170",
+    "src/analysis/plot_analysis_scatter.py": "ae2ee44808526653fabfbeee3c01d77ddabc83443961978c6af3ecb4b1888a1f",
+    "src/analysis/plot_analysis_scatter_with_group.py": "a808b26f286e58d95c4f028a364038c74c77aa04cff06ae233e2732a8987b480",
+    "src/analysis/plot_distributions.py": "3132ed8cd55150129445252a2ee9fa00958bb1361416cdbc14311db1aaedb5b8",
+    "src/analysis/score_io.py": "357d98165bdc315534e8a4fc1e7304c5faad2fa72647d5cf5852974588e01acf",
+    "src/analysis/semantic_unit_model_comparison.py": "6441073dd410e651f8a8e790c7fa8a28c9ea7fc931fbc87ba1aac76629553287",
+    "src/analysis/semantic_unit_threshold_analysis.py": "fe9a5f11d16ae472eaf44e83bd229c6047ca34a21ec35991a25f883224bbcd51",
+    "src/analysis/thresholds.py": "f724cffa1c2af10bc8dbc649c5780486359a43e2c8bfa70c1185e724640b046e",
+    "src/analysis/util/correlation.py": "168d222d816d29be2c6f0fbb20e147bbc2d68f7e25a250665d912fbe3fe39bf2",
+    "tests/test_analysis_integrity.py": "30d7e7d73d8fbe43b92abd23db73c60984df5446b88179592b448142154801cb",
+    "tests/test_block_tree_export.py": "421f662c14db7d265db1810dea950b02391881f27251917f9733c7723e748929"
+  }
+}

@@ -1,0 +1,477 @@
+{
+  "cases": [
+    {
+      "input": "12\r\ntoosmallword\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "35\r\nTheQuickBrownFoxJumpsOverTheLazyDog\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "1\r\na\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nqwertyuiopasdfghjklzxcvbnm\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "26\r\nABCDEFGHIJKLMNOPQRSTUVWXYZ\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "48\r\nthereisasyetinsufficientdataforameaningfulanswer\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "30\r\nToBeOrNotToBeThatIsTheQuestion\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "30\r\njackdawslovemybigsphinxofquarz\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "31\r\nTHEFIVEBOXINGWIZARDSJUMPQUICKLY\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "26\r\naaaaaaaaaaaaaaaaaaaaaaaaaa\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nMGJYIZDKsbhpVeNFlquRTcWoAx\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "26\r\nfWMOhAPsbIVtyUEZrGNQXDklCJ\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "26\r\nngPMVFSThiRCwLEuyOAbKxQzDJ\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "25\r\nnxYTzLFwzNolAumjgcAboyxAj\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\npRWdodGdxUESvcScPGbUoooZsC\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "66\r\nBovdMlDzTaqKllZILFVfxbLGsRnzmtVVTmqiIDTYrossLEPlmsPrkUYtWEsGHVOnFj\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "100\r\nmKtsiDRJypUieHIkvJaMFkwaKxcCIbBszZQLIyPpCDCjhNpAnYFngLjRpnKWpKWtGnwoSteeZXuFHWQxxxOpFlNeYTwKocsXuCoa\r\n",
+      "output": [
+        "YES",
+        "Yes",
+        "yes"
+      ]
+    },
+    {
+      "input": "26\r\nEoqxUbsLjPytUHMiFnvcGWZdRK\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nvCUFRKElZOnjmXGylWQaHDiPst\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nWtrPuaHdXLKJMsnvQfgOiJZBEY\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\npGiFluRteQwkaVoPszJyNBChxM\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\ncTUpqjPmANrdbzSFhlWIoKxgVY\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nLndjgvAEuICHKxPwqYztosrmBN\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nMdaXJrCipnOZLykfqHWEStevbU\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nEjDWsVxfKTqGXRnUMOLYcIzPba\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nxKwzRMpunYaqsdfaBgJcVElTHo\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nnRYUQsTwCPLZkgshfEXvBdoiMa\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nHNCQPfJutyAlDGsvRxZWMEbIdO\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nDaHJIpvKznQcmUyWsTGObXRFDe\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nkqvAnFAiRhzlJbtyuWedXSPcOG\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nhlrvgdwsIOyjcmUZXtAKEqoBpF\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\njLfXXiMhBTcAwQVReGnpKzdsYu\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nlNMcVuwItjxRBGAekjhyDsQOzf\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nRkSwbNoYldUGtAZvpFMcxhIJFE\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nDqspXZJTuONYieKgaHLMBwfVSC\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\necOyUkqNljFHRVXtIpWabGMLDz\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nEKAvqZhBnPmVCDRlgWJfOusxYI\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\naLbgqeYchKdMrsZxIPFvTOWNjA\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nxfpBLsndiqtacOCHGmeWUjRkYz\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nXsbRKtqleZPNIVCdfUhyagAomJ\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nAmVtbrwquEthZcjKPLiyDgSoNF\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nOhvXDcwqAUmSEPRZGnjFLiKtNB\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nEKWJqCFLRmstxVBdYuinpbhaOg\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nmnbvcxxlkjhgfdsapoiuytrewq\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\naAbcdefghijklmnopqrstuvwxy\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "30\r\nABCDEFGHTYRIOPLabcdefghtyriopl\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "25\r\nabcdefghijklmnopqrstuvwxy\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nabcdefhijklmnopqrstVxyzABC\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "25\r\nqwertyuiopasdfghjklxcvbnm\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "34\r\nTheQuickBrownFoxJumpsOverTheLayDog\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nabcdefghigklmnopqrstuvwxyz\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nabcdefghijklmnopqrstuvwxyA\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "50\r\nqazwsxedcrfvtgbyhnujmikolQWERTYUIOASDFGHJKLZXCVBNM\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "35\r\nTheQuickBrownFoxJumpsOverTheLasyDog\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "25\r\nbcdefghijklmnopqrstuvwxyz\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "38\r\nAbCdEfGhIjKlMnOpQrStVwXyZzzzzzzaaaaaaa\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nabcdefghiklmnopqrstvxyzABC\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "26\r\nabcdefghijklmnopqrstuvwxzZ\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    },
+    {
+      "input": "50\r\nabcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXY\r\n",
+      "output": [
+        "No",
+        "NO",
+        "no"
+      ]
+    }
+  ],
+  "execution_status": "not_run"
+}

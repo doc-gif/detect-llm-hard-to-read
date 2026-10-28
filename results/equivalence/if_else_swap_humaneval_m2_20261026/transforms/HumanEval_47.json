@@ -1,0 +1,134 @@
+{
+ "uid": "HumanEval_47",
+ "dataset": "humaneval",
+ "source_path": "data/humaneval/HumanEval_47.py",
+ "source_sha256": "38ab36afc260a6c9f53eacec3f9b955f6a4462cb4c0c40f27d4de1112fd725c0",
+ "transform": {
+  "name": "if_else_swap",
+  "languages": [
+   "python"
+  ],
+  "options": {
+   "unwrap_not": true,
+   "negation_style": "auto"
+  }
+ },
+ "task_code_matches_source": true,
+ "lm_cc_cases_with_same_code": [
+  "HumanEval_47"
+ ],
+ "candidates": [
+  {
+   "candidate": {
+    "transform": "if_else_swap",
+    "index": 0,
+    "variant_id": "ifelse_L4",
+    "start_line": 4,
+    "end_line": 7,
+    "status": "ok",
+    "reason": null,
+    "info": {
+     "condition": "len(l) % 2 == 1",
+     "condition_type": "comparison_operator",
+     "then_lines": [
+      5,
+      5
+     ],
+     "else_line": 6,
+     "else_lines": [
+      7,
+      7
+     ]
+    }
+   },
+   "status": "ok",
+   "reason": null,
+   "edits": [
+    {
+     "kind": "negate_condition",
+     "method": "add_not_paren",
+     "line": 4,
+     "before": "len(l) % 2 == 1",
+     "after": "not (len(l) % 2 == 1)"
+    },
+    {
+     "kind": "swap_bodies",
+     "then_lines_before": [
+      5,
+      5
+     ],
+     "else_lines_before": [
+      7,
+      7
+     ],
+     "then_lines_after": [
+      7,
+      7
+     ],
+     "else_lines_after": [
+      5,
+      5
+     ]
+    }
+   ],
+   "line_map": [
+    {
+     "orig_line": 1,
+     "new_line": 1,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 2,
+     "new_line": 2,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 3,
+     "new_line": 3,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 4,
+     "new_line": 4,
+     "region": "if_header",
+     "text_changed": true
+    },
+    {
+     "orig_line": 5,
+     "new_line": 7,
+     "region": "then_body",
+     "text_changed": false
+    },
+    {
+     "orig_line": 6,
+     "new_line": 6,
+     "region": "between",
+     "text_changed": false
+    },
+    {
+     "orig_line": 7,
+     "new_line": 5,
+     "region": "else_body",
+     "text_changed": false
+    },
+    {
+     "orig_line": 8,
+     "new_line": 8,
+     "region": "after",
+     "text_changed": false
+    }
+   ],
+   "checks": {
+    "line_count_before": 8,
+    "line_count_after": 8,
+    "line_count_equal": true,
+    "compiles": true,
+    "ast_matches_expected": true
+   },
+   "variant_id": "ifelse_L4"
+  }
+ ]
+}

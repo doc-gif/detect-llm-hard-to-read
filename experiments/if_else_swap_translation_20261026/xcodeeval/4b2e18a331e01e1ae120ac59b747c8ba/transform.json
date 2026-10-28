@@ -1,0 +1,345 @@
+{
+  "candidate": {
+    "transform": "if_else_swap",
+    "index": 0,
+    "variant_id": "ifelse_L4",
+    "start_line": 4,
+    "end_line": 23,
+    "status": "ok",
+    "reason": null,
+    "info": {
+      "condition": "k<n",
+      "condition_type": "comparison_operator",
+      "then_lines": [
+        5,
+        5
+      ],
+      "else_line": 6,
+      "else_lines": [
+        7,
+        23
+      ]
+    }
+  },
+  "status": "ok",
+  "reason": null,
+  "edits": [
+    {
+      "kind": "negate_condition",
+      "method": "add_not_paren",
+      "line": 4,
+      "before": "k<n",
+      "after": "not (k<n)"
+    },
+    {
+      "kind": "swap_bodies",
+      "then_lines_before": [
+        5,
+        5
+      ],
+      "else_lines_before": [
+        7,
+        23
+      ],
+      "then_lines_after": [
+        23,
+        23
+      ],
+      "else_lines_after": [
+        5,
+        21
+      ]
+    }
+  ],
+  "line_map": [
+    {
+      "orig_line": 1,
+      "new_line": 1,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 2,
+      "new_line": 2,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 3,
+      "new_line": 3,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 4,
+      "new_line": 4,
+      "region": "if_header",
+      "text_changed": true
+    },
+    {
+      "orig_line": 5,
+      "new_line": 23,
+      "region": "then_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 6,
+      "new_line": 22,
+      "region": "between",
+      "text_changed": false
+    },
+    {
+      "orig_line": 7,
+      "new_line": 5,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 8,
+      "new_line": 6,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 9,
+      "new_line": 7,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 10,
+      "new_line": 8,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 11,
+      "new_line": 9,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 12,
+      "new_line": 10,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 13,
+      "new_line": 11,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 14,
+      "new_line": 12,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 15,
+      "new_line": 13,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 16,
+      "new_line": 14,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 17,
+      "new_line": 15,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 18,
+      "new_line": 16,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 19,
+      "new_line": 17,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 20,
+      "new_line": 18,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 21,
+      "new_line": 19,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 22,
+      "new_line": 20,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 23,
+      "new_line": 21,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 24,
+      "new_line": 24,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 25,
+      "new_line": 25,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 26,
+      "new_line": 26,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 27,
+      "new_line": 27,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 28,
+      "new_line": 28,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 29,
+      "new_line": 29,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 30,
+      "new_line": 30,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 31,
+      "new_line": 31,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 32,
+      "new_line": 32,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 33,
+      "new_line": 33,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 34,
+      "new_line": 34,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 35,
+      "new_line": 35,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 36,
+      "new_line": 36,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 37,
+      "new_line": 37,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 38,
+      "new_line": 38,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 39,
+      "new_line": 39,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 40,
+      "new_line": 40,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 41,
+      "new_line": 41,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 42,
+      "new_line": 42,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 43,
+      "new_line": 43,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 44,
+      "new_line": 44,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 45,
+      "new_line": 45,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 46,
+      "new_line": 46,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 47,
+      "new_line": 47,
+      "region": "after",
+      "text_changed": false
+    }
+  ],
+  "checks": {
+    "line_count_before": 47,
+    "line_count_after": 47,
+    "line_count_equal": true,
+    "compiles": true,
+    "ast_matches_expected": true
+  }
+}

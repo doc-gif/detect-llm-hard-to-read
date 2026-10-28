@@ -1,0 +1,15 @@
+{
+  "started_after_config": true,
+  "finished_at_utc": "2026-10-19T15:41:12.814107+00:00",
+  "config_sha256": "ce654bb3c9f86f1023cbe5e35606c9b9a55dd64179f4855aedeeb01f86fe36ae",
+  "script_sha256": "c57870f5a04ac4abade0fb85575c0b43f6fadf52679a9fbdfa63de38a3e257aa",
+  "holm_family_size": 60,
+  "fits": 24,
+  "estimated": 22,
+  "commands": [
+    "scripts/run_su_fractional_analysis.py",
+    "fit",
+    "--run-dir",
+    "results/reanalysis/2026-10-20-fractional-logit-reviewed"
+  ]
+}

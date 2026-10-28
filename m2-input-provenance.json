@@ -1,0 +1,11 @@
+{
+  "source": "/Users/hyoishitobi/PycharmProjects/lm-cc",
+  "commit": "96dd50f384240a2f75c377b9a109baee8d1d099d",
+  "dirty": true,
+  "copied": [
+    "dataset",
+    "scripts",
+    "results"
+  ],
+  "note": "Working files copied; original repository is unchanged."
+}

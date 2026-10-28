@@ -1,0 +1,45 @@
+{
+ "experiment": {
+  "name": "if_else_swap_humaneval_m2_preflight_20261026",
+  "dataset": "humaneval",
+  "ids": [
+   "HumanEval_47"
+  ],
+  "targets": [],
+  "output_root": "results/equivalence"
+ },
+ "transform": {
+  "name": "if_else_swap",
+  "options": {
+   "unwrap_not": true,
+   "negation_style": "auto"
+  }
+ },
+ "behavior": {
+  "timeout_sec": 10.0,
+  "workers": 4
+ },
+ "measure": {
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "revision": "6c284d1468fe6c413cf56183e69b194dcfa27fe6",
+  "device": "mps",
+  "dtype": "float16",
+  "context_strategy": "function_scope",
+  "allowed_behavior": [
+   "match"
+  ]
+ },
+ "thresholds": {
+  "p67": 0.6813,
+  "p80": 1.2515
+ },
+ "accuracy": {
+  "answer_model": "UNCONFIGURED",
+  "trials": 5,
+  "temperature": 0.0,
+  "max_tokens": 1024,
+  "require_behavior_match": true,
+  "ier_cases": "base"
+ }
+}

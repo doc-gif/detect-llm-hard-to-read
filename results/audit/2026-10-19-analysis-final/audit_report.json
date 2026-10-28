@@ -1,0 +1,387 @@
+{
+  "python": "3.13.9",
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "scipy": "1.17.1",
+  "score_id_policy": "exact full ID; no averaging across question variants",
+  "code_policy": "exclude HumanEval AST mismatch; retain exact or AST-equal main.py",
+  "historical_outputs": "read only; no model inference, download or API calls",
+  "p67": {
+    "summary_rows": 1562,
+    "legacy_join_rows": 968,
+    "corrected_join_rows": 964,
+    "corrected_dataset_counts": {
+      "xcodeeval_code_translation": 535,
+      "xcodeeval_apr": 271,
+      "humaneval": 158
+    },
+    "excluded_datasets": {
+      "xcodeeval_simplified_code_translation": 198,
+      "xcodeeval_simplified_apr": 116,
+      "xcodeeval_simplified-top50_code_translation": 99,
+      "humaneval_simplified": 63,
+      "humaneval_simplified-top60": 60,
+      "xcodeeval_simplified-top50_apr": 58
+    }
+  },
+  "p80": {
+    "summary_rows": 1562,
+    "legacy_join_rows": 968,
+    "corrected_join_rows": 964,
+    "corrected_dataset_counts": {
+      "xcodeeval_code_translation": 535,
+      "xcodeeval_apr": 271,
+      "humaneval": 158
+    },
+    "excluded_datasets": {
+      "xcodeeval_simplified_code_translation": 198,
+      "xcodeeval_simplified_apr": 116,
+      "xcodeeval_simplified-top50_code_translation": 99,
+      "humaneval_simplified": 63,
+      "humaneval_simplified-top60": 60,
+      "xcodeeval_simplified-top50_apr": 58
+    }
+  },
+  "current_p80_vs_saved_merged": {
+    "calculated_rows": 968,
+    "stored_rows": 968,
+    "unmatched_keys": 0,
+    "avg_context_surprisal_gap": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    },
+    "avg_first_token_surprisal": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    },
+    "lm_cc": {
+      "different_rows": 291,
+      "max_absolute_difference": 11.200000000000003
+    },
+    "lm_cc_density": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    },
+    "loc": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    },
+    "num_functions": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    },
+    "num_semantic_units": {
+      "different_rows": 346,
+      "max_absolute_difference": 8.0
+    },
+    "pass_at_1": {
+      "different_rows": 0,
+      "max_absolute_difference": 5.551115123125783e-17
+    },
+    "ppl": {
+      "different_rows": 0,
+      "max_absolute_difference": 1.7763568394002505e-15
+    },
+    "total_tokens": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    }
+  },
+  "saved_bin_tables": {
+    "bin1_all_freq_table.csv": {
+      "calculated_rows": 594,
+      "stored_rows": 594,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 7.105427357601002e-15
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 8.326672684688674e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin1_humaneval_freq_table.csv": {
+      "calculated_rows": 201,
+      "stored_rows": 201,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.1102230246251565e-16
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 8.326672684688674e-17
+      }
+    },
+    "bin1_xcodeeval_apr_freq_table.csv": {
+      "calculated_rows": 594,
+      "stored_rows": 594,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 7.105427357601002e-15
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 8.326672684688674e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin1_xcodeeval_code_translation_freq_table.csv": {
+      "calculated_rows": 201,
+      "stored_rows": 201,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.7763568394002505e-15
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.1102230246251565e-16
+      }
+    },
+    "bin5_all_freq_table.csv": {
+      "calculated_rows": 119,
+      "stored_rows": 119,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 8.326672684688674e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin5_humaneval_freq_table.csv": {
+      "calculated_rows": 41,
+      "stored_rows": 41,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.7763568394002505e-15
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.1102230246251565e-16
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin5_xcodeeval_apr_freq_table.csv": {
+      "calculated_rows": 119,
+      "stored_rows": 119,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.4210854715202004e-14
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 8.326672684688674e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin5_xcodeeval_code_translation_freq_table.csv": {
+      "calculated_rows": 41,
+      "stored_rows": 41,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 2.220446049250313e-16
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin10_all_freq_table.csv": {
+      "calculated_rows": 60,
+      "stored_rows": 60,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.4210854715202004e-14
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin10_humaneval_freq_table.csv": {
+      "calculated_rows": 21,
+      "stored_rows": 21,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      }
+    },
+    "bin10_xcodeeval_apr_freq_table.csv": {
+      "calculated_rows": 60,
+      "stored_rows": 60,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.4210854715202004e-14
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      }
+    },
+    "bin10_xcodeeval_code_translation_freq_table.csv": {
+      "calculated_rows": 21,
+      "stored_rows": 21,
+      "unmatched_keys": 0,
+      "lm_cc_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "n": {
+        "different_rows": 0,
+        "max_absolute_difference": 0.0
+      },
+      "pass_at_1_mean": {
+        "different_rows": 0,
+        "max_absolute_difference": 5.551115123125783e-17
+      },
+      "pass_at_1_std": {
+        "different_rows": 0,
+        "max_absolute_difference": 1.1102230246251565e-16
+      }
+    }
+  },
+  "saved_models": {
+    "calculated_rows": 22,
+    "stored_rows": 22,
+    "unmatched_keys": 0,
+    "aic": {
+      "different_rows": 0,
+      "max_absolute_difference": 2.2737367544323206e-13
+    },
+    "bic": {
+      "different_rows": 0,
+      "max_absolute_difference": 2.2737367544323206e-13
+    },
+    "n": {
+      "different_rows": 0,
+      "max_absolute_difference": 0.0
+    },
+    "rss": {
+      "different_rows": 0,
+      "max_absolute_difference": 1.4210854715202004e-14
+    }
+  },
+  "source_sha256": {
+    "/Users/hyoishitobi/PycharmProjects/lm-cc/results/humaneval-ier/results_score.json": "22ecd864e17e5a54268837491d722d933145d16d29b349ab65d5ae229ee199ed",
+    "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/apr/python_test_filtered_results.json": "df3b1fe85ccf501b32e04728b9ae3602263c900637617909b0e4f27edc218a1d",
+    "/Users/hyoishitobi/PycharmProjects/lm-cc/results/xcodeeval/code_translation/python2c_test_filtered_results.json": "a91652227915b24c9d6ea4694389ced4d087e6c53d7b531ebddf2353272f0017",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/summaries/analysis_summary_p67.csv": "f540fa6b3161b442ac899739feb2c3613c57e094aada5da96e04469edf8ae11d",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/summaries/analysis_summary_p80.csv": "55f42e1e5a5e28c019c33d92a5e263a87927e24cf2c45466a8cbe84d7ff0429c",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/analysis_summary_p80_with_score.csv": "185f377b3d18775a271ce441bbd27101ad1498f292c09f4aa9b0dfbc67fc9f4e",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin1_all_freq_table.csv": "bd8c4a1cd553d843d21d980f6d009f6ea4d4d8c6d8781123e74e478821300d3a",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin1_humaneval_freq_table.csv": "9b8851d2bdbf04fa36e653482ca5f3b2e8c5ebb897c8876387fb4d98df64f0a2",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin1_xcodeeval_apr_freq_table.csv": "16ac62ea8e933e147baf9b574c5feeacffdb0cef85fbc10aef75c29ddc58b0e0",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin1_xcodeeval_code_translation_freq_table.csv": "f2dcb05da841605d7cdeffd59cab4fd2792fee4d7f41cd402b4bf66ceff237ea",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin5_all_freq_table.csv": "5b7705d3fe2f77666c7ab86a391bf36e735955a1126d29953941d9e3ead1ae57",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin5_humaneval_freq_table.csv": "794388f4342299e334783bd1fab848e10022abcf2b0d5430eebafbe1e0c8260a",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin5_xcodeeval_apr_freq_table.csv": "bad0cb8d6162fc218c71daf532a8bf9ca8ce3df529c1ea67cad89886d2700e0e",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin5_xcodeeval_code_translation_freq_table.csv": "eacf48de0691f8b75f48f6cdcc641600a42669a0116cbf798e9a6e3c240b9e5a",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin10_all_freq_table.csv": "afd15d95dc7bfd0ee6e3bfa2a1d092edd8dcb6cce48145d3cf9248eff7582c2b",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin10_humaneval_freq_table.csv": "d283db156291b02650497a02eeb860816d379f769e12062cdee697e1b3c6b707",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin10_xcodeeval_apr_freq_table.csv": "c948ea2c725ffd7236f9c6010c536eadda372b2bc093c17a80219c21318f9952",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_binning/tables/bin10_xcodeeval_code_translation_freq_table.csv": "74e17d8405960f94c784bf34c819f71a6217505c8d20f6467bb9f57a39007539",
+    "/Users/hyoishitobi/PycharmProjects/detect-llm-hard-to-read/results/semantic_unit_model_comparison/tables/model_comparison_summary.csv": "242e0b08ff1710caf39d1203daecbc99739745009047e4ba4f95aeb44c63703d"
+  },
+  "png_provenance": "Filenames and Git revisions identify likely producers; PNG pixels and original run commands are unverified."
+}

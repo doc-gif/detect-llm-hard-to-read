@@ -1,0 +1,2 @@
+uid,variant_id,item_id,status,reason,start_line,end_line,condition_before,condition_after,negation_method,line_count_equal,ast_matches_expected,task_code_matches_source,lm_cc_cases_with_same_code
+HumanEval_47,ifelse_L4,HumanEval_47__ifelse_L4,ok,,4,7,len(l) % 2 == 1,not (len(l) % 2 == 1),add_not_paren,True,True,True,HumanEval_47

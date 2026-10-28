@@ -1,0 +1,32 @@
+[experiment]
+package = "experiments/if_else_swap_translation_20261026"
+output = "results/equivalence/if_else_translation_13_20261026"
+
+[experiment.expected_counts]
+xcodeeval_code_translation = 10
+minimal = 3
+
+[behavior]
+timeout_sec = 10.0
+workers = 4
+# 今回は動作の同一性を検査する。保存正解との文字列比較は診断として残す。
+require_expected_output = false
+
+[measure]
+model = "codellama/CodeLlama-7b-hf"
+model_kind = "hf_causal_lm"
+revision = "6c284d1468fe6c413cf56183e69b194dcfa27fe6"
+device = "mps"
+dtype = "float16"
+context_strategy = "function_scope"
+
+# p67を主な比較に使い、保存summaryのp80も別の列で記録する。
+[thresholds]
+p67 = 0.6813
+p80_saved = 1.3238
+
+[remote]
+host = "m2"
+root = "/Users/hyoishitobi/experiments/if-else-translation-20261026"
+compute_hostname = "Hyo-MacMini-M2"
+venv_source = "/Users/hyoishitobi/experiments/llm-readability-20261026/detect-llm-hard-to-read/.venv"

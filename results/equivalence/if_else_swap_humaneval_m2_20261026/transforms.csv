@@ -1,0 +1,8 @@
+uid,variant_id,item_id,status,reason,start_line,end_line,condition_before,condition_after,negation_method,line_count_equal,ast_matches_expected,task_code_matches_source,lm_cc_cases_with_same_code
+HumanEval_47,ifelse_L4,HumanEval_47__ifelse_L4,ok,,4,7,len(l) % 2 == 1,not (len(l) % 2 == 1),add_not_paren,True,True,True,HumanEval_47
+HumanEval_123,ifelse_L3,HumanEval_123__ifelse_L3,ok,,3,6,n%2==0,not (n%2==0),add_not_paren,True,True,True,HumanEval_123
+HumanEval_123,ifelse_L8,HumanEval_123__ifelse_L8,ok,,8,11,n % 2 == 0,not (n % 2 == 0),add_not_paren,True,True,True,HumanEval_123
+HumanEval_123,ifelse_L13,HumanEval_123__ifelse_L13,not_applicable,else 節が無い,13,14,,,,,,True,HumanEval_123
+HumanEval_126,ifelse_L8,HumanEval_126__ifelse_L8,not_applicable,else 節が無い,8,9,,,,,,False,HumanEval_126__0;HumanEval_126__1
+HumanEval_126,ifelse_L10,HumanEval_126__ifelse_L10,ok,,10,13,"all(lst[i - 1] <= lst[i] for i in range(1, len(lst)))","not all(lst[i - 1] <= lst[i] for i in range(1, len(lst)))",add_not,True,True,False,HumanEval_126__0;HumanEval_126__1
+HumanEval_159,ifelse_L3,HumanEval_159__ifelse_L3,ok,,3,6,(need <= remaining), not (need <= remaining),add_not,True,True,True,HumanEval_159

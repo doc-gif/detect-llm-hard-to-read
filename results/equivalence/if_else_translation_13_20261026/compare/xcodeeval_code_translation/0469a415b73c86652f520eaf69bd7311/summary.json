@@ -1,0 +1,4419 @@
+{
+  "summary": {
+    "expected_output_matches": false,
+    "baseline_expected_mismatches": 38,
+    "swapped_expected_mismatches": 38,
+    "dataset": "xcodeeval_code_translation",
+    "uid": "0469a415b73c86652f520eaf69bd7311",
+    "group": "long",
+    "if_line": 7,
+    "behavior_status": "match",
+    "loc_before": 59,
+    "loc_after": 59,
+    "loc_delta": 0,
+    "total_tokens_before": 438,
+    "total_tokens_after": 440,
+    "total_tokens_delta": 2,
+    "mean_entropy_before": 0.5702552788839866,
+    "mean_entropy_after": 0.573662484225563,
+    "mean_entropy_delta": 0.003407205341576347,
+    "ppl_before": 1.6513688818284717,
+    "ppl_after": 1.6692962310007553,
+    "ppl_delta": 0.017927349172283558,
+    "su_count_p67_before": 55,
+    "su_count_p67_after": 55,
+    "su_count_p67_delta": 0,
+    "su_count_p80_saved_before": 33,
+    "su_count_p80_saved_after": 33,
+    "su_count_p80_saved_delta": 0,
+    "lm_cc_p67_before": 72.79999999999998,
+    "lm_cc_p67_after": 72.79999999999998,
+    "lm_cc_p67_delta": 0.0,
+    "lm_cc_p80_saved_before": 39.8,
+    "lm_cc_p80_saved_after": 40.0,
+    "lm_cc_p80_saved_delta": 0.20000000000000284,
+    "loc_equal": true,
+    "su_change_p67": "unchanged",
+    "su_change_p80_saved": "unchanged",
+    "mean_surprisal_before": 0.5016045693141864,
+    "mean_surprisal_after": 0.5124021190444844,
+    "mean_surprisal_delta": 0.010797549730298006
+  },
+  "thresholds": {
+    "p67": 0.6813,
+    "p80_saved": 1.3238
+  },
+  "metrics_before": {
+    "loc": 59,
+    "total_tokens": 438,
+    "mean_entropy": 0.5702552788839866,
+    "ppl": 1.6513688818284717,
+    "su_count_p67": 55,
+    "lm_cc_p67": 72.79999999999998,
+    "su_count_p80_saved": 33,
+    "lm_cc_p80_saved": 39.8
+  },
+  "metrics_after": {
+    "loc": 59,
+    "total_tokens": 440,
+    "mean_entropy": 0.573662484225563,
+    "ppl": 1.6692962310007553,
+    "su_count_p67": 55,
+    "lm_cc_p67": 72.79999999999998,
+    "su_count_p80_saved": 33,
+    "lm_cc_p80_saved": 40.0
+  },
+  "units": {
+    "p67": {
+      "before": [
+        {
+          "su_index": 0,
+          "start_line": null,
+          "end_line": null,
+          "start_token": null,
+          "end_token": null,
+          "n_tokens": 0,
+          "trigger_tokens": []
+        },
+        {
+          "su_index": 1,
+          "start_line": 1,
+          "end_line": 1,
+          "start_token": 0,
+          "end_token": 6,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 1,
+              "idx": 1,
+              "token_str": "▁=",
+              "entropy": 3.5428385734558105,
+              "line": 1
+            },
+            {
+              "pos": 2,
+              "idx": 2,
+              "token_str": "▁int",
+              "entropy": 1.2983660697937012,
+              "line": 1
+            },
+            {
+              "pos": 5,
+              "idx": 5,
+              "token_str": "())",
+              "entropy": 1.109464168548584,
+              "line": 1
+            }
+          ]
+        },
+        {
+          "su_index": 2,
+          "start_line": 2,
+          "end_line": 2,
+          "start_token": 7,
+          "end_token": 13,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 7,
+              "idx": 7,
+              "token_str": "input",
+              "entropy": 3.5387630462646484,
+              "line": 2
+            },
+            {
+              "pos": 8,
+              "idx": 8,
+              "token_str": "_",
+              "entropy": 1.8498740196228027,
+              "line": 2
+            },
+            {
+              "pos": 9,
+              "idx": 9,
+              "token_str": "string",
+              "entropy": 2.7627205848693848,
+              "line": 2
+            },
+            {
+              "pos": 11,
+              "idx": 11,
+              "token_str": "▁input",
+              "entropy": 1.2116591930389404,
+              "line": 2
+            }
+          ]
+        },
+        {
+          "su_index": 3,
+          "start_line": 3,
+          "end_line": 3,
+          "start_token": 14,
+          "end_token": 14,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 14,
+              "idx": 14,
+              "token_str": "<0x0A>",
+              "entropy": 3.7206523418426514,
+              "line": 3
+            }
+          ]
+        },
+        {
+          "su_index": 4,
+          "start_line": 4,
+          "end_line": 4,
+          "start_token": 15,
+          "end_token": 18,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 15,
+              "idx": 15,
+              "token_str": "map",
+              "entropy": 4.997642517089844,
+              "line": 4
+            },
+            {
+              "pos": 16,
+              "idx": 16,
+              "token_str": "▁=",
+              "entropy": 1.2920531034469604,
+              "line": 4
+            },
+            {
+              "pos": 17,
+              "idx": 17,
+              "token_str": "▁{}",
+              "entropy": 2.0375561714172363,
+              "line": 4
+            }
+          ]
+        },
+        {
+          "su_index": 5,
+          "start_line": 5,
+          "end_line": 5,
+          "start_token": 19,
+          "end_token": 19,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 19,
+              "idx": 19,
+              "token_str": "<0x0A>",
+              "entropy": 2.8927955627441406,
+              "line": 5
+            }
+          ]
+        },
+        {
+          "su_index": 6,
+          "start_line": 6,
+          "end_line": 6,
+          "start_token": 20,
+          "end_token": 33,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 20,
+              "idx": 20,
+              "token_str": "for",
+              "entropy": 2.4766435623168945,
+              "line": 6
+            },
+            {
+              "pos": 21,
+              "idx": 21,
+              "token_str": "▁i",
+              "entropy": 2.286388397216797,
+              "line": 6
+            },
+            {
+              "pos": 25,
+              "idx": 25,
+              "token_str": "0",
+              "entropy": 1.6836271286010742,
+              "line": 6
+            },
+            {
+              "pos": 27,
+              "idx": 27,
+              "token_str": "▁len",
+              "entropy": 1.5807154178619385,
+              "line": 6
+            },
+            {
+              "pos": 32,
+              "idx": 32,
+              "token_str": ")):",
+              "entropy": 1.1048392057418823,
+              "line": 6
+            }
+          ]
+        },
+        {
+          "su_index": 7,
+          "start_line": 7,
+          "end_line": 7,
+          "start_token": 34,
+          "end_token": 45,
+          "n_tokens": 12,
+          "trigger_tokens": [
+            {
+              "pos": 35,
+              "idx": 35,
+              "token_str": "▁if",
+              "entropy": 3.055537462234497,
+              "line": 7
+            },
+            {
+              "pos": 36,
+              "idx": 36,
+              "token_str": "▁input",
+              "entropy": 1.236764907836914,
+              "line": 7
+            },
+            {
+              "pos": 42,
+              "idx": 42,
+              "token_str": "▁in",
+              "entropy": 1.10891592502594,
+              "line": 7
+            }
+          ]
+        },
+        {
+          "su_index": 8,
+          "start_line": 8,
+          "end_line": 9,
+          "start_token": 46,
+          "end_token": 61,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 47,
+              "idx": 47,
+              "token_str": "▁map",
+              "entropy": 0.9482946395874023,
+              "line": 8
+            }
+          ]
+        },
+        {
+          "su_index": 9,
+          "start_line": 10,
+          "end_line": 10,
+          "start_token": 62,
+          "end_token": 73,
+          "n_tokens": 12,
+          "trigger_tokens": [
+            {
+              "pos": 71,
+              "idx": 71,
+              "token_str": "=",
+              "entropy": 0.7187803983688354,
+              "line": 10
+            }
+          ]
+        },
+        {
+          "su_index": 10,
+          "start_line": 11,
+          "end_line": 11,
+          "start_token": 74,
+          "end_token": 74,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 74,
+              "idx": 74,
+              "token_str": "<0x0A>",
+              "entropy": 0.9900873899459839,
+              "line": 11
+            }
+          ]
+        },
+        {
+          "su_index": 11,
+          "start_line": 12,
+          "end_line": 12,
+          "start_token": 75,
+          "end_token": 75,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 75,
+              "idx": 75,
+              "token_str": "<0x0A>",
+              "entropy": 4.17739200592041,
+              "line": 12
+            }
+          ]
+        },
+        {
+          "su_index": 12,
+          "start_line": 13,
+          "end_line": 13,
+          "start_token": 76,
+          "end_token": 85,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 76,
+              "idx": 76,
+              "token_str": "if",
+              "entropy": 4.079206466674805,
+              "line": 13
+            },
+            {
+              "pos": 77,
+              "idx": 77,
+              "token_str": "▁len",
+              "entropy": 2.280766010284424,
+              "line": 13
+            },
+            {
+              "pos": 80,
+              "idx": 80,
+              "token_str": ")",
+              "entropy": 0.7037402391433716,
+              "line": 13
+            },
+            {
+              "pos": 81,
+              "idx": 81,
+              "token_str": "▁==",
+              "entropy": 2.030430555343628,
+              "line": 13
+            },
+            {
+              "pos": 82,
+              "idx": 82,
+              "token_str": "▁",
+              "entropy": 1.048567771911621,
+              "line": 13
+            },
+            {
+              "pos": 83,
+              "idx": 83,
+              "token_str": "3",
+              "entropy": 1.074021339416504,
+              "line": 13
+            },
+            {
+              "pos": 84,
+              "idx": 84,
+              "token_str": ":",
+              "entropy": 0.740985631942749,
+              "line": 13
+            }
+          ]
+        },
+        {
+          "su_index": 13,
+          "start_line": 14,
+          "end_line": 14,
+          "start_token": 86,
+          "end_token": 92,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 87,
+              "idx": 87,
+              "token_str": "▁print",
+              "entropy": 3.5016322135925293,
+              "line": 14
+            },
+            {
+              "pos": 88,
+              "idx": 88,
+              "token_str": "(\"",
+              "entropy": 1.3382329940795898,
+              "line": 14
+            },
+            {
+              "pos": 89,
+              "idx": 89,
+              "token_str": "B",
+              "entropy": 3.8188982009887695,
+              "line": 14
+            },
+            {
+              "pos": 90,
+              "idx": 90,
+              "token_str": "GR",
+              "entropy": 5.120308876037598,
+              "line": 14
+            },
+            {
+              "pos": 91,
+              "idx": 91,
+              "token_str": "\")",
+              "entropy": 1.3586262464523315,
+              "line": 14
+            }
+          ]
+        },
+        {
+          "su_index": 14,
+          "start_line": 15,
+          "end_line": 15,
+          "start_token": 93,
+          "end_token": 93,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 93,
+              "idx": 93,
+              "token_str": "<0x0A>",
+              "entropy": 0.9796890020370483,
+              "line": 15
+            }
+          ]
+        },
+        {
+          "su_index": 15,
+          "start_line": 16,
+          "end_line": 16,
+          "start_token": 94,
+          "end_token": 94,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 94,
+              "idx": 94,
+              "token_str": "<0x0A>",
+              "entropy": 1.0365636348724365,
+              "line": 16
+            }
+          ]
+        },
+        {
+          "su_index": 16,
+          "start_line": 17,
+          "end_line": 17,
+          "start_token": 95,
+          "end_token": 104,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 95,
+              "idx": 95,
+              "token_str": "if",
+              "entropy": 2.1045892238616943,
+              "line": 17
+            },
+            {
+              "pos": 96,
+              "idx": 96,
+              "token_str": "▁len",
+              "entropy": 0.8061519861221313,
+              "line": 17
+            },
+            {
+              "pos": 102,
+              "idx": 102,
+              "token_str": "2",
+              "entropy": 1.0210273265838623,
+              "line": 17
+            }
+          ]
+        },
+        {
+          "su_index": 17,
+          "start_line": 18,
+          "end_line": 18,
+          "start_token": 105,
+          "end_token": 110,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 106,
+              "idx": 106,
+              "token_str": "▁sum",
+              "entropy": 2.91573166847229,
+              "line": 18
+            },
+            {
+              "pos": 107,
+              "idx": 107,
+              "token_str": "▁=",
+              "entropy": 1.542259693145752,
+              "line": 18
+            },
+            {
+              "pos": 108,
+              "idx": 108,
+              "token_str": "▁",
+              "entropy": 0.765198290348053,
+              "line": 18
+            }
+          ]
+        },
+        {
+          "su_index": 18,
+          "start_line": 19,
+          "end_line": 19,
+          "start_token": 111,
+          "end_token": 115,
+          "n_tokens": 5,
+          "trigger_tokens": [
+            {
+              "pos": 112,
+              "idx": 112,
+              "token_str": "▁check",
+              "entropy": 1.4900507926940918,
+              "line": 19
+            },
+            {
+              "pos": 113,
+              "idx": 113,
+              "token_str": "▁=",
+              "entropy": 1.2633419036865234,
+              "line": 19
+            },
+            {
+              "pos": 114,
+              "idx": 114,
+              "token_str": "▁False",
+              "entropy": 2.040999412536621,
+              "line": 19
+            }
+          ]
+        },
+        {
+          "su_index": 19,
+          "start_line": 20,
+          "end_line": 20,
+          "start_token": 116,
+          "end_token": 122,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 117,
+              "idx": 117,
+              "token_str": "▁check",
+              "entropy": 1.122272253036499,
+              "line": 20
+            },
+            {
+              "pos": 118,
+              "idx": 118,
+              "token_str": "_",
+              "entropy": 1.8259809017181396,
+              "line": 20
+            },
+            {
+              "pos": 119,
+              "idx": 119,
+              "token_str": "key",
+              "entropy": 4.721537113189697,
+              "line": 20
+            },
+            {
+              "pos": 121,
+              "idx": 121,
+              "token_str": "▁\"\"",
+              "entropy": 2.0561070442199707,
+              "line": 20
+            }
+          ]
+        },
+        {
+          "su_index": 20,
+          "start_line": 21,
+          "end_line": 21,
+          "start_token": 123,
+          "end_token": 129,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 124,
+              "idx": 124,
+              "token_str": "▁other",
+              "entropy": 1.221030354499817,
+              "line": 21
+            },
+            {
+              "pos": 126,
+              "idx": 126,
+              "token_str": "key",
+              "entropy": 1.3254719972610474,
+              "line": 21
+            }
+          ]
+        },
+        {
+          "su_index": 21,
+          "start_line": 22,
+          "end_line": 22,
+          "start_token": 130,
+          "end_token": 138,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 130,
+              "idx": 130,
+              "token_str": "▁▁▁",
+              "entropy": 0.6909653544425964,
+              "line": 22
+            },
+            {
+              "pos": 131,
+              "idx": 131,
+              "token_str": "▁for",
+              "entropy": 1.387516736984253,
+              "line": 22
+            },
+            {
+              "pos": 132,
+              "idx": 132,
+              "token_str": "▁key",
+              "entropy": 1.1573137044906616,
+              "line": 22
+            },
+            {
+              "pos": 133,
+              "idx": 133,
+              "token_str": "▁in",
+              "entropy": 0.7811211347579956,
+              "line": 22
+            }
+          ]
+        },
+        {
+          "su_index": 22,
+          "start_line": 23,
+          "end_line": 24,
+          "start_token": 139,
+          "end_token": 147,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 140,
+              "idx": 140,
+              "token_str": "▁sum",
+              "entropy": 1.016385793685913,
+              "line": 23
+            },
+            {
+              "pos": 141,
+              "idx": 141,
+              "token_str": "▁+=",
+              "entropy": 1.0595625638961792,
+              "line": 23
+            }
+          ]
+        },
+        {
+          "su_index": 23,
+          "start_line": 25,
+          "end_line": 25,
+          "start_token": 148,
+          "end_token": 158,
+          "n_tokens": 11,
+          "trigger_tokens": [
+            {
+              "pos": 148,
+              "idx": 148,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 0.816718578338623,
+              "line": 25
+            },
+            {
+              "pos": 150,
+              "idx": 150,
+              "token_str": "▁map",
+              "entropy": 1.7733477354049683,
+              "line": 25
+            },
+            {
+              "pos": 154,
+              "idx": 154,
+              "token_str": "▁==",
+              "entropy": 1.7407081127166748,
+              "line": 25
+            },
+            {
+              "pos": 155,
+              "idx": 155,
+              "token_str": "▁",
+              "entropy": 1.5256763696670532,
+              "line": 25
+            },
+            {
+              "pos": 156,
+              "idx": 156,
+              "token_str": "1",
+              "entropy": 1.192138671875,
+              "line": 25
+            }
+          ]
+        },
+        {
+          "su_index": 24,
+          "start_line": 26,
+          "end_line": 26,
+          "start_token": 159,
+          "end_token": 163,
+          "n_tokens": 5,
+          "trigger_tokens": [
+            {
+              "pos": 160,
+              "idx": 160,
+              "token_str": "▁check",
+              "entropy": 1.0023905038833618,
+              "line": 26
+            },
+            {
+              "pos": 161,
+              "idx": 161,
+              "token_str": "▁=",
+              "entropy": 0.7146065831184387,
+              "line": 26
+            }
+          ]
+        },
+        {
+          "su_index": 25,
+          "start_line": 27,
+          "end_line": 27,
+          "start_token": 164,
+          "end_token": 170,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 165,
+              "idx": 165,
+              "token_str": "▁check",
+              "entropy": 0.8556526899337769,
+              "line": 27
+            }
+          ]
+        },
+        {
+          "su_index": 26,
+          "start_line": 28,
+          "end_line": 29,
+          "start_token": 171,
+          "end_token": 181,
+          "n_tokens": 11,
+          "trigger_tokens": [
+            {
+              "pos": 171,
+              "idx": 171,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.276141881942749,
+              "line": 28
+            },
+            {
+              "pos": 172,
+              "idx": 172,
+              "token_str": "▁else",
+              "entropy": 1.0978925228118896,
+              "line": 28
+            }
+          ]
+        },
+        {
+          "su_index": 27,
+          "start_line": 30,
+          "end_line": 30,
+          "start_token": 182,
+          "end_token": 183,
+          "n_tokens": 2,
+          "trigger_tokens": [
+            {
+              "pos": 182,
+              "idx": 182,
+              "token_str": "▁▁▁▁",
+              "entropy": 0.9140130877494812,
+              "line": 30
+            }
+          ]
+        },
+        {
+          "su_index": 28,
+          "start_line": 31,
+          "end_line": 31,
+          "start_token": 184,
+          "end_token": 191,
+          "n_tokens": 8,
+          "trigger_tokens": [
+            {
+              "pos": 185,
+              "idx": 185,
+              "token_str": "▁if",
+              "entropy": 0.7642817497253418,
+              "line": 31
+            },
+            {
+              "pos": 186,
+              "idx": 186,
+              "token_str": "▁sum",
+              "entropy": 1.2482666969299316,
+              "line": 31
+            },
+            {
+              "pos": 187,
+              "idx": 187,
+              "token_str": "▁==",
+              "entropy": 1.0896955728530884,
+              "line": 31
+            },
+            {
+              "pos": 188,
+              "idx": 188,
+              "token_str": "▁",
+              "entropy": 1.2198567390441895,
+              "line": 31
+            },
+            {
+              "pos": 189,
+              "idx": 189,
+              "token_str": "2",
+              "entropy": 1.7293704748153687,
+              "line": 31
+            },
+            {
+              "pos": 190,
+              "idx": 190,
+              "token_str": ":",
+              "entropy": 1.3305878639221191,
+              "line": 31
+            }
+          ]
+        },
+        {
+          "su_index": 29,
+          "start_line": 32,
+          "end_line": 32,
+          "start_token": 192,
+          "end_token": 201,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 193,
+              "idx": 193,
+              "token_str": "▁if",
+              "entropy": 1.2163372039794922,
+              "line": 32
+            },
+            {
+              "pos": 194,
+              "idx": 194,
+              "token_str": "▁'",
+              "entropy": 0.8871750235557556,
+              "line": 32
+            },
+            {
+              "pos": 195,
+              "idx": 195,
+              "token_str": "G",
+              "entropy": 1.5557475090026855,
+              "line": 32
+            },
+            {
+              "pos": 197,
+              "idx": 197,
+              "token_str": "▁not",
+              "entropy": 0.9114892482757568,
+              "line": 32
+            },
+            {
+              "pos": 199,
+              "idx": 199,
+              "token_str": "▁map",
+              "entropy": 0.9281655550003052,
+              "line": 32
+            },
+            {
+              "pos": 200,
+              "idx": 200,
+              "token_str": ":",
+              "entropy": 1.1398025751113892,
+              "line": 32
+            }
+          ]
+        },
+        {
+          "su_index": 30,
+          "start_line": 33,
+          "end_line": 33,
+          "start_token": 202,
+          "end_token": 207,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 203,
+              "idx": 203,
+              "token_str": "▁print",
+              "entropy": 1.0637164115905762,
+              "line": 33
+            },
+            {
+              "pos": 205,
+              "idx": 205,
+              "token_str": "G",
+              "entropy": 2.478870391845703,
+              "line": 33
+            },
+            {
+              "pos": 206,
+              "idx": 206,
+              "token_str": "\")",
+              "entropy": 2.8690428733825684,
+              "line": 33
+            }
+          ]
+        },
+        {
+          "su_index": 31,
+          "start_line": 34,
+          "end_line": 35,
+          "start_token": 208,
+          "end_token": 223,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 208,
+              "idx": 208,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 0.7104767560958862,
+              "line": 34
+            },
+            {
+              "pos": 209,
+              "idx": 209,
+              "token_str": "▁if",
+              "entropy": 0.9609204530715942,
+              "line": 34
+            },
+            {
+              "pos": 211,
+              "idx": 211,
+              "token_str": "R",
+              "entropy": 0.9929494261741638,
+              "line": 34
+            }
+          ]
+        },
+        {
+          "su_index": 32,
+          "start_line": 36,
+          "end_line": 37,
+          "start_token": 224,
+          "end_token": 239,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 224,
+              "idx": 224,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.2071471214294434,
+              "line": 36
+            }
+          ]
+        },
+        {
+          "su_index": 33,
+          "start_line": 38,
+          "end_line": 38,
+          "start_token": 240,
+          "end_token": 243,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 240,
+              "idx": 240,
+              "token_str": "▁▁▁",
+              "entropy": 1.3412724733352661,
+              "line": 38
+            },
+            {
+              "pos": 241,
+              "idx": 241,
+              "token_str": "▁else",
+              "entropy": 1.1992475986480713,
+              "line": 38
+            }
+          ]
+        },
+        {
+          "su_index": 34,
+          "start_line": 39,
+          "end_line": 39,
+          "start_token": 244,
+          "end_token": 250,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 245,
+              "idx": 245,
+              "token_str": "▁if",
+              "entropy": 0.9941909313201904,
+              "line": 39
+            },
+            {
+              "pos": 246,
+              "idx": 246,
+              "token_str": "▁check",
+              "entropy": 1.2095232009887695,
+              "line": 39
+            },
+            {
+              "pos": 247,
+              "idx": 247,
+              "token_str": "▁==",
+              "entropy": 1.1659839153289795,
+              "line": 39
+            }
+          ]
+        },
+        {
+          "su_index": 35,
+          "start_line": 40,
+          "end_line": 40,
+          "start_token": 251,
+          "end_token": 268,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 252,
+              "idx": 252,
+              "token_str": "▁if",
+              "entropy": 1.373720407485962,
+              "line": 40
+            },
+            {
+              "pos": 253,
+              "idx": 253,
+              "token_str": "▁other",
+              "entropy": 1.644335389137268,
+              "line": 40
+            },
+            {
+              "pos": 256,
+              "idx": 256,
+              "token_str": "▁==",
+              "entropy": 0.8016495108604431,
+              "line": 40
+            },
+            {
+              "pos": 257,
+              "idx": 257,
+              "token_str": "▁\"",
+              "entropy": 1.0198415517807007,
+              "line": 40
+            },
+            {
+              "pos": 258,
+              "idx": 258,
+              "token_str": "R",
+              "entropy": 1.2407026290893555,
+              "line": 40
+            },
+            {
+              "pos": 260,
+              "idx": 260,
+              "token_str": "▁and",
+              "entropy": 0.8358550071716309,
+              "line": 40
+            },
+            {
+              "pos": 261,
+              "idx": 261,
+              "token_str": "▁check",
+              "entropy": 1.0618611574172974,
+              "line": 40
+            },
+            {
+              "pos": 266,
+              "idx": 266,
+              "token_str": "G",
+              "entropy": 0.8177578449249268,
+              "line": 40
+            }
+          ]
+        },
+        {
+          "su_index": 36,
+          "start_line": 41,
+          "end_line": 41,
+          "start_token": 269,
+          "end_token": 275,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 272,
+              "idx": 272,
+              "token_str": "B",
+              "entropy": 1.7831015586853027,
+              "line": 41
+            },
+            {
+              "pos": 273,
+              "idx": 273,
+              "token_str": "G",
+              "entropy": 1.1937851905822754,
+              "line": 41
+            }
+          ]
+        },
+        {
+          "su_index": 37,
+          "start_line": 42,
+          "end_line": 42,
+          "start_token": 276,
+          "end_token": 293,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 277,
+              "idx": 277,
+              "token_str": "▁if",
+              "entropy": 1.0978947877883911,
+              "line": 42
+            },
+            {
+              "pos": 283,
+              "idx": 283,
+              "token_str": "B",
+              "entropy": 0.9922647476196289,
+              "line": 42
+            }
+          ]
+        },
+        {
+          "su_index": 38,
+          "start_line": 43,
+          "end_line": 43,
+          "start_token": 294,
+          "end_token": 299,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 297,
+              "idx": 297,
+              "token_str": "GR",
+              "entropy": 1.1117651462554932,
+              "line": 43
+            }
+          ]
+        },
+        {
+          "su_index": 39,
+          "start_line": 44,
+          "end_line": 44,
+          "start_token": 300,
+          "end_token": 317,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 300,
+              "idx": 300,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.222379446029663,
+              "line": 44
+            },
+            {
+              "pos": 307,
+              "idx": 307,
+              "token_str": "B",
+              "entropy": 1.0897221565246582,
+              "line": 44
+            }
+          ]
+        },
+        {
+          "su_index": 40,
+          "start_line": 45,
+          "end_line": 45,
+          "start_token": 318,
+          "end_token": 323,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 321,
+              "idx": 321,
+              "token_str": "GR",
+              "entropy": 1.3200500011444092,
+              "line": 45
+            }
+          ]
+        },
+        {
+          "su_index": 41,
+          "start_line": 46,
+          "end_line": 46,
+          "start_token": 324,
+          "end_token": 341,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 324,
+              "idx": 324,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 0.7745593786239624,
+              "line": 46
+            },
+            {
+              "pos": 331,
+              "idx": 331,
+              "token_str": "G",
+              "entropy": 0.8079174757003784,
+              "line": 46
+            }
+          ]
+        },
+        {
+          "su_index": 42,
+          "start_line": 47,
+          "end_line": 47,
+          "start_token": 342,
+          "end_token": 347,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 345,
+              "idx": 345,
+              "token_str": "BR",
+              "entropy": 1.0976157188415527,
+              "line": 47
+            }
+          ]
+        },
+        {
+          "su_index": 43,
+          "start_line": 48,
+          "end_line": 48,
+          "start_token": 348,
+          "end_token": 365,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 348,
+              "idx": 348,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.470476746559143,
+              "line": 48
+            },
+            {
+              "pos": 355,
+              "idx": 355,
+              "token_str": "R",
+              "entropy": 0.9675679206848145,
+              "line": 48
+            }
+          ]
+        },
+        {
+          "su_index": 44,
+          "start_line": 49,
+          "end_line": 49,
+          "start_token": 366,
+          "end_token": 372,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 369,
+              "idx": 369,
+              "token_str": "B",
+              "entropy": 1.4784412384033203,
+              "line": 49
+            }
+          ]
+        },
+        {
+          "su_index": 45,
+          "start_line": 50,
+          "end_line": 50,
+          "start_token": 373,
+          "end_token": 390,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 373,
+              "idx": 373,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.4763343334197998,
+              "line": 50
+            }
+          ]
+        },
+        {
+          "su_index": 46,
+          "start_line": 51,
+          "end_line": 51,
+          "start_token": 391,
+          "end_token": 397,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 394,
+              "idx": 394,
+              "token_str": "BR",
+              "entropy": 1.2736823558807373,
+              "line": 51
+            }
+          ]
+        },
+        {
+          "su_index": 47,
+          "start_line": 52,
+          "end_line": 52,
+          "start_token": 398,
+          "end_token": 401,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 398,
+              "idx": 398,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.517195463180542,
+              "line": 52
+            },
+            {
+              "pos": 399,
+              "idx": 399,
+              "token_str": "▁else",
+              "entropy": 0.8065259456634521,
+              "line": 52
+            }
+          ]
+        },
+        {
+          "su_index": 48,
+          "start_line": 53,
+          "end_line": 53,
+          "start_token": 402,
+          "end_token": 408,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 403,
+              "idx": 403,
+              "token_str": "▁print",
+              "entropy": 1.101545810699463,
+              "line": 53
+            },
+            {
+              "pos": 405,
+              "idx": 405,
+              "token_str": "B",
+              "entropy": 3.408000946044922,
+              "line": 53
+            },
+            {
+              "pos": 406,
+              "idx": 406,
+              "token_str": "GR",
+              "entropy": 1.235988736152649,
+              "line": 53
+            }
+          ]
+        },
+        {
+          "su_index": 49,
+          "start_line": 54,
+          "end_line": 54,
+          "start_token": 409,
+          "end_token": 409,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 409,
+              "idx": 409,
+              "token_str": "<0x0A>",
+              "entropy": 1.5859787464141846,
+              "line": 54
+            }
+          ]
+        },
+        {
+          "su_index": 50,
+          "start_line": 55,
+          "end_line": 55,
+          "start_token": 410,
+          "end_token": 419,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 410,
+              "idx": 410,
+              "token_str": "if",
+              "entropy": 1.5048357248306274,
+              "line": 55
+            }
+          ]
+        },
+        {
+          "su_index": 51,
+          "start_line": 56,
+          "end_line": 56,
+          "start_token": 420,
+          "end_token": 428,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 421,
+              "idx": 421,
+              "token_str": "▁for",
+              "entropy": 1.9036369323730469,
+              "line": 56
+            }
+          ]
+        },
+        {
+          "su_index": 52,
+          "start_line": 57,
+          "end_line": 57,
+          "start_token": 429,
+          "end_token": 434,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 430,
+              "idx": 430,
+              "token_str": "▁print",
+              "entropy": 1.2924646139144897,
+              "line": 57
+            },
+            {
+              "pos": 433,
+              "idx": 433,
+              "token_str": ")",
+              "entropy": 0.8338793516159058,
+              "line": 57
+            }
+          ]
+        },
+        {
+          "su_index": 53,
+          "start_line": 58,
+          "end_line": 58,
+          "start_token": 435,
+          "end_token": 435,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 435,
+              "idx": 435,
+              "token_str": "<0x0A>",
+              "entropy": 1.2459945678710938,
+              "line": 58
+            }
+          ]
+        },
+        {
+          "su_index": 54,
+          "start_line": 59,
+          "end_line": 59,
+          "start_token": 436,
+          "end_token": 437,
+          "n_tokens": 2,
+          "trigger_tokens": [
+            {
+              "pos": 436,
+              "idx": 436,
+              "token_str": "▁▁▁▁",
+              "entropy": 1.8068748712539673,
+              "line": 59
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "su_index": 0,
+          "start_line": null,
+          "end_line": null,
+          "start_token": null,
+          "end_token": null,
+          "n_tokens": 0,
+          "trigger_tokens": []
+        },
+        {
+          "su_index": 1,
+          "start_line": 1,
+          "end_line": 1,
+          "start_token": 0,
+          "end_token": 6,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 1,
+              "idx": 1,
+              "token_str": "▁=",
+              "entropy": 3.5428385734558105,
+              "line": 1
+            },
+            {
+              "pos": 2,
+              "idx": 2,
+              "token_str": "▁int",
+              "entropy": 1.2983660697937012,
+              "line": 1
+            },
+            {
+              "pos": 5,
+              "idx": 5,
+              "token_str": "())",
+              "entropy": 1.109464168548584,
+              "line": 1
+            }
+          ]
+        },
+        {
+          "su_index": 2,
+          "start_line": 2,
+          "end_line": 2,
+          "start_token": 7,
+          "end_token": 13,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 7,
+              "idx": 7,
+              "token_str": "input",
+              "entropy": 3.5387630462646484,
+              "line": 2
+            },
+            {
+              "pos": 8,
+              "idx": 8,
+              "token_str": "_",
+              "entropy": 1.8498740196228027,
+              "line": 2
+            },
+            {
+              "pos": 9,
+              "idx": 9,
+              "token_str": "string",
+              "entropy": 2.7627205848693848,
+              "line": 2
+            },
+            {
+              "pos": 11,
+              "idx": 11,
+              "token_str": "▁input",
+              "entropy": 1.2116591930389404,
+              "line": 2
+            }
+          ]
+        },
+        {
+          "su_index": 3,
+          "start_line": 3,
+          "end_line": 3,
+          "start_token": 14,
+          "end_token": 14,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 14,
+              "idx": 14,
+              "token_str": "<0x0A>",
+              "entropy": 3.7206523418426514,
+              "line": 3
+            }
+          ]
+        },
+        {
+          "su_index": 4,
+          "start_line": 4,
+          "end_line": 4,
+          "start_token": 15,
+          "end_token": 18,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 15,
+              "idx": 15,
+              "token_str": "map",
+              "entropy": 4.997642517089844,
+              "line": 4
+            },
+            {
+              "pos": 16,
+              "idx": 16,
+              "token_str": "▁=",
+              "entropy": 1.2920531034469604,
+              "line": 4
+            },
+            {
+              "pos": 17,
+              "idx": 17,
+              "token_str": "▁{}",
+              "entropy": 2.0375561714172363,
+              "line": 4
+            }
+          ]
+        },
+        {
+          "su_index": 5,
+          "start_line": 5,
+          "end_line": 5,
+          "start_token": 19,
+          "end_token": 19,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 19,
+              "idx": 19,
+              "token_str": "<0x0A>",
+              "entropy": 2.8927955627441406,
+              "line": 5
+            }
+          ]
+        },
+        {
+          "su_index": 6,
+          "start_line": 6,
+          "end_line": 6,
+          "start_token": 20,
+          "end_token": 33,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 20,
+              "idx": 20,
+              "token_str": "for",
+              "entropy": 2.4766435623168945,
+              "line": 6
+            },
+            {
+              "pos": 21,
+              "idx": 21,
+              "token_str": "▁i",
+              "entropy": 2.286388397216797,
+              "line": 6
+            },
+            {
+              "pos": 25,
+              "idx": 25,
+              "token_str": "0",
+              "entropy": 1.6836271286010742,
+              "line": 6
+            },
+            {
+              "pos": 27,
+              "idx": 27,
+              "token_str": "▁len",
+              "entropy": 1.5807154178619385,
+              "line": 6
+            },
+            {
+              "pos": 32,
+              "idx": 32,
+              "token_str": ")):",
+              "entropy": 1.1048392057418823,
+              "line": 6
+            }
+          ]
+        },
+        {
+          "su_index": 7,
+          "start_line": 7,
+          "end_line": 7,
+          "start_token": 34,
+          "end_token": 47,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 35,
+              "idx": 35,
+              "token_str": "▁if",
+              "entropy": 3.055537462234497,
+              "line": 7
+            },
+            {
+              "pos": 36,
+              "idx": 36,
+              "token_str": "▁not",
+              "entropy": 1.236764907836914,
+              "line": 7
+            },
+            {
+              "pos": 37,
+              "idx": 37,
+              "token_str": "▁(",
+              "entropy": 1.3430371284484863,
+              "line": 7
+            },
+            {
+              "pos": 38,
+              "idx": 38,
+              "token_str": "input",
+              "entropy": 0.9338381290435791,
+              "line": 7
+            }
+          ]
+        },
+        {
+          "su_index": 8,
+          "start_line": 8,
+          "end_line": 9,
+          "start_token": 48,
+          "end_token": 63,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 58,
+              "idx": 58,
+              "token_str": "1",
+              "entropy": 1.9001872539520264,
+              "line": 8
+            }
+          ]
+        },
+        {
+          "su_index": 9,
+          "start_line": 10,
+          "end_line": 10,
+          "start_token": 64,
+          "end_token": 75,
+          "n_tokens": 12,
+          "trigger_tokens": [
+            {
+              "pos": 73,
+              "idx": 73,
+              "token_str": "+=",
+              "entropy": 1.1907135248184204,
+              "line": 10
+            }
+          ]
+        },
+        {
+          "su_index": 10,
+          "start_line": 11,
+          "end_line": 11,
+          "start_token": 76,
+          "end_token": 76,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 76,
+              "idx": 76,
+              "token_str": "<0x0A>",
+              "entropy": 0.9438566565513611,
+              "line": 11
+            }
+          ]
+        },
+        {
+          "su_index": 11,
+          "start_line": 12,
+          "end_line": 12,
+          "start_token": 77,
+          "end_token": 77,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 77,
+              "idx": 77,
+              "token_str": "<0x0A>",
+              "entropy": 4.075082778930664,
+              "line": 12
+            }
+          ]
+        },
+        {
+          "su_index": 12,
+          "start_line": 13,
+          "end_line": 13,
+          "start_token": 78,
+          "end_token": 87,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 78,
+              "idx": 78,
+              "token_str": "if",
+              "entropy": 4.027777671813965,
+              "line": 13
+            },
+            {
+              "pos": 79,
+              "idx": 79,
+              "token_str": "▁len",
+              "entropy": 2.379908561706543,
+              "line": 13
+            },
+            {
+              "pos": 82,
+              "idx": 82,
+              "token_str": ")",
+              "entropy": 0.6927375197410583,
+              "line": 13
+            },
+            {
+              "pos": 83,
+              "idx": 83,
+              "token_str": "▁==",
+              "entropy": 2.0441696643829346,
+              "line": 13
+            },
+            {
+              "pos": 84,
+              "idx": 84,
+              "token_str": "▁",
+              "entropy": 1.0882426500320435,
+              "line": 13
+            },
+            {
+              "pos": 85,
+              "idx": 85,
+              "token_str": "3",
+              "entropy": 1.1155368089675903,
+              "line": 13
+            },
+            {
+              "pos": 86,
+              "idx": 86,
+              "token_str": ":",
+              "entropy": 0.7511323094367981,
+              "line": 13
+            }
+          ]
+        },
+        {
+          "su_index": 13,
+          "start_line": 14,
+          "end_line": 14,
+          "start_token": 88,
+          "end_token": 94,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 89,
+              "idx": 89,
+              "token_str": "▁print",
+              "entropy": 3.231041431427002,
+              "line": 14
+            },
+            {
+              "pos": 90,
+              "idx": 90,
+              "token_str": "(\"",
+              "entropy": 1.3477586507797241,
+              "line": 14
+            },
+            {
+              "pos": 91,
+              "idx": 91,
+              "token_str": "B",
+              "entropy": 3.950430393218994,
+              "line": 14
+            },
+            {
+              "pos": 92,
+              "idx": 92,
+              "token_str": "GR",
+              "entropy": 5.0843000411987305,
+              "line": 14
+            },
+            {
+              "pos": 93,
+              "idx": 93,
+              "token_str": "\")",
+              "entropy": 1.3376121520996094,
+              "line": 14
+            }
+          ]
+        },
+        {
+          "su_index": 14,
+          "start_line": 15,
+          "end_line": 15,
+          "start_token": 95,
+          "end_token": 95,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 95,
+              "idx": 95,
+              "token_str": "<0x0A>",
+              "entropy": 0.9957277774810791,
+              "line": 15
+            }
+          ]
+        },
+        {
+          "su_index": 15,
+          "start_line": 16,
+          "end_line": 16,
+          "start_token": 96,
+          "end_token": 96,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 96,
+              "idx": 96,
+              "token_str": "<0x0A>",
+              "entropy": 1.0817853212356567,
+              "line": 16
+            }
+          ]
+        },
+        {
+          "su_index": 16,
+          "start_line": 17,
+          "end_line": 17,
+          "start_token": 97,
+          "end_token": 106,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 97,
+              "idx": 97,
+              "token_str": "if",
+              "entropy": 2.125243663787842,
+              "line": 17
+            },
+            {
+              "pos": 98,
+              "idx": 98,
+              "token_str": "▁len",
+              "entropy": 0.7665612697601318,
+              "line": 17
+            },
+            {
+              "pos": 104,
+              "idx": 104,
+              "token_str": "2",
+              "entropy": 1.0279042720794678,
+              "line": 17
+            }
+          ]
+        },
+        {
+          "su_index": 17,
+          "start_line": 18,
+          "end_line": 18,
+          "start_token": 107,
+          "end_token": 112,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 108,
+              "idx": 108,
+              "token_str": "▁sum",
+              "entropy": 2.8747847080230713,
+              "line": 18
+            },
+            {
+              "pos": 109,
+              "idx": 109,
+              "token_str": "▁=",
+              "entropy": 1.5500555038452148,
+              "line": 18
+            },
+            {
+              "pos": 110,
+              "idx": 110,
+              "token_str": "▁",
+              "entropy": 0.73350590467453,
+              "line": 18
+            }
+          ]
+        },
+        {
+          "su_index": 18,
+          "start_line": 19,
+          "end_line": 19,
+          "start_token": 113,
+          "end_token": 117,
+          "n_tokens": 5,
+          "trigger_tokens": [
+            {
+              "pos": 114,
+              "idx": 114,
+              "token_str": "▁check",
+              "entropy": 1.4807679653167725,
+              "line": 19
+            },
+            {
+              "pos": 115,
+              "idx": 115,
+              "token_str": "▁=",
+              "entropy": 1.2709505558013916,
+              "line": 19
+            },
+            {
+              "pos": 116,
+              "idx": 116,
+              "token_str": "▁False",
+              "entropy": 2.0579941272735596,
+              "line": 19
+            }
+          ]
+        },
+        {
+          "su_index": 19,
+          "start_line": 20,
+          "end_line": 20,
+          "start_token": 118,
+          "end_token": 124,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 119,
+              "idx": 119,
+              "token_str": "▁check",
+              "entropy": 1.118623971939087,
+              "line": 20
+            },
+            {
+              "pos": 120,
+              "idx": 120,
+              "token_str": "_",
+              "entropy": 1.8553531169891357,
+              "line": 20
+            },
+            {
+              "pos": 121,
+              "idx": 121,
+              "token_str": "key",
+              "entropy": 4.758035659790039,
+              "line": 20
+            },
+            {
+              "pos": 123,
+              "idx": 123,
+              "token_str": "▁\"\"",
+              "entropy": 2.0380473136901855,
+              "line": 20
+            }
+          ]
+        },
+        {
+          "su_index": 20,
+          "start_line": 21,
+          "end_line": 21,
+          "start_token": 125,
+          "end_token": 131,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 126,
+              "idx": 126,
+              "token_str": "▁other",
+              "entropy": 1.2203307151794434,
+              "line": 21
+            },
+            {
+              "pos": 128,
+              "idx": 128,
+              "token_str": "key",
+              "entropy": 1.2282570600509644,
+              "line": 21
+            }
+          ]
+        },
+        {
+          "su_index": 21,
+          "start_line": 22,
+          "end_line": 22,
+          "start_token": 132,
+          "end_token": 140,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 132,
+              "idx": 132,
+              "token_str": "▁▁▁",
+              "entropy": 0.6850963234901428,
+              "line": 22
+            },
+            {
+              "pos": 133,
+              "idx": 133,
+              "token_str": "▁for",
+              "entropy": 1.3791612386703491,
+              "line": 22
+            },
+            {
+              "pos": 134,
+              "idx": 134,
+              "token_str": "▁key",
+              "entropy": 1.2084555625915527,
+              "line": 22
+            },
+            {
+              "pos": 135,
+              "idx": 135,
+              "token_str": "▁in",
+              "entropy": 0.779644250869751,
+              "line": 22
+            }
+          ]
+        },
+        {
+          "su_index": 22,
+          "start_line": 23,
+          "end_line": 24,
+          "start_token": 141,
+          "end_token": 149,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 142,
+              "idx": 142,
+              "token_str": "▁sum",
+              "entropy": 0.9940841197967529,
+              "line": 23
+            },
+            {
+              "pos": 143,
+              "idx": 143,
+              "token_str": "▁+=",
+              "entropy": 1.014082908630371,
+              "line": 23
+            }
+          ]
+        },
+        {
+          "su_index": 23,
+          "start_line": 25,
+          "end_line": 25,
+          "start_token": 150,
+          "end_token": 160,
+          "n_tokens": 11,
+          "trigger_tokens": [
+            {
+              "pos": 150,
+              "idx": 150,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 0.8158958554267883,
+              "line": 25
+            },
+            {
+              "pos": 152,
+              "idx": 152,
+              "token_str": "▁map",
+              "entropy": 1.9467355012893677,
+              "line": 25
+            },
+            {
+              "pos": 156,
+              "idx": 156,
+              "token_str": "▁==",
+              "entropy": 1.7140510082244873,
+              "line": 25
+            },
+            {
+              "pos": 157,
+              "idx": 157,
+              "token_str": "▁",
+              "entropy": 1.4396288394927979,
+              "line": 25
+            },
+            {
+              "pos": 158,
+              "idx": 158,
+              "token_str": "1",
+              "entropy": 1.160581350326538,
+              "line": 25
+            }
+          ]
+        },
+        {
+          "su_index": 24,
+          "start_line": 26,
+          "end_line": 26,
+          "start_token": 161,
+          "end_token": 165,
+          "n_tokens": 5,
+          "trigger_tokens": [
+            {
+              "pos": 162,
+              "idx": 162,
+              "token_str": "▁check",
+              "entropy": 0.9721863865852356,
+              "line": 26
+            },
+            {
+              "pos": 163,
+              "idx": 163,
+              "token_str": "▁=",
+              "entropy": 0.7326853275299072,
+              "line": 26
+            }
+          ]
+        },
+        {
+          "su_index": 25,
+          "start_line": 27,
+          "end_line": 27,
+          "start_token": 166,
+          "end_token": 172,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 167,
+              "idx": 167,
+              "token_str": "▁check",
+              "entropy": 0.7726897597312927,
+              "line": 27
+            }
+          ]
+        },
+        {
+          "su_index": 26,
+          "start_line": 28,
+          "end_line": 29,
+          "start_token": 173,
+          "end_token": 183,
+          "n_tokens": 11,
+          "trigger_tokens": [
+            {
+              "pos": 173,
+              "idx": 173,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.241268277168274,
+              "line": 28
+            },
+            {
+              "pos": 174,
+              "idx": 174,
+              "token_str": "▁else",
+              "entropy": 1.0998386144638062,
+              "line": 28
+            }
+          ]
+        },
+        {
+          "su_index": 27,
+          "start_line": 30,
+          "end_line": 30,
+          "start_token": 184,
+          "end_token": 185,
+          "n_tokens": 2,
+          "trigger_tokens": [
+            {
+              "pos": 184,
+              "idx": 184,
+              "token_str": "▁▁▁▁",
+              "entropy": 0.9152238368988037,
+              "line": 30
+            }
+          ]
+        },
+        {
+          "su_index": 28,
+          "start_line": 31,
+          "end_line": 31,
+          "start_token": 186,
+          "end_token": 193,
+          "n_tokens": 8,
+          "trigger_tokens": [
+            {
+              "pos": 187,
+              "idx": 187,
+              "token_str": "▁if",
+              "entropy": 0.7891876101493835,
+              "line": 31
+            },
+            {
+              "pos": 188,
+              "idx": 188,
+              "token_str": "▁sum",
+              "entropy": 1.3333280086517334,
+              "line": 31
+            },
+            {
+              "pos": 189,
+              "idx": 189,
+              "token_str": "▁==",
+              "entropy": 1.1351592540740967,
+              "line": 31
+            },
+            {
+              "pos": 190,
+              "idx": 190,
+              "token_str": "▁",
+              "entropy": 1.1690927743911743,
+              "line": 31
+            },
+            {
+              "pos": 191,
+              "idx": 191,
+              "token_str": "2",
+              "entropy": 1.7785868644714355,
+              "line": 31
+            },
+            {
+              "pos": 192,
+              "idx": 192,
+              "token_str": ":",
+              "entropy": 1.4743366241455078,
+              "line": 31
+            }
+          ]
+        },
+        {
+          "su_index": 29,
+          "start_line": 32,
+          "end_line": 32,
+          "start_token": 194,
+          "end_token": 203,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 195,
+              "idx": 195,
+              "token_str": "▁if",
+              "entropy": 1.2202603816986084,
+              "line": 32
+            },
+            {
+              "pos": 196,
+              "idx": 196,
+              "token_str": "▁'",
+              "entropy": 0.9545360803604126,
+              "line": 32
+            },
+            {
+              "pos": 197,
+              "idx": 197,
+              "token_str": "G",
+              "entropy": 1.5086239576339722,
+              "line": 32
+            },
+            {
+              "pos": 199,
+              "idx": 199,
+              "token_str": "▁not",
+              "entropy": 0.9059809446334839,
+              "line": 32
+            },
+            {
+              "pos": 201,
+              "idx": 201,
+              "token_str": "▁map",
+              "entropy": 0.9939061999320984,
+              "line": 32
+            },
+            {
+              "pos": 202,
+              "idx": 202,
+              "token_str": ":",
+              "entropy": 1.1154969930648804,
+              "line": 32
+            }
+          ]
+        },
+        {
+          "su_index": 30,
+          "start_line": 33,
+          "end_line": 33,
+          "start_token": 204,
+          "end_token": 209,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 205,
+              "idx": 205,
+              "token_str": "▁print",
+              "entropy": 1.1079671382904053,
+              "line": 33
+            },
+            {
+              "pos": 207,
+              "idx": 207,
+              "token_str": "G",
+              "entropy": 2.4624695777893066,
+              "line": 33
+            },
+            {
+              "pos": 208,
+              "idx": 208,
+              "token_str": "\")",
+              "entropy": 2.8809990882873535,
+              "line": 33
+            }
+          ]
+        },
+        {
+          "su_index": 31,
+          "start_line": 34,
+          "end_line": 35,
+          "start_token": 210,
+          "end_token": 225,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 210,
+              "idx": 210,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 0.6905505657196045,
+              "line": 34
+            },
+            {
+              "pos": 211,
+              "idx": 211,
+              "token_str": "▁if",
+              "entropy": 0.9588524699211121,
+              "line": 34
+            },
+            {
+              "pos": 213,
+              "idx": 213,
+              "token_str": "R",
+              "entropy": 0.9722042083740234,
+              "line": 34
+            }
+          ]
+        },
+        {
+          "su_index": 32,
+          "start_line": 36,
+          "end_line": 37,
+          "start_token": 226,
+          "end_token": 241,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 226,
+              "idx": 226,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.2097117900848389,
+              "line": 36
+            }
+          ]
+        },
+        {
+          "su_index": 33,
+          "start_line": 38,
+          "end_line": 38,
+          "start_token": 242,
+          "end_token": 245,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 242,
+              "idx": 242,
+              "token_str": "▁▁▁",
+              "entropy": 1.3473174571990967,
+              "line": 38
+            },
+            {
+              "pos": 243,
+              "idx": 243,
+              "token_str": "▁else",
+              "entropy": 1.2019652128219604,
+              "line": 38
+            }
+          ]
+        },
+        {
+          "su_index": 34,
+          "start_line": 39,
+          "end_line": 39,
+          "start_token": 246,
+          "end_token": 252,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 247,
+              "idx": 247,
+              "token_str": "▁if",
+              "entropy": 0.9879775047302246,
+              "line": 39
+            },
+            {
+              "pos": 248,
+              "idx": 248,
+              "token_str": "▁check",
+              "entropy": 1.2771811485290527,
+              "line": 39
+            },
+            {
+              "pos": 249,
+              "idx": 249,
+              "token_str": "▁==",
+              "entropy": 1.1695125102996826,
+              "line": 39
+            }
+          ]
+        },
+        {
+          "su_index": 35,
+          "start_line": 40,
+          "end_line": 40,
+          "start_token": 253,
+          "end_token": 270,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 254,
+              "idx": 254,
+              "token_str": "▁if",
+              "entropy": 1.3557069301605225,
+              "line": 40
+            },
+            {
+              "pos": 255,
+              "idx": 255,
+              "token_str": "▁other",
+              "entropy": 1.7334215641021729,
+              "line": 40
+            },
+            {
+              "pos": 258,
+              "idx": 258,
+              "token_str": "▁==",
+              "entropy": 0.829721987247467,
+              "line": 40
+            },
+            {
+              "pos": 259,
+              "idx": 259,
+              "token_str": "▁\"",
+              "entropy": 1.0150272846221924,
+              "line": 40
+            },
+            {
+              "pos": 260,
+              "idx": 260,
+              "token_str": "R",
+              "entropy": 1.2374385595321655,
+              "line": 40
+            },
+            {
+              "pos": 262,
+              "idx": 262,
+              "token_str": "▁and",
+              "entropy": 0.8508189916610718,
+              "line": 40
+            },
+            {
+              "pos": 263,
+              "idx": 263,
+              "token_str": "▁check",
+              "entropy": 1.1239820718765259,
+              "line": 40
+            },
+            {
+              "pos": 268,
+              "idx": 268,
+              "token_str": "G",
+              "entropy": 0.8120604753494263,
+              "line": 40
+            }
+          ]
+        },
+        {
+          "su_index": 36,
+          "start_line": 41,
+          "end_line": 41,
+          "start_token": 271,
+          "end_token": 277,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 274,
+              "idx": 274,
+              "token_str": "B",
+              "entropy": 1.7679729461669922,
+              "line": 41
+            },
+            {
+              "pos": 275,
+              "idx": 275,
+              "token_str": "G",
+              "entropy": 1.2163748741149902,
+              "line": 41
+            }
+          ]
+        },
+        {
+          "su_index": 37,
+          "start_line": 42,
+          "end_line": 42,
+          "start_token": 278,
+          "end_token": 295,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 279,
+              "idx": 279,
+              "token_str": "▁if",
+              "entropy": 1.0920307636260986,
+              "line": 42
+            },
+            {
+              "pos": 285,
+              "idx": 285,
+              "token_str": "B",
+              "entropy": 0.9946872591972351,
+              "line": 42
+            }
+          ]
+        },
+        {
+          "su_index": 38,
+          "start_line": 43,
+          "end_line": 43,
+          "start_token": 296,
+          "end_token": 301,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 299,
+              "idx": 299,
+              "token_str": "GR",
+              "entropy": 1.079207181930542,
+              "line": 43
+            }
+          ]
+        },
+        {
+          "su_index": 39,
+          "start_line": 44,
+          "end_line": 44,
+          "start_token": 302,
+          "end_token": 319,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 302,
+              "idx": 302,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.2145640850067139,
+              "line": 44
+            },
+            {
+              "pos": 309,
+              "idx": 309,
+              "token_str": "B",
+              "entropy": 1.083903431892395,
+              "line": 44
+            }
+          ]
+        },
+        {
+          "su_index": 40,
+          "start_line": 45,
+          "end_line": 45,
+          "start_token": 320,
+          "end_token": 325,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 323,
+              "idx": 323,
+              "token_str": "GR",
+              "entropy": 1.323422908782959,
+              "line": 45
+            }
+          ]
+        },
+        {
+          "su_index": 41,
+          "start_line": 46,
+          "end_line": 46,
+          "start_token": 326,
+          "end_token": 343,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 326,
+              "idx": 326,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 0.7546263337135315,
+              "line": 46
+            },
+            {
+              "pos": 333,
+              "idx": 333,
+              "token_str": "G",
+              "entropy": 0.8091991543769836,
+              "line": 46
+            }
+          ]
+        },
+        {
+          "su_index": 42,
+          "start_line": 47,
+          "end_line": 47,
+          "start_token": 344,
+          "end_token": 349,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 347,
+              "idx": 347,
+              "token_str": "BR",
+              "entropy": 1.0817633867263794,
+              "line": 47
+            }
+          ]
+        },
+        {
+          "su_index": 43,
+          "start_line": 48,
+          "end_line": 48,
+          "start_token": 350,
+          "end_token": 367,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 350,
+              "idx": 350,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.4809825420379639,
+              "line": 48
+            },
+            {
+              "pos": 357,
+              "idx": 357,
+              "token_str": "R",
+              "entropy": 0.966856837272644,
+              "line": 48
+            }
+          ]
+        },
+        {
+          "su_index": 44,
+          "start_line": 49,
+          "end_line": 49,
+          "start_token": 368,
+          "end_token": 374,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 371,
+              "idx": 371,
+              "token_str": "B",
+              "entropy": 1.4710493087768555,
+              "line": 49
+            }
+          ]
+        },
+        {
+          "su_index": 45,
+          "start_line": 50,
+          "end_line": 50,
+          "start_token": 375,
+          "end_token": 392,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 375,
+              "idx": 375,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.4754772186279297,
+              "line": 50
+            }
+          ]
+        },
+        {
+          "su_index": 46,
+          "start_line": 51,
+          "end_line": 51,
+          "start_token": 393,
+          "end_token": 399,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 396,
+              "idx": 396,
+              "token_str": "BR",
+              "entropy": 1.2780122756958008,
+              "line": 51
+            }
+          ]
+        },
+        {
+          "su_index": 47,
+          "start_line": 52,
+          "end_line": 52,
+          "start_token": 400,
+          "end_token": 403,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 400,
+              "idx": 400,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.5320295095443726,
+              "line": 52
+            },
+            {
+              "pos": 401,
+              "idx": 401,
+              "token_str": "▁else",
+              "entropy": 0.8052072525024414,
+              "line": 52
+            }
+          ]
+        },
+        {
+          "su_index": 48,
+          "start_line": 53,
+          "end_line": 53,
+          "start_token": 404,
+          "end_token": 410,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 405,
+              "idx": 405,
+              "token_str": "▁print",
+              "entropy": 1.1110892295837402,
+              "line": 53
+            },
+            {
+              "pos": 407,
+              "idx": 407,
+              "token_str": "B",
+              "entropy": 3.437704563140869,
+              "line": 53
+            },
+            {
+              "pos": 408,
+              "idx": 408,
+              "token_str": "GR",
+              "entropy": 1.2217082977294922,
+              "line": 53
+            }
+          ]
+        },
+        {
+          "su_index": 49,
+          "start_line": 54,
+          "end_line": 54,
+          "start_token": 411,
+          "end_token": 411,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 411,
+              "idx": 411,
+              "token_str": "<0x0A>",
+              "entropy": 1.58182954788208,
+              "line": 54
+            }
+          ]
+        },
+        {
+          "su_index": 50,
+          "start_line": 55,
+          "end_line": 55,
+          "start_token": 412,
+          "end_token": 421,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 412,
+              "idx": 412,
+              "token_str": "if",
+              "entropy": 1.4885685443878174,
+              "line": 55
+            }
+          ]
+        },
+        {
+          "su_index": 51,
+          "start_line": 56,
+          "end_line": 56,
+          "start_token": 422,
+          "end_token": 430,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 423,
+              "idx": 423,
+              "token_str": "▁for",
+              "entropy": 1.895045518875122,
+              "line": 56
+            }
+          ]
+        },
+        {
+          "su_index": 52,
+          "start_line": 57,
+          "end_line": 57,
+          "start_token": 431,
+          "end_token": 436,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 432,
+              "idx": 432,
+              "token_str": "▁print",
+              "entropy": 1.2549617290496826,
+              "line": 57
+            },
+            {
+              "pos": 435,
+              "idx": 435,
+              "token_str": ")",
+              "entropy": 0.7903686761856079,
+              "line": 57
+            }
+          ]
+        },
+        {
+          "su_index": 53,
+          "start_line": 58,
+          "end_line": 58,
+          "start_token": 437,
+          "end_token": 437,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 437,
+              "idx": 437,
+              "token_str": "<0x0A>",
+              "entropy": 1.2558802366256714,
+              "line": 58
+            }
+          ]
+        },
+        {
+          "su_index": 54,
+          "start_line": 59,
+          "end_line": 59,
+          "start_token": 438,
+          "end_token": 439,
+          "n_tokens": 2,
+          "trigger_tokens": [
+            {
+              "pos": 438,
+              "idx": 438,
+              "token_str": "▁▁▁▁",
+              "entropy": 1.8114312887191772,
+              "line": 59
+            }
+          ]
+        }
+      ]
+    },
+    "p80_saved": {
+      "before": [
+        {
+          "su_index": 0,
+          "start_line": null,
+          "end_line": null,
+          "start_token": null,
+          "end_token": null,
+          "n_tokens": 0,
+          "trigger_tokens": []
+        },
+        {
+          "su_index": 1,
+          "start_line": 1,
+          "end_line": 1,
+          "start_token": 0,
+          "end_token": 6,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 1,
+              "idx": 1,
+              "token_str": "▁=",
+              "entropy": 3.5428385734558105,
+              "line": 1
+            }
+          ]
+        },
+        {
+          "su_index": 2,
+          "start_line": 2,
+          "end_line": 2,
+          "start_token": 7,
+          "end_token": 13,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 7,
+              "idx": 7,
+              "token_str": "input",
+              "entropy": 3.5387630462646484,
+              "line": 2
+            },
+            {
+              "pos": 8,
+              "idx": 8,
+              "token_str": "_",
+              "entropy": 1.8498740196228027,
+              "line": 2
+            },
+            {
+              "pos": 9,
+              "idx": 9,
+              "token_str": "string",
+              "entropy": 2.7627205848693848,
+              "line": 2
+            }
+          ]
+        },
+        {
+          "su_index": 3,
+          "start_line": 3,
+          "end_line": 3,
+          "start_token": 14,
+          "end_token": 14,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 14,
+              "idx": 14,
+              "token_str": "<0x0A>",
+              "entropy": 3.7206523418426514,
+              "line": 3
+            }
+          ]
+        },
+        {
+          "su_index": 4,
+          "start_line": 4,
+          "end_line": 4,
+          "start_token": 15,
+          "end_token": 18,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 15,
+              "idx": 15,
+              "token_str": "map",
+              "entropy": 4.997642517089844,
+              "line": 4
+            },
+            {
+              "pos": 17,
+              "idx": 17,
+              "token_str": "▁{}",
+              "entropy": 2.0375561714172363,
+              "line": 4
+            }
+          ]
+        },
+        {
+          "su_index": 5,
+          "start_line": 5,
+          "end_line": 5,
+          "start_token": 19,
+          "end_token": 19,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 19,
+              "idx": 19,
+              "token_str": "<0x0A>",
+              "entropy": 2.8927955627441406,
+              "line": 5
+            }
+          ]
+        },
+        {
+          "su_index": 6,
+          "start_line": 6,
+          "end_line": 6,
+          "start_token": 20,
+          "end_token": 33,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 20,
+              "idx": 20,
+              "token_str": "for",
+              "entropy": 2.4766435623168945,
+              "line": 6
+            },
+            {
+              "pos": 21,
+              "idx": 21,
+              "token_str": "▁i",
+              "entropy": 2.286388397216797,
+              "line": 6
+            },
+            {
+              "pos": 25,
+              "idx": 25,
+              "token_str": "0",
+              "entropy": 1.6836271286010742,
+              "line": 6
+            },
+            {
+              "pos": 27,
+              "idx": 27,
+              "token_str": "▁len",
+              "entropy": 1.5807154178619385,
+              "line": 6
+            }
+          ]
+        },
+        {
+          "su_index": 7,
+          "start_line": 7,
+          "end_line": 11,
+          "start_token": 34,
+          "end_token": 74,
+          "n_tokens": 41,
+          "trigger_tokens": [
+            {
+              "pos": 35,
+              "idx": 35,
+              "token_str": "▁if",
+              "entropy": 3.055537462234497,
+              "line": 7
+            }
+          ]
+        },
+        {
+          "su_index": 8,
+          "start_line": 12,
+          "end_line": 12,
+          "start_token": 75,
+          "end_token": 75,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 75,
+              "idx": 75,
+              "token_str": "<0x0A>",
+              "entropy": 4.17739200592041,
+              "line": 12
+            }
+          ]
+        },
+        {
+          "su_index": 9,
+          "start_line": 13,
+          "end_line": 13,
+          "start_token": 76,
+          "end_token": 85,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 76,
+              "idx": 76,
+              "token_str": "if",
+              "entropy": 4.079206466674805,
+              "line": 13
+            },
+            {
+              "pos": 77,
+              "idx": 77,
+              "token_str": "▁len",
+              "entropy": 2.280766010284424,
+              "line": 13
+            },
+            {
+              "pos": 81,
+              "idx": 81,
+              "token_str": "▁==",
+              "entropy": 2.030430555343628,
+              "line": 13
+            }
+          ]
+        },
+        {
+          "su_index": 10,
+          "start_line": 14,
+          "end_line": 16,
+          "start_token": 86,
+          "end_token": 94,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 87,
+              "idx": 87,
+              "token_str": "▁print",
+              "entropy": 3.5016322135925293,
+              "line": 14
+            },
+            {
+              "pos": 88,
+              "idx": 88,
+              "token_str": "(\"",
+              "entropy": 1.3382329940795898,
+              "line": 14
+            },
+            {
+              "pos": 89,
+              "idx": 89,
+              "token_str": "B",
+              "entropy": 3.8188982009887695,
+              "line": 14
+            },
+            {
+              "pos": 90,
+              "idx": 90,
+              "token_str": "GR",
+              "entropy": 5.120308876037598,
+              "line": 14
+            },
+            {
+              "pos": 91,
+              "idx": 91,
+              "token_str": "\")",
+              "entropy": 1.3586262464523315,
+              "line": 14
+            }
+          ]
+        },
+        {
+          "su_index": 11,
+          "start_line": 17,
+          "end_line": 17,
+          "start_token": 95,
+          "end_token": 104,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 95,
+              "idx": 95,
+              "token_str": "if",
+              "entropy": 2.1045892238616943,
+              "line": 17
+            }
+          ]
+        },
+        {
+          "su_index": 12,
+          "start_line": 18,
+          "end_line": 18,
+          "start_token": 105,
+          "end_token": 110,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 106,
+              "idx": 106,
+              "token_str": "▁sum",
+              "entropy": 2.91573166847229,
+              "line": 18
+            },
+            {
+              "pos": 107,
+              "idx": 107,
+              "token_str": "▁=",
+              "entropy": 1.542259693145752,
+              "line": 18
+            }
+          ]
+        },
+        {
+          "su_index": 13,
+          "start_line": 19,
+          "end_line": 19,
+          "start_token": 111,
+          "end_token": 115,
+          "n_tokens": 5,
+          "trigger_tokens": [
+            {
+              "pos": 112,
+              "idx": 112,
+              "token_str": "▁check",
+              "entropy": 1.4900507926940918,
+              "line": 19
+            },
+            {
+              "pos": 114,
+              "idx": 114,
+              "token_str": "▁False",
+              "entropy": 2.040999412536621,
+              "line": 19
+            }
+          ]
+        },
+        {
+          "su_index": 14,
+          "start_line": 20,
+          "end_line": 20,
+          "start_token": 116,
+          "end_token": 122,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 118,
+              "idx": 118,
+              "token_str": "_",
+              "entropy": 1.8259809017181396,
+              "line": 20
+            },
+            {
+              "pos": 119,
+              "idx": 119,
+              "token_str": "key",
+              "entropy": 4.721537113189697,
+              "line": 20
+            },
+            {
+              "pos": 121,
+              "idx": 121,
+              "token_str": "▁\"\"",
+              "entropy": 2.0561070442199707,
+              "line": 20
+            }
+          ]
+        },
+        {
+          "su_index": 15,
+          "start_line": 21,
+          "end_line": 21,
+          "start_token": 123,
+          "end_token": 129,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 126,
+              "idx": 126,
+              "token_str": "key",
+              "entropy": 1.3254719972610474,
+              "line": 21
+            }
+          ]
+        },
+        {
+          "su_index": 16,
+          "start_line": 22,
+          "end_line": 24,
+          "start_token": 130,
+          "end_token": 147,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 131,
+              "idx": 131,
+              "token_str": "▁for",
+              "entropy": 1.387516736984253,
+              "line": 22
+            }
+          ]
+        },
+        {
+          "su_index": 17,
+          "start_line": 25,
+          "end_line": 30,
+          "start_token": 148,
+          "end_token": 183,
+          "n_tokens": 36,
+          "trigger_tokens": [
+            {
+              "pos": 150,
+              "idx": 150,
+              "token_str": "▁map",
+              "entropy": 1.7733477354049683,
+              "line": 25
+            },
+            {
+              "pos": 154,
+              "idx": 154,
+              "token_str": "▁==",
+              "entropy": 1.7407081127166748,
+              "line": 25
+            },
+            {
+              "pos": 155,
+              "idx": 155,
+              "token_str": "▁",
+              "entropy": 1.5256763696670532,
+              "line": 25
+            }
+          ]
+        },
+        {
+          "su_index": 18,
+          "start_line": 31,
+          "end_line": 31,
+          "start_token": 184,
+          "end_token": 191,
+          "n_tokens": 8,
+          "trigger_tokens": [
+            {
+              "pos": 189,
+              "idx": 189,
+              "token_str": "2",
+              "entropy": 1.7293704748153687,
+              "line": 31
+            },
+            {
+              "pos": 190,
+              "idx": 190,
+              "token_str": ":",
+              "entropy": 1.3305878639221191,
+              "line": 31
+            }
+          ]
+        },
+        {
+          "su_index": 19,
+          "start_line": 32,
+          "end_line": 32,
+          "start_token": 192,
+          "end_token": 201,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 195,
+              "idx": 195,
+              "token_str": "G",
+              "entropy": 1.5557475090026855,
+              "line": 32
+            }
+          ]
+        },
+        {
+          "su_index": 20,
+          "start_line": 33,
+          "end_line": 37,
+          "start_token": 202,
+          "end_token": 239,
+          "n_tokens": 38,
+          "trigger_tokens": [
+            {
+              "pos": 205,
+              "idx": 205,
+              "token_str": "G",
+              "entropy": 2.478870391845703,
+              "line": 33
+            },
+            {
+              "pos": 206,
+              "idx": 206,
+              "token_str": "\")",
+              "entropy": 2.8690428733825684,
+              "line": 33
+            }
+          ]
+        },
+        {
+          "su_index": 21,
+          "start_line": 38,
+          "end_line": 39,
+          "start_token": 240,
+          "end_token": 250,
+          "n_tokens": 11,
+          "trigger_tokens": [
+            {
+              "pos": 240,
+              "idx": 240,
+              "token_str": "▁▁▁",
+              "entropy": 1.3412724733352661,
+              "line": 38
+            }
+          ]
+        },
+        {
+          "su_index": 22,
+          "start_line": 40,
+          "end_line": 40,
+          "start_token": 251,
+          "end_token": 268,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 252,
+              "idx": 252,
+              "token_str": "▁if",
+              "entropy": 1.373720407485962,
+              "line": 40
+            },
+            {
+              "pos": 253,
+              "idx": 253,
+              "token_str": "▁other",
+              "entropy": 1.644335389137268,
+              "line": 40
+            }
+          ]
+        },
+        {
+          "su_index": 23,
+          "start_line": 41,
+          "end_line": 47,
+          "start_token": 269,
+          "end_token": 347,
+          "n_tokens": 79,
+          "trigger_tokens": [
+            {
+              "pos": 272,
+              "idx": 272,
+              "token_str": "B",
+              "entropy": 1.7831015586853027,
+              "line": 41
+            }
+          ]
+        },
+        {
+          "su_index": 24,
+          "start_line": 48,
+          "end_line": 48,
+          "start_token": 348,
+          "end_token": 365,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 348,
+              "idx": 348,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.470476746559143,
+              "line": 48
+            }
+          ]
+        },
+        {
+          "su_index": 25,
+          "start_line": 49,
+          "end_line": 49,
+          "start_token": 366,
+          "end_token": 372,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 369,
+              "idx": 369,
+              "token_str": "B",
+              "entropy": 1.4784412384033203,
+              "line": 49
+            }
+          ]
+        },
+        {
+          "su_index": 26,
+          "start_line": 50,
+          "end_line": 51,
+          "start_token": 373,
+          "end_token": 397,
+          "n_tokens": 25,
+          "trigger_tokens": [
+            {
+              "pos": 373,
+              "idx": 373,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.4763343334197998,
+              "line": 50
+            }
+          ]
+        },
+        {
+          "su_index": 27,
+          "start_line": 52,
+          "end_line": 52,
+          "start_token": 398,
+          "end_token": 401,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 398,
+              "idx": 398,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.517195463180542,
+              "line": 52
+            }
+          ]
+        },
+        {
+          "su_index": 28,
+          "start_line": 53,
+          "end_line": 53,
+          "start_token": 402,
+          "end_token": 408,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 405,
+              "idx": 405,
+              "token_str": "B",
+              "entropy": 3.408000946044922,
+              "line": 53
+            }
+          ]
+        },
+        {
+          "su_index": 29,
+          "start_line": 54,
+          "end_line": 54,
+          "start_token": 409,
+          "end_token": 409,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 409,
+              "idx": 409,
+              "token_str": "<0x0A>",
+              "entropy": 1.5859787464141846,
+              "line": 54
+            }
+          ]
+        },
+        {
+          "su_index": 30,
+          "start_line": 55,
+          "end_line": 55,
+          "start_token": 410,
+          "end_token": 419,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 410,
+              "idx": 410,
+              "token_str": "if",
+              "entropy": 1.5048357248306274,
+              "line": 55
+            }
+          ]
+        },
+        {
+          "su_index": 31,
+          "start_line": 56,
+          "end_line": 58,
+          "start_token": 420,
+          "end_token": 435,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 421,
+              "idx": 421,
+              "token_str": "▁for",
+              "entropy": 1.9036369323730469,
+              "line": 56
+            }
+          ]
+        },
+        {
+          "su_index": 32,
+          "start_line": 59,
+          "end_line": 59,
+          "start_token": 436,
+          "end_token": 437,
+          "n_tokens": 2,
+          "trigger_tokens": [
+            {
+              "pos": 436,
+              "idx": 436,
+              "token_str": "▁▁▁▁",
+              "entropy": 1.8068748712539673,
+              "line": 59
+            }
+          ]
+        }
+      ],
+      "after": [
+        {
+          "su_index": 0,
+          "start_line": null,
+          "end_line": null,
+          "start_token": null,
+          "end_token": null,
+          "n_tokens": 0,
+          "trigger_tokens": []
+        },
+        {
+          "su_index": 1,
+          "start_line": 1,
+          "end_line": 1,
+          "start_token": 0,
+          "end_token": 6,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 1,
+              "idx": 1,
+              "token_str": "▁=",
+              "entropy": 3.5428385734558105,
+              "line": 1
+            }
+          ]
+        },
+        {
+          "su_index": 2,
+          "start_line": 2,
+          "end_line": 2,
+          "start_token": 7,
+          "end_token": 13,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 7,
+              "idx": 7,
+              "token_str": "input",
+              "entropy": 3.5387630462646484,
+              "line": 2
+            },
+            {
+              "pos": 8,
+              "idx": 8,
+              "token_str": "_",
+              "entropy": 1.8498740196228027,
+              "line": 2
+            },
+            {
+              "pos": 9,
+              "idx": 9,
+              "token_str": "string",
+              "entropy": 2.7627205848693848,
+              "line": 2
+            }
+          ]
+        },
+        {
+          "su_index": 3,
+          "start_line": 3,
+          "end_line": 3,
+          "start_token": 14,
+          "end_token": 14,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 14,
+              "idx": 14,
+              "token_str": "<0x0A>",
+              "entropy": 3.7206523418426514,
+              "line": 3
+            }
+          ]
+        },
+        {
+          "su_index": 4,
+          "start_line": 4,
+          "end_line": 4,
+          "start_token": 15,
+          "end_token": 18,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 15,
+              "idx": 15,
+              "token_str": "map",
+              "entropy": 4.997642517089844,
+              "line": 4
+            },
+            {
+              "pos": 17,
+              "idx": 17,
+              "token_str": "▁{}",
+              "entropy": 2.0375561714172363,
+              "line": 4
+            }
+          ]
+        },
+        {
+          "su_index": 5,
+          "start_line": 5,
+          "end_line": 5,
+          "start_token": 19,
+          "end_token": 19,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 19,
+              "idx": 19,
+              "token_str": "<0x0A>",
+              "entropy": 2.8927955627441406,
+              "line": 5
+            }
+          ]
+        },
+        {
+          "su_index": 6,
+          "start_line": 6,
+          "end_line": 6,
+          "start_token": 20,
+          "end_token": 33,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 20,
+              "idx": 20,
+              "token_str": "for",
+              "entropy": 2.4766435623168945,
+              "line": 6
+            },
+            {
+              "pos": 21,
+              "idx": 21,
+              "token_str": "▁i",
+              "entropy": 2.286388397216797,
+              "line": 6
+            },
+            {
+              "pos": 25,
+              "idx": 25,
+              "token_str": "0",
+              "entropy": 1.6836271286010742,
+              "line": 6
+            },
+            {
+              "pos": 27,
+              "idx": 27,
+              "token_str": "▁len",
+              "entropy": 1.5807154178619385,
+              "line": 6
+            }
+          ]
+        },
+        {
+          "su_index": 7,
+          "start_line": 7,
+          "end_line": 7,
+          "start_token": 34,
+          "end_token": 47,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 35,
+              "idx": 35,
+              "token_str": "▁if",
+              "entropy": 3.055537462234497,
+              "line": 7
+            },
+            {
+              "pos": 37,
+              "idx": 37,
+              "token_str": "▁(",
+              "entropy": 1.3430371284484863,
+              "line": 7
+            }
+          ]
+        },
+        {
+          "su_index": 8,
+          "start_line": 8,
+          "end_line": 11,
+          "start_token": 48,
+          "end_token": 76,
+          "n_tokens": 29,
+          "trigger_tokens": [
+            {
+              "pos": 58,
+              "idx": 58,
+              "token_str": "1",
+              "entropy": 1.9001872539520264,
+              "line": 8
+            }
+          ]
+        },
+        {
+          "su_index": 9,
+          "start_line": 12,
+          "end_line": 12,
+          "start_token": 77,
+          "end_token": 77,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 77,
+              "idx": 77,
+              "token_str": "<0x0A>",
+              "entropy": 4.075082778930664,
+              "line": 12
+            }
+          ]
+        },
+        {
+          "su_index": 10,
+          "start_line": 13,
+          "end_line": 13,
+          "start_token": 78,
+          "end_token": 87,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 78,
+              "idx": 78,
+              "token_str": "if",
+              "entropy": 4.027777671813965,
+              "line": 13
+            },
+            {
+              "pos": 79,
+              "idx": 79,
+              "token_str": "▁len",
+              "entropy": 2.379908561706543,
+              "line": 13
+            },
+            {
+              "pos": 83,
+              "idx": 83,
+              "token_str": "▁==",
+              "entropy": 2.0441696643829346,
+              "line": 13
+            }
+          ]
+        },
+        {
+          "su_index": 11,
+          "start_line": 14,
+          "end_line": 16,
+          "start_token": 88,
+          "end_token": 96,
+          "n_tokens": 9,
+          "trigger_tokens": [
+            {
+              "pos": 89,
+              "idx": 89,
+              "token_str": "▁print",
+              "entropy": 3.231041431427002,
+              "line": 14
+            },
+            {
+              "pos": 90,
+              "idx": 90,
+              "token_str": "(\"",
+              "entropy": 1.3477586507797241,
+              "line": 14
+            },
+            {
+              "pos": 91,
+              "idx": 91,
+              "token_str": "B",
+              "entropy": 3.950430393218994,
+              "line": 14
+            },
+            {
+              "pos": 92,
+              "idx": 92,
+              "token_str": "GR",
+              "entropy": 5.0843000411987305,
+              "line": 14
+            },
+            {
+              "pos": 93,
+              "idx": 93,
+              "token_str": "\")",
+              "entropy": 1.3376121520996094,
+              "line": 14
+            }
+          ]
+        },
+        {
+          "su_index": 12,
+          "start_line": 17,
+          "end_line": 17,
+          "start_token": 97,
+          "end_token": 106,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 97,
+              "idx": 97,
+              "token_str": "if",
+              "entropy": 2.125243663787842,
+              "line": 17
+            }
+          ]
+        },
+        {
+          "su_index": 13,
+          "start_line": 18,
+          "end_line": 18,
+          "start_token": 107,
+          "end_token": 112,
+          "n_tokens": 6,
+          "trigger_tokens": [
+            {
+              "pos": 108,
+              "idx": 108,
+              "token_str": "▁sum",
+              "entropy": 2.8747847080230713,
+              "line": 18
+            },
+            {
+              "pos": 109,
+              "idx": 109,
+              "token_str": "▁=",
+              "entropy": 1.5500555038452148,
+              "line": 18
+            }
+          ]
+        },
+        {
+          "su_index": 14,
+          "start_line": 19,
+          "end_line": 19,
+          "start_token": 113,
+          "end_token": 117,
+          "n_tokens": 5,
+          "trigger_tokens": [
+            {
+              "pos": 114,
+              "idx": 114,
+              "token_str": "▁check",
+              "entropy": 1.4807679653167725,
+              "line": 19
+            },
+            {
+              "pos": 116,
+              "idx": 116,
+              "token_str": "▁False",
+              "entropy": 2.0579941272735596,
+              "line": 19
+            }
+          ]
+        },
+        {
+          "su_index": 15,
+          "start_line": 20,
+          "end_line": 21,
+          "start_token": 118,
+          "end_token": 131,
+          "n_tokens": 14,
+          "trigger_tokens": [
+            {
+              "pos": 120,
+              "idx": 120,
+              "token_str": "_",
+              "entropy": 1.8553531169891357,
+              "line": 20
+            },
+            {
+              "pos": 121,
+              "idx": 121,
+              "token_str": "key",
+              "entropy": 4.758035659790039,
+              "line": 20
+            },
+            {
+              "pos": 123,
+              "idx": 123,
+              "token_str": "▁\"\"",
+              "entropy": 2.0380473136901855,
+              "line": 20
+            }
+          ]
+        },
+        {
+          "su_index": 16,
+          "start_line": 22,
+          "end_line": 24,
+          "start_token": 132,
+          "end_token": 149,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 133,
+              "idx": 133,
+              "token_str": "▁for",
+              "entropy": 1.3791612386703491,
+              "line": 22
+            }
+          ]
+        },
+        {
+          "su_index": 17,
+          "start_line": 25,
+          "end_line": 30,
+          "start_token": 150,
+          "end_token": 185,
+          "n_tokens": 36,
+          "trigger_tokens": [
+            {
+              "pos": 152,
+              "idx": 152,
+              "token_str": "▁map",
+              "entropy": 1.9467355012893677,
+              "line": 25
+            },
+            {
+              "pos": 156,
+              "idx": 156,
+              "token_str": "▁==",
+              "entropy": 1.7140510082244873,
+              "line": 25
+            },
+            {
+              "pos": 157,
+              "idx": 157,
+              "token_str": "▁",
+              "entropy": 1.4396288394927979,
+              "line": 25
+            }
+          ]
+        },
+        {
+          "su_index": 18,
+          "start_line": 31,
+          "end_line": 31,
+          "start_token": 186,
+          "end_token": 193,
+          "n_tokens": 8,
+          "trigger_tokens": [
+            {
+              "pos": 188,
+              "idx": 188,
+              "token_str": "▁sum",
+              "entropy": 1.3333280086517334,
+              "line": 31
+            },
+            {
+              "pos": 191,
+              "idx": 191,
+              "token_str": "2",
+              "entropy": 1.7785868644714355,
+              "line": 31
+            },
+            {
+              "pos": 192,
+              "idx": 192,
+              "token_str": ":",
+              "entropy": 1.4743366241455078,
+              "line": 31
+            }
+          ]
+        },
+        {
+          "su_index": 19,
+          "start_line": 32,
+          "end_line": 32,
+          "start_token": 194,
+          "end_token": 203,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 197,
+              "idx": 197,
+              "token_str": "G",
+              "entropy": 1.5086239576339722,
+              "line": 32
+            }
+          ]
+        },
+        {
+          "su_index": 20,
+          "start_line": 33,
+          "end_line": 37,
+          "start_token": 204,
+          "end_token": 241,
+          "n_tokens": 38,
+          "trigger_tokens": [
+            {
+              "pos": 207,
+              "idx": 207,
+              "token_str": "G",
+              "entropy": 2.4624695777893066,
+              "line": 33
+            },
+            {
+              "pos": 208,
+              "idx": 208,
+              "token_str": "\")",
+              "entropy": 2.8809990882873535,
+              "line": 33
+            }
+          ]
+        },
+        {
+          "su_index": 21,
+          "start_line": 38,
+          "end_line": 39,
+          "start_token": 242,
+          "end_token": 252,
+          "n_tokens": 11,
+          "trigger_tokens": [
+            {
+              "pos": 242,
+              "idx": 242,
+              "token_str": "▁▁▁",
+              "entropy": 1.3473174571990967,
+              "line": 38
+            }
+          ]
+        },
+        {
+          "su_index": 22,
+          "start_line": 40,
+          "end_line": 40,
+          "start_token": 253,
+          "end_token": 270,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 254,
+              "idx": 254,
+              "token_str": "▁if",
+              "entropy": 1.3557069301605225,
+              "line": 40
+            },
+            {
+              "pos": 255,
+              "idx": 255,
+              "token_str": "▁other",
+              "entropy": 1.7334215641021729,
+              "line": 40
+            }
+          ]
+        },
+        {
+          "su_index": 23,
+          "start_line": 41,
+          "end_line": 47,
+          "start_token": 271,
+          "end_token": 349,
+          "n_tokens": 79,
+          "trigger_tokens": [
+            {
+              "pos": 274,
+              "idx": 274,
+              "token_str": "B",
+              "entropy": 1.7679729461669922,
+              "line": 41
+            }
+          ]
+        },
+        {
+          "su_index": 24,
+          "start_line": 48,
+          "end_line": 48,
+          "start_token": 350,
+          "end_token": 367,
+          "n_tokens": 18,
+          "trigger_tokens": [
+            {
+              "pos": 350,
+              "idx": 350,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.4809825420379639,
+              "line": 48
+            }
+          ]
+        },
+        {
+          "su_index": 25,
+          "start_line": 49,
+          "end_line": 49,
+          "start_token": 368,
+          "end_token": 374,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 371,
+              "idx": 371,
+              "token_str": "B",
+              "entropy": 1.4710493087768555,
+              "line": 49
+            }
+          ]
+        },
+        {
+          "su_index": 26,
+          "start_line": 50,
+          "end_line": 51,
+          "start_token": 375,
+          "end_token": 399,
+          "n_tokens": 25,
+          "trigger_tokens": [
+            {
+              "pos": 375,
+              "idx": 375,
+              "token_str": "▁▁▁▁▁▁▁▁▁▁▁",
+              "entropy": 1.4754772186279297,
+              "line": 50
+            }
+          ]
+        },
+        {
+          "su_index": 27,
+          "start_line": 52,
+          "end_line": 52,
+          "start_token": 400,
+          "end_token": 403,
+          "n_tokens": 4,
+          "trigger_tokens": [
+            {
+              "pos": 400,
+              "idx": 400,
+              "token_str": "▁▁▁▁▁▁▁",
+              "entropy": 1.5320295095443726,
+              "line": 52
+            }
+          ]
+        },
+        {
+          "su_index": 28,
+          "start_line": 53,
+          "end_line": 53,
+          "start_token": 404,
+          "end_token": 410,
+          "n_tokens": 7,
+          "trigger_tokens": [
+            {
+              "pos": 407,
+              "idx": 407,
+              "token_str": "B",
+              "entropy": 3.437704563140869,
+              "line": 53
+            }
+          ]
+        },
+        {
+          "su_index": 29,
+          "start_line": 54,
+          "end_line": 54,
+          "start_token": 411,
+          "end_token": 411,
+          "n_tokens": 1,
+          "trigger_tokens": [
+            {
+              "pos": 411,
+              "idx": 411,
+              "token_str": "<0x0A>",
+              "entropy": 1.58182954788208,
+              "line": 54
+            }
+          ]
+        },
+        {
+          "su_index": 30,
+          "start_line": 55,
+          "end_line": 55,
+          "start_token": 412,
+          "end_token": 421,
+          "n_tokens": 10,
+          "trigger_tokens": [
+            {
+              "pos": 412,
+              "idx": 412,
+              "token_str": "if",
+              "entropy": 1.4885685443878174,
+              "line": 55
+            }
+          ]
+        },
+        {
+          "su_index": 31,
+          "start_line": 56,
+          "end_line": 58,
+          "start_token": 422,
+          "end_token": 437,
+          "n_tokens": 16,
+          "trigger_tokens": [
+            {
+              "pos": 423,
+              "idx": 423,
+              "token_str": "▁for",
+              "entropy": 1.895045518875122,
+              "line": 56
+            }
+          ]
+        },
+        {
+          "su_index": 32,
+          "start_line": 59,
+          "end_line": 59,
+          "start_token": 438,
+          "end_token": 439,
+          "n_tokens": 2,
+          "trigger_tokens": [
+            {
+              "pos": 438,
+              "idx": 438,
+              "token_str": "▁▁▁▁",
+              "entropy": 1.8114312887191772,
+              "line": 59
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

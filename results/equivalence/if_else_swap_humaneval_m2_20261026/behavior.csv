@@ -1,0 +1,6 @@
+uid,variant_id,item_id,line_count_equal,status,reason,n_cases,n_equal,n_timeout,original_matches_expected
+HumanEval_47,ifelse_L4,HumanEval_47__ifelse_L4,True,match,,4,4,0,3/3
+HumanEval_123,ifelse_L3,HumanEval_123__ifelse_L3,True,match,,4,4,0,3/3
+HumanEval_123,ifelse_L8,HumanEval_123__ifelse_L8,True,match,,4,4,0,3/3
+HumanEval_126,ifelse_L10,HumanEval_126__ifelse_L10,True,match,,4,4,0,3/3
+HumanEval_159,ifelse_L3,HumanEval_159__ifelse_L3,True,match,,4,4,0,3/3

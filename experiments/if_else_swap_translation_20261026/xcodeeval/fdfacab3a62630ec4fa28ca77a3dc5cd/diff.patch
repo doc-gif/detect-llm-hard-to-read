@@ -1,0 +1,16 @@
+--- original.py
++++ swapped.py
+@@ -6,10 +6,10 @@
+ i = 1
+ arr = list(map(int, st.split()))
+ j = (sum(arr) + k * i)/(len(arr) + i)
+-if(j-math.trunc(j)>=0.5):
++if not (j-math.trunc(j)>=0.5):
++    j = math.trunc(j)
++else:
+     j = math.ceil(j)
+-else:
+-    j = math.trunc(j)
+ if(j == k):
+     print(0)
+ else:

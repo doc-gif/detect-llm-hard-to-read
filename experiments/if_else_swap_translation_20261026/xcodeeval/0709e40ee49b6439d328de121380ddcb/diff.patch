@@ -1,0 +1,16 @@
+--- original.py
++++ swapped.py
+@@ -13,10 +13,10 @@
+     if c==27:
+         break
+ 
+-if f==d :
++if not (f==d) :
++    print("NO")
++else:
+     print("YES")
+-else:
+-    print("NO")
+ 
+ 
+ 

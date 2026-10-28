@@ -1,0 +1,14 @@
+dataset,uid,status,n_cases,n_equal,n_timeout,baseline_failures,swapped_failures,ready_for_measurement
+xcodeeval_code_translation,b072dc9e37263b339fdf61bfaddd23a7,match,279,279,0,0,0,True
+xcodeeval_code_translation,e87d5dda1727b2bf5f0cdfc5042c02ab,match,77,77,0,0,0,True
+xcodeeval_code_translation,3b399bc13f31d7ac665a906c006042f4,match,84,84,0,0,0,True
+xcodeeval_code_translation,b55dc5b34d55f7d7ca7226f31d700712,match,127,127,0,0,0,True
+xcodeeval_code_translation,36cb9751a3bdba6cfb6f7369fb86b64b,match,30,30,0,0,0,True
+xcodeeval_code_translation,dae6d6e41bc2c3062a445566c056ffbf,match,44,44,0,0,0,True
+xcodeeval_code_translation,fdfacab3a62630ec4fa28ca77a3dc5cd,match,105,105,0,0,0,True
+xcodeeval_code_translation,0469a415b73c86652f520eaf69bd7311,match,45,45,0,38,38,False
+xcodeeval_code_translation,0709e40ee49b6439d328de121380ddcb,match,59,59,0,59,59,False
+xcodeeval_code_translation,4b2e18a331e01e1ae120ac59b747c8ba,match,102,102,0,0,0,True
+minimal,positive,match,3,3,0,0,0,True
+minimal,even,match,3,3,0,0,0,True
+minimal,both_positive,match,4,4,0,0,0,True

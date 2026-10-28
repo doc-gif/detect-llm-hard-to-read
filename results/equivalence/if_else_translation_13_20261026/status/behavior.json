@@ -1,0 +1,119 @@
+{
+  "xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:36.569807+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7.json": "3f553ea29f3542fc13dbee2d76b7f4c323d3b6cfb26909621492464f460420cb"
+    },
+    "n_cases": 279,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:39.243273+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab.json": "fb697dd99ebca983e4e7525dbe2cf5ffa113dded227a701c02c9a593cd0dbccb"
+    },
+    "n_cases": 77,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:42.128596+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4.json": "d2b65b64344baff8c842d081fc0df714d9f3dcb28cacbbec9bbb082f9784d91d"
+    },
+    "n_cases": 84,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:47.585693+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712.json": "e91b63cb29c4f4cc456497e876cebe1adbfbd40812736ce99f16ea14da4ef29e"
+    },
+    "n_cases": 127,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:48.654907+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b.json": "f3af434a513fcc05a48b5dabfa8cbcd2ce2922c549456690d472c0658e51a3b5"
+    },
+    "n_cases": 30,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:50.323185+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf.json": "343816d81f2b9a0006aad58820e732c5278388572b76fa772ba5221b7212fae3"
+    },
+    "n_cases": 44,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:54.163959+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd.json": "12c03c79c4a59d34bb06aa0b17934b21b426b8216f2cbc3d7ebf2966cc88f86d"
+    },
+    "n_cases": 105,
+    "expected_output_matches": true
+  },
+  "xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:55.897125+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311.json": "893cbca3d8ba82bddff8ef5674cf5890a68fca31f536c20dcfff5c81ba715ddf"
+    },
+    "n_cases": 45,
+    "expected_output_matches": false
+  },
+  "xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:35:57.946291+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb.json": "a6f0de13fe001292bd29c49154adc057bd26f6f9347dd9d8c93cfe6db2ce9d59"
+    },
+    "n_cases": 59,
+    "expected_output_matches": false
+  },
+  "xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:36:01.527319+00:00",
+    "files": {
+      "behavior/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba.json": "f42b5f6d4a1be3e1618547e32b737c1ad745fe4280651251f8dc3b1b58596fdf"
+    },
+    "n_cases": 102,
+    "expected_output_matches": true
+  },
+  "minimal/positive": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:36:01.667101+00:00",
+    "files": {
+      "behavior/minimal/positive.json": "ab253df9018701a0589604f868e85056e3cb5bfe8efc2094ceba5c0da8efe9e3"
+    },
+    "n_cases": 3,
+    "expected_output_matches": true
+  },
+  "minimal/even": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:36:01.798547+00:00",
+    "files": {
+      "behavior/minimal/even.json": "e9be5183224e06911f107fdcdf67edba220f333e0358f9429e80988e560d1fc5"
+    },
+    "n_cases": 3,
+    "expected_output_matches": true
+  },
+  "minimal/both_positive": {
+    "status": "ok",
+    "updated_at": "2026-10-26T11:36:01.959842+00:00",
+    "files": {
+      "behavior/minimal/both_positive.json": "9dd4dd5666fdebabfbed80fe76f9812d1cbc0fd7609e92bfc1f4ecabeb04d9a6"
+    },
+    "n_cases": 4,
+    "expected_output_matches": true
+  }
+}

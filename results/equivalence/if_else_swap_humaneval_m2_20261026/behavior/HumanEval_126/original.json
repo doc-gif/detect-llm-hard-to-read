@@ -1,0 +1,125 @@
+{
+ "uid": "HumanEval_126",
+ "case_ids": [
+  "input:HumanEval_126",
+  "input:HumanEval_126__0",
+  "input:HumanEval_126__1",
+  "asserts"
+ ],
+ "observations": [
+  {
+   "str": "True",
+   "repr": "True",
+   "error": null,
+   "matches_expected": true
+  },
+  {
+   "str": "True",
+   "repr": "True",
+   "error": null,
+   "matches_expected": true
+  },
+  {
+   "str": "False",
+   "repr": "False",
+   "error": null,
+   "matches_expected": true
+  },
+  {
+   "asserts": [
+    {
+     "i": 0,
+     "line": 4,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 1,
+     "line": 5,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 2,
+     "line": 6,
+     "ok": true,
+     "value": "False",
+     "error": null
+    },
+    {
+     "i": 3,
+     "line": 7,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 4,
+     "line": 8,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 5,
+     "line": 9,
+     "ok": true,
+     "value": "False",
+     "error": null
+    },
+    {
+     "i": 6,
+     "line": 10,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 7,
+     "line": 11,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 8,
+     "line": 12,
+     "ok": true,
+     "value": "False",
+     "error": null
+    },
+    {
+     "i": 9,
+     "line": 15,
+     "ok": true,
+     "value": "False",
+     "error": null
+    },
+    {
+     "i": 10,
+     "line": 16,
+     "ok": true,
+     "value": "False",
+     "error": null
+    },
+    {
+     "i": 11,
+     "line": 17,
+     "ok": true,
+     "value": "True",
+     "error": null
+    },
+    {
+     "i": 12,
+     "line": 18,
+     "ok": true,
+     "value": "True",
+     "error": null
+    }
+   ],
+   "error": null
+  }
+ ]
+}

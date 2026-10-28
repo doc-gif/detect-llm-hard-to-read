@@ -1,0 +1,184 @@
+{
+  "xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:17.844324+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/summary.json": "0c1d879c5a6658f59e65c1159a9112bc7957efeb93d5757153babbcb9567a90d",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/regions.csv": "37f94dc6edb8c1cb54b56afa8140a544eaa300a1f0941eeca7033d308230e7e2",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/token_alignment.csv": "e2151f4b8e3c2731d4b21d58bca7b24bb93a9e339e9efae04ff52b0fb94b5027",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/tokens_after.csv": "9c1a3549b2bfbfa9e476ffa56cce74bc3bfb36b0b5f44439ba9887549f2a6266",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/report.md": "83306f46062d25c1c33dea1ad547e876104f4e342cfc6fa57570e73e16610bf5",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/tokens_before.csv": "8fd14e6c5ea26b5c558c38b1a7e2050ed3e125c87456f00831c64b88df6224a2",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/lines.csv": "0a14039946cccece56dde8cca5a36f0692c117c9d50e62590958e5574a5364ec",
+      "compare/xcodeeval_code_translation/b072dc9e37263b339fdf61bfaddd23a7/report.html": "4553d213d8748421af23d67e4b73158fb830b2ad6e98c8c38acaefe2d08aab9f"
+    }
+  },
+  "xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:17.918936+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/summary.json": "73b92bd20cc5c3ae42764401f1b0431540e9665707cd854d0a0913e14c5dde5f",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/regions.csv": "2c7967c9068b851b8acd5c743540d6bda2ff32f67c7d94a0177b1bbd777b8a70",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/token_alignment.csv": "c20c18b969d0161a90b482cd6630aede5528e00494e7d61a534e2ce9f6af10a0",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/tokens_after.csv": "c84830b1345c96249e84b64735aea83da5b42e9ab62f1209d7168e9c436ae826",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/report.md": "c079c4928f9b7bdb7497229165acfca15c7f9ad293950b4a3f26535a3f149cc4",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/tokens_before.csv": "15c768c3a80865aa4483e8f9bf497de7c79a50a346ac39bbd2404f8b27089cff",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/lines.csv": "149e0407300e77223a0e7d2c04766bdb79e83a1d5bf9530e90d397e0aaa89a86",
+      "compare/xcodeeval_code_translation/e87d5dda1727b2bf5f0cdfc5042c02ab/report.html": "4363f0286b86a4887d90760d002be3cbb36dcf2e732575c3938fdecd5339565d"
+    }
+  },
+  "xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:17.979791+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/summary.json": "b171326b4da2bacd3c26d4725d40e16f3e202928acc507eaaaf6e9277ce85825",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/regions.csv": "3882ec22ad1fb362069979ca146651fede26f9ed11af1405b8c652305fedcfbb",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/token_alignment.csv": "5278cb947d08ecae16e40ee7bb979c2adfb4f1a0d43739931d629b2f8dd79b1d",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/tokens_after.csv": "1d1cf0cf562ba85d92290fed4a18ed65847f53c22d360319e295b3dd2f7f5b62",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/report.md": "18bd11e835b231971cc30add9cae6274b3e867315f1d61c75c17d70df320fdeb",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/tokens_before.csv": "3a2878aa94882ab8905cd5e71a72a6be5bd36bf329beaf6e4cd2df2e0681acf3",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/lines.csv": "4c9657c0af5aa4fd3e1d9d823f6826f3575a5a0355cde753dcc550f94192907b",
+      "compare/xcodeeval_code_translation/3b399bc13f31d7ac665a906c006042f4/report.html": "55e0db232e2434c7b71d50b70273c7a9844f2c67c0786df1b110bc98d8454efa"
+    }
+  },
+  "xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.079252+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/summary.json": "bc9adecfc1e287e5e43fcd0e58e534abc0067bcaa1d396c1e8491e781c00d30e",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/regions.csv": "b6a51a53f8709a88f94bd47f8f0b8ae729360b6302e245a0bdc895878d6885a8",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/token_alignment.csv": "cfb34cac4ac75ae13e57f9efd1b15f0e91721db910e55f30759a0f934c82bc86",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/tokens_after.csv": "bb4bc93435d38992dfff233dee763b94837a34b1694e983ec7f97b22f4a432cd",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/report.md": "af8e651576c300961390c205382f3c31b7d234d268b685bf5003007f069c8896",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/tokens_before.csv": "e658dab3a86874d1d6cc32ab133d1f70ebdca70f8a26ccc1b98d44f30b2757ce",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/lines.csv": "e2cc9b8e48e8d801a856d0cc6222010f433c1a3992ca99616aab1117d715e318",
+      "compare/xcodeeval_code_translation/b55dc5b34d55f7d7ca7226f31d700712/report.html": "d243a19d8190fa21bce73b7705ec9f89b33e961aac5569409112d6c5e267250f"
+    }
+  },
+  "xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.175561+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/summary.json": "31f66472d3cce01fed1206672d04be3547810e976892149d5a780f9d90d68e33",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/regions.csv": "c465d1156bbc1c8c06a64a7c4b5ae8c95a12c2a9dc3aa744346cb34d655fb38f",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/token_alignment.csv": "097e302d97670ebd5e5f6985020d99102907003dbcad48997ddc0101b55e0f7f",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/tokens_after.csv": "e0392565f3c498dbeeedc42e56e0ce328ef9019ceac223215e8e0dfa899d3508",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/report.md": "fd35a0034064ffd2e9ea63df5ae38de696f4abf71e61b4b82e64e2aab5dec6e1",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/tokens_before.csv": "dda3b610d10ed572b7d15eb6e98314977d23c59e3049ce96f17ffcd402128ccd",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/lines.csv": "62eb41fb4e84fd43cb8b77c979a2bee00416bf89ed9dbbe9e6fe49d83c4f49e4",
+      "compare/xcodeeval_code_translation/36cb9751a3bdba6cfb6f7369fb86b64b/report.html": "7cc8bc3e3e3333bf8f10facfdafcdb8fa8c237e1bd58a61789ac7bb22e7121a1"
+    }
+  },
+  "xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.278328+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/summary.json": "b6c9858b9d44b5d3870ea89b4ec7b22dfadff8c5e4bdeaa64c4a990319c12c97",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/regions.csv": "44110cb3bab57338e3a2ee7b55b7a839944bdcbac033b0ac0cebdabd2a15ccdc",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/token_alignment.csv": "0b7f382ccf8c663216c5023457c6817e65c22c7f24d8e60ea9d5f6eed090990a",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/tokens_after.csv": "29267f65434021de590985ccc642f2d189e8fa5e20328a686c2726303ae05252",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/report.md": "1f33e1d87bc3e5d7c578672e0a8618c19f11c36d52155d015a4403224c418d3f",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/tokens_before.csv": "96c350021d2de4305184c7009ab749f539ef48ea7c83956eb883ed2147374c8f",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/lines.csv": "dfc158fcdeba8c72bd77d8d26293ace14f64eefc777471b5efb01c4c232d2aa1",
+      "compare/xcodeeval_code_translation/dae6d6e41bc2c3062a445566c056ffbf/report.html": "658b90c3939ea523c67e21b10b10f68f1b271b36138fdfbad68c7a886abf7bd4"
+    }
+  },
+  "xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.379103+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/summary.json": "0eaac05ce351fe226734cca0dad61bc68f7b9ebf1ca94c4dc920ebda974bede6",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/regions.csv": "4437cd66c11feb9128a7ecb91aefef8709122318aa1793c42455332eefc1161b",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/token_alignment.csv": "634411d27bee64f41b6ab1a46e04774c0810466990d867835a6f659b0507bb54",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/tokens_after.csv": "0a3c51a2cf0d03258e19cc6d65635de8c3485e8da40da5672554700cdb14f95c",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/report.md": "58b2b62861f8f67f3e973c851ea343cc628996663169560f79cc1eeb57d9566b",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/tokens_before.csv": "70df1c7f637a4699cfa9eae99917902ca254b59d73faea5edfabcba227995cab",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/lines.csv": "9e9ff67275106299cfd55c11d70ca64965a317fe8212f145db3406b94e523327",
+      "compare/xcodeeval_code_translation/fdfacab3a62630ec4fa28ca77a3dc5cd/report.html": "4924322b66c77bab256324552b21777212562ba9c4d7afd8631626fb2bb8b74c"
+    }
+  },
+  "xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.573494+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/summary.json": "c7ef62a2c399229a3a0b32b21a732f96eb62ebd239f64c4b4abd84ca33925c63",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/regions.csv": "2e272d36c97ff98aefbc7dfd324ef0418c8510f629cf5f19cff93c7a81bfea38",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/token_alignment.csv": "9cbb5212d5118abff4a7ebb477bcfdcaa00d70509e73a7684b8b2bb5b99b5b52",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/tokens_after.csv": "8803a6498a24987de04a4ce4174d4a2492c594fd18c1f641a8d0b2fd627b1009",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/report.md": "e22862951398d9c197856dd6438207cb2eabc03324a93973e714f8653bdd23be",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/tokens_before.csv": "c39a07dd6c5181e0f98144c94f566e0f9be644086c8b9bf90479e5790807f711",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/lines.csv": "76776235dfc97ae5cf1c8062ff3d2b9088a71d17f689f262598af705b94e3489",
+      "compare/xcodeeval_code_translation/0469a415b73c86652f520eaf69bd7311/report.html": "322ec956e7f47830fefd8aedf13125cbb42f95090784079b203712ca37ef15d8"
+    }
+  },
+  "xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.684468+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/summary.json": "a650a0ed585cd90704a93496da7d37fac134569ed92f468b8aa5d8e67f5f828f",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/regions.csv": "f3f360aa0ac1a2f95d5f9352b15e75d5d117e5ae5c5d20389f606b569ee88b5f",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/token_alignment.csv": "368fac05413dade5fa43421e7c7c21bfa481e300f13e87360a14910f9efd773b",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/tokens_after.csv": "b69b91ee4ab1610207ed620b6b245a8e0bedc8491d880c347dae7618f104dc91",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/report.md": "655e37229721eddc421099a792c5f7438be83e66da55a498bcb1263a9b14aa4c",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/tokens_before.csv": "79084390a117c50922948444682de32598a9c1dad723e62b122113713a4617e2",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/lines.csv": "2a5fa65015e4b66feda20e8759bf73182eea973fb79df28d12ba0ab48ad1a6cf",
+      "compare/xcodeeval_code_translation/0709e40ee49b6439d328de121380ddcb/report.html": "3d631594afe492b00a728ed7413dc7a9256229b838533df5a027618dc494ea85"
+    }
+  },
+  "xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.842552+00:00",
+    "files": {
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/summary.json": "c253974ac7648c20ce2ef0ce59bc9f3bd0dba30a8eeb0af6da90607d0b50273a",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/regions.csv": "9c9ffd0a8641d5cedecf9cf84f1b7659896d9551a5ed6e437e6516df29c5b536",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/token_alignment.csv": "34335e055456a9aa7bd71884e18c5357bdc65ec3fec384f35e0144b91436540b",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/tokens_after.csv": "eb6095f1862e0330b5850086befaa09a301979c27602371c45beff59c873272c",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/report.md": "076cb06097c0d3a5f741731943bad962996d2428c6d6e33cf5e6133dda838d62",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/tokens_before.csv": "655421cb35d76ca81b2f244cfc4153d8f694fc4b2131ba0069a73d0c4590f037",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/lines.csv": "13659ab99595f181eb67c1f226813b1d57f828a2e2314fbce74ce0c58cb46740",
+      "compare/xcodeeval_code_translation/4b2e18a331e01e1ae120ac59b747c8ba/report.html": "ef40adb0eb43fc90e03f5557de3846744ead8ded49c061b82ef3ac598dd0c25d"
+    }
+  },
+  "minimal/positive": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.881115+00:00",
+    "files": {
+      "compare/minimal/positive/summary.json": "4224d5090d2aeda13d3cafbdec0fab2c6d6c733afcc306d9d094f63c4fe698fb",
+      "compare/minimal/positive/regions.csv": "a6b82d712c0fc8187d10bbcb565dbdb7dba15c0617a7ead3c9691f8c2534cadd",
+      "compare/minimal/positive/token_alignment.csv": "b5a5e51373ac4f0a3cb781db4dafb46fec952f6425a7fe5adc471a457e837a73",
+      "compare/minimal/positive/tokens_after.csv": "7066774b5636b954150b370cd2e0b540ccb87c10f2da331aa060b67ab9c9ca01",
+      "compare/minimal/positive/report.md": "78495f457d0a4e01b48f0f3363fc68a7d40e6cabbfa2aa744da2c37d81246ae7",
+      "compare/minimal/positive/tokens_before.csv": "1be1bcfdce47c80afa8d678bf82bd4a56c8cc2fe370c47d97903afea14b2cbc5",
+      "compare/minimal/positive/lines.csv": "3e1d74ead678821ec716ff8bd90d80b40d747aaf3abfb12c578aafe68db85233",
+      "compare/minimal/positive/report.html": "72791a1134fa9706c3b5714856a36a51b0118de7da33a5d18f1c5907140675be"
+    }
+  },
+  "minimal/even": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.918047+00:00",
+    "files": {
+      "compare/minimal/even/summary.json": "8b6fd01cb9436d999763c0d56fa328f6cebf13a9bd4b5b1de8fc5b1c75519cdb",
+      "compare/minimal/even/regions.csv": "122419e5c238f91f8c4e9995c16cce671b9a762f83790af4cf912f5670131808",
+      "compare/minimal/even/token_alignment.csv": "1b7aff842e5ba72295de7fb1df966ee494fb2c0cbd148055a7b7e365f648f36c",
+      "compare/minimal/even/tokens_after.csv": "e4e8adc5b2053fdf16f81dae763ded7bf73c6c143d3b5b0f398a0b0babe4b994",
+      "compare/minimal/even/report.md": "078c1b935a87e8c763f922d620e570e1558464a45985f53215a4ad25595cbcd4",
+      "compare/minimal/even/tokens_before.csv": "14d644b19774f4f10b909b960d79975ea0beebcd7d14cc4e6615c0873fcb6618",
+      "compare/minimal/even/lines.csv": "9282460d3ff207fd7254806571f6979def6b4556fff10ba0c537f8e18b246dfc",
+      "compare/minimal/even/report.html": "85419a927c78a37f494745549d2194af113249cabdb564230856e2f633dc295d"
+    }
+  },
+  "minimal/both_positive": {
+    "status": "ok",
+    "updated_at": "2026-10-26T12:08:18.956682+00:00",
+    "files": {
+      "compare/minimal/both_positive/summary.json": "0ed606524159ebd93144e6ff0c0aab42118304df6c3744c4ee40752bbfd2dfaa",
+      "compare/minimal/both_positive/regions.csv": "48212fc0cdbd366c077c8ddebdbb4469940356ecf7d14e32667126dc8e54d03f",
+      "compare/minimal/both_positive/token_alignment.csv": "b94d8d1fc9f6bea42f722b30b3537c4976065b6348d4994a57ef4905f43aefe0",
+      "compare/minimal/both_positive/tokens_after.csv": "28ec7ec84fdbf56189e59d84f22fd02fdbc24e35ac46f0d86e0cf03396c5c5be",
+      "compare/minimal/both_positive/report.md": "9dde969e260c85be7194d6e0f972705e7d14e9f4647d12cde2c4abfe11aac31d",
+      "compare/minimal/both_positive/tokens_before.csv": "c40bdd3245dbd7342af2dea86e862ae0375c3028ac9ccb1da98fa9b6ce69225b",
+      "compare/minimal/both_positive/lines.csv": "e01587e22264ca95e8c0c21e40dca6114d448b4354c72a669b22b10d044f4c82",
+      "compare/minimal/both_positive/report.html": "d21f60b537690645e887cd8dcb8f4ddf5d4ba56c3d144ff5de72f5c24411764f"
+    }
+  }
+}

@@ -1,0 +1,565 @@
+{
+  "n_cases": 30,
+  "n_equal": 30,
+  "n_timeout": 0,
+  "cases": [
+    {
+      "case_id": "0",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 15 15 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 15 15 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "1",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-15 0 0 15\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-15 0 0 15\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "2",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -30 30 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -30 30 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "3",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1000000010 0 0 -1000000010\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1000000010 0 0 -1000000010\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "4",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-2000000000 0 0 -2000000000\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-2000000000 0 0 -2000000000\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "5",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 2000000000 2000000000 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 2000000000 2000000000 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "6",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-3246272 0 0 3246272\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-3246272 0 0 3246272\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "7",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-243265846 0 0 -243265846\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-243265846 0 0 -243265846\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "8",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 4684066 4684066 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 4684066 4684066 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "9",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -24452 24452 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -24452 24452 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "10",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "11",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 486966 486966 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 486966 486966 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "12",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 2 2 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 2 2 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "13",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-2 0 0 -2\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-2 0 0 -2\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "14",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-2 0 0 2\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-2 0 0 2\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "15",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -2 2 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -2 2 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "16",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -44 44 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -44 44 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "17",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -437 437 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -437 437 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "18",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -152 152 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -152 152 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "19",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 1000000001 1000000001 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 1000000001 1000000001 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "20",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -1000000001 1000000001 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -1000000001 1000000001 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "21",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1000000001 0 0 1000000001\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1000000001 0 0 1000000001\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "22",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1000000001 0 0 -1000000001\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1000000001 0 0 -1000000001\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "23",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "24",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1999999999 0 0 1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1999999999 0 0 1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "25",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1999999999 0 0 -1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1999999999 0 0 -1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "26",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "27",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1999999999 0 0 1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1999999999 0 0 1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "28",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0 -1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0 -1999999999 1999999999 0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "29",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "-1999999999 0 0 -1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "-1999999999 0 0 -1999999999\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    }
+  ],
+  "notes": [],
+  "status": "match",
+  "reason": null,
+  "baseline_failures": 0,
+  "swapped_failures": 0,
+  "ready_for_measurement": true,
+  "environment": {
+    "host": "Hyo-MacMini-M4",
+    "python": "3.13.9",
+    "packages": {
+      "torch": "2.12.0",
+      "transformers": "5.11.0",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "tree-sitter": "0.25.2",
+      "tree-sitter-python": "0.25.0"
+    }
+  }
+}

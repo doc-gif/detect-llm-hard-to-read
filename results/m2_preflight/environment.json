@@ -1,0 +1,25 @@
+{
+  "host": "Hyo-MacMini-M2",
+  "machine": "arm64",
+  "python": "3.13.16",
+  "memory_bytes": 25769803776,
+  "model": "codellama/CodeLlama-7b-hf",
+  "revision": "6c284d1468fe6c413cf56183e69b194dcfa27fe6",
+  "blobs": [
+    {
+      "blob": "127e0cc0a92c8286a44815d42419177072fba39c472dc840d9b1f71c62076c49",
+      "bytes": 3500425616,
+      "sha256_matches": true
+    },
+    {
+      "blob": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+      "bytes": 500058,
+      "sha256_matches": true
+    },
+    {
+      "blob": "70ab2f3d82ca81c80d2fa444db0332e534577f164951902b1b216164dff23791",
+      "bytes": 9976701592,
+      "sha256_matches": true
+    }
+  ]
+}

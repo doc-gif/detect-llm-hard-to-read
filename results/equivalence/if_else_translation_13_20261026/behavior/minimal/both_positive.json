@@ -1,0 +1,100 @@
+{
+  "n_cases": 4,
+  "n_equal": 4,
+  "n_timeout": 0,
+  "cases": [
+    {
+      "case_id": "0",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "1\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "1\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "1",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "2",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    },
+    {
+      "case_id": "3",
+      "kind": "stdin",
+      "equal": true,
+      "timeout": false,
+      "original": {
+        "stdout": "0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      },
+      "transformed": {
+        "stdout": "0\n",
+        "returncode": 0,
+        "exception": null,
+        "matches_expected": true
+      }
+    }
+  ],
+  "notes": [],
+  "status": "match",
+  "reason": null,
+  "baseline_runtime_failures": 0,
+  "swapped_runtime_failures": 0,
+  "baseline_expected_mismatches": 0,
+  "swapped_expected_mismatches": 0,
+  "expected_output_matches": true,
+  "ready_for_measurement": true,
+  "environment": {
+    "host": "Hyo-MacMini-M4",
+    "python": "3.13.9",
+    "packages": {
+      "torch": "2.12.0",
+      "transformers": "5.11.0",
+      "pandas": "3.0.3",
+      "pyarrow": "24.0.0",
+      "tree-sitter": "0.25.2",
+      "tree-sitter-python": "0.25.0"
+    }
+  }
+}

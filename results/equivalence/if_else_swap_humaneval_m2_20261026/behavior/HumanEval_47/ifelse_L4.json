@@ -1,0 +1,154 @@
+{
+ "n_cases": 4,
+ "n_equal": 4,
+ "n_timeout": 0,
+ "cases": [
+  {
+   "case_id": "input:HumanEval_47",
+   "kind": "input",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "str": "3",
+    "repr": "3",
+    "error": null,
+    "matches_expected": true
+   },
+   "transformed": {
+    "str": "3",
+    "repr": "3",
+    "error": null,
+    "matches_expected": true
+   }
+  },
+  {
+   "case_id": "input:HumanEval_47__0",
+   "kind": "input",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "str": "7",
+    "repr": "7",
+    "error": null,
+    "matches_expected": true
+   },
+   "transformed": {
+    "str": "7",
+    "repr": "7",
+    "error": null,
+    "matches_expected": true
+   }
+  },
+  {
+   "case_id": "input:HumanEval_47__1",
+   "kind": "input",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "str": "8.0",
+    "repr": "8.0",
+    "error": null,
+    "matches_expected": true
+   },
+   "transformed": {
+    "str": "8.0",
+    "repr": "8.0",
+    "error": null,
+    "matches_expected": true
+   }
+  },
+  {
+   "case_id": "asserts",
+   "kind": "asserts",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "asserts": [
+     {
+      "i": 0,
+      "line": 7,
+      "ok": true,
+      "value": "3",
+      "error": null
+     },
+     {
+      "i": 1,
+      "line": 8,
+      "ok": true,
+      "value": "8.0",
+      "error": null
+     },
+     {
+      "i": 2,
+      "line": 9,
+      "ok": true,
+      "value": "5",
+      "error": null
+     },
+     {
+      "i": 3,
+      "line": 10,
+      "ok": true,
+      "value": "5.5",
+      "error": null
+     },
+     {
+      "i": 4,
+      "line": 11,
+      "ok": true,
+      "value": "7",
+      "error": null
+     }
+    ],
+    "error": null
+   },
+   "transformed": {
+    "asserts": [
+     {
+      "i": 0,
+      "line": 7,
+      "ok": true,
+      "value": "3",
+      "error": null
+     },
+     {
+      "i": 1,
+      "line": 8,
+      "ok": true,
+      "value": "8.0",
+      "error": null
+     },
+     {
+      "i": 2,
+      "line": 9,
+      "ok": true,
+      "value": "5",
+      "error": null
+     },
+     {
+      "i": 3,
+      "line": 10,
+      "ok": true,
+      "value": "5.5",
+      "error": null
+     },
+     {
+      "i": 4,
+      "line": 11,
+      "ok": true,
+      "value": "7",
+      "error": null
+     }
+    ],
+    "error": null
+   }
+  }
+ ],
+ "notes": [],
+ "status": "match",
+ "reason": null,
+ "uid": "HumanEval_47",
+ "variant_id": "ifelse_L4",
+ "checked_at": "2026-10-26T09:52:33.364727+00:00",
+ "timeout_sec": 10.0
+}

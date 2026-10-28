@@ -1,0 +1,275 @@
+{
+  "cases": [
+    {
+      "input": "2\r\nRB\r\n",
+      "output": [
+        "G"
+      ]
+    },
+    {
+      "input": "3\r\nGRG\r\n",
+      "output": [
+        "BR"
+      ]
+    },
+    {
+      "input": "5\r\nBBBBB\r\n",
+      "output": [
+        "B"
+      ]
+    },
+    {
+      "input": "1\r\nR\r\n",
+      "output": [
+        "R"
+      ]
+    },
+    {
+      "input": "200\r\nBBRGRRBBRGGGBGBGBGRRGRGRGRBGRGRRBBGRGBGRRGRRRGGBBRGBGBGBRBBBBBBBGGBRGGRRRGGRGBGBGGBRRRRBRRRBRBBGGBGBRGRGBBBBGGBGBBBGBGRRBRRRGBGGBBBRBGRBRRGGGRRGBBBGBGRRRRRRGGRGRGBBBRGGGBGGGBRBBRRGBGRGRBRRRBRBGRGGBRBB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "101\r\nRRRRRRRRRRRRRRRRRRRBRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR\r\n",
+      "output": [
+        "BG"
+      ]
+    },
+    {
+      "input": "7\r\nBBBGBRG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "5\r\nGRRGR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "3\r\nGBR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "1\r\nB\r\n",
+      "output": [
+        "B"
+      ]
+    },
+    {
+      "input": "2\r\nBB\r\n",
+      "output": [
+        "B"
+      ]
+    },
+    {
+      "input": "1\r\nG\r\n",
+      "output": [
+        "G"
+      ]
+    },
+    {
+      "input": "2\r\nBG\r\n",
+      "output": [
+        "R"
+      ]
+    },
+    {
+      "input": "3\r\nBGB\r\n",
+      "output": [
+        "GR"
+      ]
+    },
+    {
+      "input": "2\r\nGG\r\n",
+      "output": [
+        "G"
+      ]
+    },
+    {
+      "input": "3\r\nGBG\r\n",
+      "output": [
+        "BR"
+      ]
+    },
+    {
+      "input": "4\r\nBGBG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "2\r\nBR\r\n",
+      "output": [
+        "G"
+      ]
+    },
+    {
+      "input": "3\r\nBRB\r\n",
+      "output": [
+        "GR"
+      ]
+    },
+    {
+      "input": "2\r\nRG\r\n",
+      "output": [
+        "B"
+      ]
+    },
+    {
+      "input": "3\r\nBGR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "4\r\nRBGB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "3\r\nGGR\r\n",
+      "output": [
+        "BR"
+      ]
+    },
+    {
+      "input": "4\r\nGGRB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "5\r\nBGBGR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "2\r\nRR\r\n",
+      "output": [
+        "R"
+      ]
+    },
+    {
+      "input": "3\r\nRBR\r\n",
+      "output": [
+        "BG"
+      ]
+    },
+    {
+      "input": "4\r\nRRBB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "3\r\nRRG\r\n",
+      "output": [
+        "BG"
+      ]
+    },
+    {
+      "input": "4\r\nBRRG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "5\r\nRBRBG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "4\r\nRGGR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "5\r\nBRGRG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "6\r\nGRRGBB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "150\r\nGRGBBBBRBGGBGBBGBBBBGRBBRRBBGRRGGGBRBBRGRRRRGBGRRBGBGBGRBBBGBBBGBGBRGBRRRRRGGGRGRBBGBRGGGRBBRGBBGRGGGBBRBRRGRGRRGRRGRRRGBGBRRGGRGGBRBGGGBBBRGRGBRGRRRR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "16\r\nRRGRRRRRRGGRGRRR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "190\r\nBBBBBBBBBBBBBBBBBGBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\r\n",
+      "output": [
+        "GR"
+      ]
+    },
+    {
+      "input": "200\r\nRGRGRRRRRGRRGRRRGRGRRRGGRGRRGGGRRGGRRRRRRRRRRRGRRGRRRGRRRGRRRRRRRGRRRRRRRRRRRGGRRGGRRRRGGRRRRRRRRRGGGRGRGRGRRGRGGRGRGRRRGRRRRRRGGRGRRRRGRRGRGGRRRRRRRGRGGRRGRRRRRRRGGRRRRGRRRRRRRGRRRGGRRRRRRGRRGGGRRRGR\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "200\r\nGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG\r\n",
+      "output": [
+        "G"
+      ]
+    },
+    {
+      "input": "52\r\nBBBBBBBBBBBBBBBBBBBBGBGBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "200\r\nGRGRRGRBRRRGGGRGGRRRRRBBGRRGRBBGRRGBGRRBBRBBRRBBBGRBRGGGGBGGBRRBBRGRBGGRRGGBBRBGGRGBBRRBBRGBRRBGBRBGBBRGGRRRGGGBRGGGGRRRBBRRGRGRBRRGRBBGGRBBRGRGRBGRBBRGGBBBGRGBBGGBGBGBBRRBGRGRGGBRRGRGGGGGBRGGGGBBBBRB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "102\r\nGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGRGGGGGGGGBGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "193\r\nRRRGGGRBGGBGGGBGGBBGRBGGRBGGBBRBGGRBBBRBRRGGBBRBRGRRRBGBBRGGRGGGBGGRRGGRGRRBRBRBRRGRGBGBRGBBRGRRRBGRGGBGBRBBBGBRBBGBGBGGGBGGGGBRBBRRBGRGGBBBRBBBBBGRRRGBRGBRRRBBBGBGGGGRGGRRBRBGRRGBGBRBGGGRBRRGG\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "90\r\nBGBGGRRBGGRRRRRGGRGBBBBBRRBGBGBGBGGBBGRGGGGRBRBBRRRGBRRGBBGBBGGGRGRGRBGBBBRRGRRBRBRRGGRBRB\r\n",
+      "output": [
+        "BGR"
+      ]
+    },
+    {
+      "input": "3\r\nGGB\r\n",
+      "output": [
+        "BR"
+      ]
+    }
+  ],
+  "execution_status": "not_run"
+}

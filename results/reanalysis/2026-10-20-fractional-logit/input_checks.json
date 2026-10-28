@@ -1,0 +1,24 @@
+{
+  "codes_per_threshold": {
+    "humaneval": 158,
+    "xcodeeval_apr": 271,
+    "xcodeeval_code_translation": 535
+  },
+  "rechecked_metric_rows": 1928,
+  "rechecked_code_rows": 964,
+  "human_eval_all_correct": 146,
+  "all_observed_n_five": true,
+  "new_exclusions": 0,
+  "counts_origin": {
+    "five_saved_binary_verdicts": 158,
+    "integer_count_recovered_from_pass_at_1_with_five_saved_choices": 806
+  },
+  "clusters": {
+    "humaneval": 158,
+    "xcodeeval_apr": 180,
+    "xcodeeval_code_translation": 535
+  },
+  "description_cluster_consistency": true,
+  "missing_values": 0,
+  "duplicate_keys": 0
+}

@@ -1,0 +1,153 @@
+{
+  "models": [
+    {
+      "model_id": "p67__humaneval__interval_B",
+      "fitted_rows": 158,
+      "curve_rows": 304,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_apr__interval_B",
+      "fitted_rows": 271,
+      "curve_rows": 307,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_code_translation__interval_B",
+      "fitted_rows": 535,
+      "curve_rows": 309,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_code_translation__interval_B",
+      "fitted_rows": 535,
+      "curve_rows": 309,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_code_translation__A",
+      "fitted_rows": 535,
+      "curve_rows": 102,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_apr__B",
+      "fitted_rows": 271,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__humaneval__B",
+      "fitted_rows": 158,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__humaneval__interval_A",
+      "fitted_rows": 158,
+      "curve_rows": 304,
+      "matched": true
+    },
+    {
+      "model_id": "p67__humaneval__A",
+      "fitted_rows": 158,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_apr__interval_B",
+      "fitted_rows": 271,
+      "curve_rows": 309,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_apr__A",
+      "fitted_rows": 271,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_code_translation__A",
+      "fitted_rows": 535,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_apr__B",
+      "fitted_rows": 271,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_code_translation__B",
+      "fitted_rows": 535,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_apr__interval_A",
+      "fitted_rows": 271,
+      "curve_rows": 309,
+      "matched": true
+    },
+    {
+      "model_id": "p80__humaneval__A",
+      "fitted_rows": 158,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__humaneval__interval_B",
+      "fitted_rows": 158,
+      "curve_rows": 304,
+      "matched": true
+    },
+    {
+      "model_id": "p67__humaneval__B",
+      "fitted_rows": 158,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_apr__A",
+      "fitted_rows": 271,
+      "curve_rows": 103,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_code_translation__interval_A",
+      "fitted_rows": 535,
+      "curve_rows": 309,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_code_translation__interval_A",
+      "fitted_rows": 535,
+      "curve_rows": 309,
+      "matched": true
+    },
+    {
+      "model_id": "p67__xcodeeval_code_translation__B",
+      "fitted_rows": 535,
+      "curve_rows": 102,
+      "matched": true
+    },
+    {
+      "model_id": "p67__humaneval__interval_A",
+      "fitted_rows": 158,
+      "curve_rows": 304,
+      "matched": true
+    },
+    {
+      "model_id": "p80__xcodeeval_apr__interval_A",
+      "fitted_rows": 271,
+      "curve_rows": 307,
+      "matched": true
+    }
+  ],
+  "maximum_tolerance": 1e-10,
+  "all_matches": true,
+  "plots_use_saved_curve_and_slope_tables": true,
+  "input_sha256": "1c46016f72ff64781a084ad38f080f1eac98de149fae8a33b7b6c5fe641bc192",
+  "config_sha256": "ce654bb3c9f86f1023cbe5e35606c9b9a55dd64179f4855aedeeb01f86fe36ae"
+}

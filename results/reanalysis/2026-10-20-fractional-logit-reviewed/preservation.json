@@ -1,0 +1,20 @@
+{
+  "detect-llm-hard-to-read": {
+    "original_file_count": 6652,
+    "changed_original_files": [
+      "docs/README.md"
+    ],
+    "missing_original_files": [],
+    "status": " M scripts/run_threshold_experiments.py\n M src/analysis/check_missing_data.py\n M src/analysis/correlation_analysis.py\n M src/analysis/generate_block_tree.py\n M src/analysis/plot_analysis_scatter.py\n M src/analysis/plot_analysis_scatter_with_group.py\n M src/analysis/plot_distributions.py\n M src/analysis/semantic_unit_model_comparison.py\n M src/analysis/semantic_unit_threshold_analysis.py\n M src/analysis/util/correlation.py\n?? .DS_Store\n?? AGENTS.md\n?? docs/\n?? results/.DS_Store\n?? results/audit/\n?? results/reanalysis/\n?? scripts/audit_saved_analysis.py\n?? scripts/audit_saved_semantic_metrics.py\n?? scripts/inference.log\n?? scripts/run_su_fractional_analysis.py\n?? src/analysis/score_io.py\n?? src/analysis/thresholds.py\n?? tests/\n",
+    "diff_check_exit": 0,
+    "diff_check_output": ""
+  },
+  "lm-cc": {
+    "original_file_count": 6642,
+    "changed_original_files": [],
+    "missing_original_files": [],
+    "status": " M out/plots/scatter_partial_HumanEval.png\n M out/plots/scatter_partial_XcodeEval_APR.png\n M out/plots/scatter_partial_XcodeEval_Code_Translation.png\n M scripts/plot_lmcc_scatter.py\n M scripts/run_lmcc_correlation.py\n M scripts/tasks/ier/get_scores.py\n M scripts/utils/correlation.py\n M scripts/utils/entropy.py\n?? .DS_Store\n?? .idea/\n?? AGENTS.md\n?? data/humaneval_simplified-top60/\n?? data/xcodeeval_simplified-top50/\n?? dataset/.DS_Store\n?? out/lmcc_distribution_comparison.png\n?? out/lmcc_paired_comparison.png\n?? out/loc/\n?? results/humaneval-ier-simplified/loc.json\n?? results/humaneval-ier/loc.json\n?? results/xcodeeval/apr-simplified/loc.json\n?? results/xcodeeval/apr/loc.json\n?? scripts/audit_saved_calculations.py\n?? scripts/audit_saved_lmcc_metrics.py\n?? scripts/utils/code_integrity.py\n?? scripts/utils/score_io.py\n?? tests/\n",
+    "diff_check_exit": 0,
+    "diff_check_output": ""
+  }
+}

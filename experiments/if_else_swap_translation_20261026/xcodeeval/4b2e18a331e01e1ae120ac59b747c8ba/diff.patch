@@ -1,0 +1,22 @@
+--- original.py
++++ swapped.py
+@@ -1,9 +1,7 @@
+ #n is the base and k is the result, need to find min x s.t. f(x)=k, length is the length of n
+ import math
+ def find(n,k,length):
+-    if k<n:
+-        return [k]
+-    else:
++    if not (k<n):
+         MAX=0
+         index=1
+         
+@@ -21,6 +19,8 @@
+         res=res//(10**index)
+         #print(MAX,res,n,k,index)
+         return find(n,res,length)+[MAX]
++    else:
++        return [k]
+                 
+             
+         

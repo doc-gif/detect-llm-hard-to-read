@@ -1,0 +1,247 @@
+{
+  "created_at_utc": "2026-10-19T14:16:17.060836+00:00",
+  "repository_head": "2476ee6bfad24e217c0baf465b7709d21608b8c7",
+  "note": "Labels pXX are historical names. Effective numeric thresholds are recorded below.",
+  "summaries": {
+    "p05": {
+      "path": "results/summaries/analysis_summary_p05.csv",
+      "sha256": "54f88c4aa5e22bc9168e493a26245227f79071afb0d4ce7dd0ef8a40ca66453e",
+      "threshold": 0.0037,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p10": {
+      "path": "results/summaries/analysis_summary_p10.csv",
+      "sha256": "463b7be35516892824b0ea630035d4857d311bf9b1b59463811676be8ae8823f",
+      "threshold": 0.0114,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p15": {
+      "path": "results/summaries/analysis_summary_p15.csv",
+      "sha256": "afe3820a2a6fec8135e3a5a1562f8706de011871e7fb6a89a2c277d9adccc669",
+      "threshold": 0.0214,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p20": {
+      "path": "results/summaries/analysis_summary_p20.csv",
+      "sha256": "cceb0221ff2e557464307928ce9dcae3605d531ddc672e460be0740f33e837d8",
+      "threshold": 0.0335,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p25": {
+      "path": "results/summaries/analysis_summary_p25.csv",
+      "sha256": "18c3fe7977101784dbc3b003cfbceef1f9dd17a2663e0a2419b4bafa533168b1",
+      "threshold": 0.0483,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p30": {
+      "path": "results/summaries/analysis_summary_p30.csv",
+      "sha256": "5b3011dafda9840b400bc34dd9cad24b023bc93a09bee294bf6f5fbc72e247af",
+      "threshold": 0.0675,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p35": {
+      "path": "results/summaries/analysis_summary_p35.csv",
+      "sha256": "b29ce552e34d9867f050be654b68a905c3c7c2f2c07705a203a0660513835690",
+      "threshold": 0.0921,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p40": {
+      "path": "results/summaries/analysis_summary_p40.csv",
+      "sha256": "ee38555318207265b908faba2812382e9fbeda25247fdfdfba78b94958d6fb9b",
+      "threshold": 0.1244,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p45": {
+      "path": "results/summaries/analysis_summary_p45.csv",
+      "sha256": "1521041178519c2106538cb046aff18cc7d6d876d3bf5d92a916212141ad2c4e",
+      "threshold": 0.1691,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p50": {
+      "path": "results/summaries/analysis_summary_p50.csv",
+      "sha256": "2aac6157881178d41fbae60bf079a83f7e2e87072065e1068525d7a5e61bf26f",
+      "threshold": 0.2327,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p55": {
+      "path": "results/summaries/analysis_summary_p55.csv",
+      "sha256": "c1d198649d821b3006e3d9716f5e193d78022c9f30c1302dc5b1c3ea243274e6",
+      "threshold": 0.3254,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p60": {
+      "path": "results/summaries/analysis_summary_p60.csv",
+      "sha256": "40841f8f42d85f4074de220ea46a4be6c147fe0443410911df00e817ef7ebcea",
+      "threshold": 0.4536,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p65": {
+      "path": "results/summaries/analysis_summary_p65.csv",
+      "sha256": "18b6252304c6f5ac19650120b86154c5f58f7c705edda4dde032df7ad4c98c08",
+      "threshold": 0.6154,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p67": {
+      "path": "results/summaries/analysis_summary_p67.csv",
+      "sha256": "f540fa6b3161b442ac899739feb2c3613c57e094aada5da96e04469edf8ae11d",
+      "threshold": 0.6813,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p70": {
+      "path": "results/summaries/analysis_summary_p70.csv",
+      "sha256": "dc55465edea1e2c4f3322a3561916fa1f89f07d2a3a17dc3af6f1881d52a0003",
+      "threshold": 0.7781,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p75": {
+      "path": "results/summaries/analysis_summary_p75.csv",
+      "sha256": "76cfdeaf3a094d8122fadd4ffd2cf7c00a25f62164d063f6b0d982c51f1eb847",
+      "threshold": 0.9829,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p80": {
+      "path": "results/summaries/analysis_summary_p80.csv",
+      "sha256": "55f42e1e5a5e28c019c33d92a5e263a87927e24cf2c45466a8cbe84d7ff0429c",
+      "threshold": 1.3238,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p85": {
+      "path": "results/summaries/analysis_summary_p85.csv",
+      "sha256": "7fafe269f40e2edc7931074fd88e65cb0633674813b9c325f4f8956f94b42a9e",
+      "threshold": 1.592,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p90": {
+      "path": "results/summaries/analysis_summary_p90.csv",
+      "sha256": "fe4e157a1069ae83dca7d2f42ca92906b23a8eea5339ef1541fcb5abf33ad412",
+      "threshold": 2.1097,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    },
+    "p95": {
+      "path": "results/summaries/analysis_summary_p95.csv",
+      "sha256": "74a35667f6685b2e9d3873ae4d50b0781c87e4bb3abfa18ff1f9b4654be77fe1",
+      "threshold": 3.2355,
+      "rows": 1562,
+      "checked": 1562,
+      "matches": {
+        "num_semantic_units": 1562,
+        "lm_cc": 1562,
+        "loc": 1562
+      }
+    }
+  }
+}

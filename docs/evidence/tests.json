@@ -1,0 +1,12 @@
+{
+  "detect": {
+    "command": "PYTHONPATH=.:src:src/analysis PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg MPLCONFIGDIR=/tmp/codex-mpl .venv/bin/python -m unittest discover -s tests",
+    "passed": 21,
+    "failed": 0
+  },
+  "lm-cc": {
+    "command": "MPLBACKEND=Agg MPLCONFIGDIR=/tmp/lmcc-mpl-cache PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m unittest discover -s tests",
+    "passed": 22,
+    "failed": 0
+  }
+}

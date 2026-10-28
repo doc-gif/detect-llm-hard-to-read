@@ -1,0 +1,266 @@
+{
+ "n_cases": 4,
+ "n_equal": 4,
+ "n_timeout": 0,
+ "cases": [
+  {
+   "case_id": "input:HumanEval_126",
+   "kind": "input",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "str": "True",
+    "repr": "True",
+    "error": null,
+    "matches_expected": true
+   },
+   "transformed": {
+    "str": "True",
+    "repr": "True",
+    "error": null,
+    "matches_expected": true
+   }
+  },
+  {
+   "case_id": "input:HumanEval_126__0",
+   "kind": "input",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "str": "True",
+    "repr": "True",
+    "error": null,
+    "matches_expected": true
+   },
+   "transformed": {
+    "str": "True",
+    "repr": "True",
+    "error": null,
+    "matches_expected": true
+   }
+  },
+  {
+   "case_id": "input:HumanEval_126__1",
+   "kind": "input",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "str": "False",
+    "repr": "False",
+    "error": null,
+    "matches_expected": true
+   },
+   "transformed": {
+    "str": "False",
+    "repr": "False",
+    "error": null,
+    "matches_expected": true
+   }
+  },
+  {
+   "case_id": "asserts",
+   "kind": "asserts",
+   "equal": true,
+   "timeout": false,
+   "original": {
+    "asserts": [
+     {
+      "i": 0,
+      "line": 4,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 1,
+      "line": 5,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 2,
+      "line": 6,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 3,
+      "line": 7,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 4,
+      "line": 8,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 5,
+      "line": 9,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 6,
+      "line": 10,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 7,
+      "line": 11,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 8,
+      "line": 12,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 9,
+      "line": 15,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 10,
+      "line": 16,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 11,
+      "line": 17,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 12,
+      "line": 18,
+      "ok": true,
+      "value": "True",
+      "error": null
+     }
+    ],
+    "error": null
+   },
+   "transformed": {
+    "asserts": [
+     {
+      "i": 0,
+      "line": 4,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 1,
+      "line": 5,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 2,
+      "line": 6,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 3,
+      "line": 7,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 4,
+      "line": 8,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 5,
+      "line": 9,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 6,
+      "line": 10,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 7,
+      "line": 11,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 8,
+      "line": 12,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 9,
+      "line": 15,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 10,
+      "line": 16,
+      "ok": true,
+      "value": "False",
+      "error": null
+     },
+     {
+      "i": 11,
+      "line": 17,
+      "ok": true,
+      "value": "True",
+      "error": null
+     },
+     {
+      "i": 12,
+      "line": 18,
+      "ok": true,
+      "value": "True",
+      "error": null
+     }
+    ],
+    "error": null
+   }
+  }
+ ],
+ "notes": [],
+ "status": "match",
+ "reason": null,
+ "uid": "HumanEval_126",
+ "variant_id": "ifelse_L10",
+ "checked_at": "2026-10-26T09:52:33.739750+00:00",
+ "timeout_sec": 10.0
+}

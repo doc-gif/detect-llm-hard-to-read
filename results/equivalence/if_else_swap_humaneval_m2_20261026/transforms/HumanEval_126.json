@@ -1,0 +1,189 @@
+{
+ "uid": "HumanEval_126",
+ "dataset": "humaneval",
+ "source_path": "data/humaneval/HumanEval_126.py",
+ "source_sha256": "5e22e34775b1d04832a10598bd5eef03a2ce7c10330138a91fde4ae67be64b00",
+ "transform": {
+  "name": "if_else_swap",
+  "languages": [
+   "python"
+  ],
+  "options": {
+   "unwrap_not": true,
+   "negation_style": "auto"
+  }
+ },
+ "task_code_matches_source": false,
+ "lm_cc_cases_with_same_code": [
+  "HumanEval_126__0",
+  "HumanEval_126__1"
+ ],
+ "candidates": [
+  {
+   "candidate": {
+    "transform": "if_else_swap",
+    "index": 0,
+    "variant_id": "ifelse_L8",
+    "start_line": 8,
+    "end_line": 9,
+    "status": "not_applicable",
+    "reason": "else 節が無い",
+    "info": {}
+   },
+   "status": "not_applicable",
+   "reason": "else 節が無い",
+   "edits": [],
+   "line_map": [],
+   "checks": {},
+   "variant_id": "ifelse_L8"
+  },
+  {
+   "candidate": {
+    "transform": "if_else_swap",
+    "index": 1,
+    "variant_id": "ifelse_L10",
+    "start_line": 10,
+    "end_line": 13,
+    "status": "ok",
+    "reason": null,
+    "info": {
+     "condition": "all(lst[i - 1] <= lst[i] for i in range(1, len(lst)))",
+     "condition_type": "call",
+     "then_lines": [
+      11,
+      11
+     ],
+     "else_line": 12,
+     "else_lines": [
+      13,
+      13
+     ]
+    }
+   },
+   "status": "ok",
+   "reason": null,
+   "edits": [
+    {
+     "kind": "negate_condition",
+     "method": "add_not",
+     "line": 10,
+     "before": "all(lst[i - 1] <= lst[i] for i in range(1, len(lst)))",
+     "after": "not all(lst[i - 1] <= lst[i] for i in range(1, len(lst)))"
+    },
+    {
+     "kind": "swap_bodies",
+     "then_lines_before": [
+      11,
+      11
+     ],
+     "else_lines_before": [
+      13,
+      13
+     ],
+     "then_lines_after": [
+      13,
+      13
+     ],
+     "else_lines_after": [
+      11,
+      11
+     ]
+    }
+   ],
+   "line_map": [
+    {
+     "orig_line": 1,
+     "new_line": 1,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 2,
+     "new_line": 2,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 3,
+     "new_line": 3,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 4,
+     "new_line": 4,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 5,
+     "new_line": 5,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 6,
+     "new_line": 6,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 7,
+     "new_line": 7,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 8,
+     "new_line": 8,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 9,
+     "new_line": 9,
+     "region": "before",
+     "text_changed": false
+    },
+    {
+     "orig_line": 10,
+     "new_line": 10,
+     "region": "if_header",
+     "text_changed": true
+    },
+    {
+     "orig_line": 11,
+     "new_line": 13,
+     "region": "then_body",
+     "text_changed": false
+    },
+    {
+     "orig_line": 12,
+     "new_line": 12,
+     "region": "between",
+     "text_changed": false
+    },
+    {
+     "orig_line": 13,
+     "new_line": 11,
+     "region": "else_body",
+     "text_changed": false
+    },
+    {
+     "orig_line": 14,
+     "new_line": 14,
+     "region": "after",
+     "text_changed": false
+    }
+   ],
+   "checks": {
+    "line_count_before": 14,
+    "line_count_after": 14,
+    "line_count_equal": true,
+    "compiles": true,
+    "ast_matches_expected": true
+   },
+   "variant_id": "ifelse_L10"
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "HumanEval_47": {
+  "status": "ok",
+  "updated_at": "2026-10-26T09:52:32.466046+00:00",
+  "n_candidates": 1,
+  "n_ok": 1
+ },
+ "HumanEval_123": {
+  "status": "ok",
+  "updated_at": "2026-10-26T09:52:32.471220+00:00",
+  "n_candidates": 3,
+  "n_ok": 2
+ },
+ "HumanEval_126": {
+  "status": "ok",
+  "updated_at": "2026-10-26T09:52:32.475226+00:00",
+  "n_candidates": 2,
+  "n_ok": 1
+ },
+ "HumanEval_159": {
+  "status": "ok",
+  "updated_at": "2026-10-26T09:52:32.478217+00:00",
+  "n_candidates": 1,
+  "n_ok": 1
+ }
+}

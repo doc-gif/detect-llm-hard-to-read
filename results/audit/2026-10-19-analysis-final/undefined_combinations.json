@@ -1,0 +1,20 @@
+[
+  {
+    "version": "legacy_score",
+    "dataset": "xcodeeval_code_translation",
+    "metric": "lm_cc",
+    "control": "loc",
+    "n": 535,
+    "status": "no_valid_groups",
+    "reason": "No defined correlation among the 9-to-11-group candidates"
+  },
+  {
+    "version": "corrected_score",
+    "dataset": "xcodeeval_code_translation",
+    "metric": "lm_cc",
+    "control": "loc",
+    "n": 535,
+    "status": "no_valid_groups",
+    "reason": "No defined correlation among the 9-to-11-group candidates"
+  }
+]

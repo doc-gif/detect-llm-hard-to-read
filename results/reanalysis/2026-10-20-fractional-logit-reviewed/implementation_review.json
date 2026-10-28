@@ -1,0 +1,14 @@
+{
+  "tests_passed": 31,
+  "tests_failed": 0,
+  "new_analysis_tests": 10,
+  "all_24_converged": true,
+  "separation_detected": 0,
+  "unstable_models": 2,
+  "covariance_check_max_abs": 4.950706511408498e-12,
+  "score_root_check_max_abs": 3.4150460237469815e-12,
+  "first_run": "2026-10-20-fractional-logit",
+  "reviewed_run": "2026-10-20-fractional-logit-reviewed",
+  "diagnostic_correction": "Do not require five clusters with interior fractional answers: endpoint values 0/1 also carry information. Removed this automatic insufficiency flag. No input, boundary, mean model, covariance, coefficient, CI, p value, or prediction changed. Both runs preserved.",
+  "original_and_reviewed_numeric_tables_identical": true
+}

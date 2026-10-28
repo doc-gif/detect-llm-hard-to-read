@@ -1,0 +1,11 @@
+{
+  "tests_passed": 90,
+  "tests_failed": 0,
+  "behavior_pairs": 13,
+  "behavior_cases": 962,
+  "expected_output_warning_samples": 2,
+  "input_files_verified": 78,
+  "received_files_verified": 15,
+  "real_model_measurement": "not_run",
+  "measurement_path_test": "dummy model in pytest temporary directory"
+}

@@ -1,0 +1,50 @@
+# M2での計測用。回答モデルは未指定。accuracy-runは実行しない。
+# if/else 入れ替え変換を HumanEval の少数例で試す設定 (計測はユーザーの Mac で実行する)
+#   python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample.toml
+#
+# 計測条件 (transform / measure / thresholds / behavior / accuracy) を変えるときは
+# experiment.name も変えること (同じディレクトリで条件を混ぜないようエラーにしている)。
+
+[experiment]
+name = "if_else_swap_humaneval_m2_20261026"
+dataset = "humaneval"                 # out/ や summary CSV の dataset 名と同じ
+# 対象 ID ("all" で data/humaneval/ の全件)。if/else 候補が無い ID は自動的に何もしない
+ids = ["HumanEval_47", "HumanEval_123", "HumanEval_126", "HumanEval_159"]
+# 変換箇所を絞るときは "uid:variant_id" (例: "HumanEval_123:ifelse_L3")。空なら全候補
+targets = []
+output_root = "results/equivalence"   # リポジトリからの相対パス
+
+[transform]
+name = "if_else_swap"
+
+[transform.options]
+unwrap_not = true          # 条件が not X なら X にする
+negation_style = "auto"    # auto: 原子的な式は not X、それ以外は not (X) / always_paren: 常に not (X)
+
+[behavior]
+timeout_sec = 10.0         # 1テストケースあたり
+workers = 4                # テストケースを並列に実行するプロセス数 (結果には影響しない)
+
+[measure]
+# エントロピーを計測するモデル (回答モデルとは別)。scripts/batch_runner.py と同じ設定
+model = "codellama/CodeLlama-7b-hf"
+model_kind = "hf_causal_lm"
+revision = "6c284d1468fe6c413cf56183e69b194dcfa27fe6"
+device = "mps"
+dtype = "float16"
+context_strategy = "function_scope"
+allowed_behavior = ["match"]   # 動作確認でこの判定になった変換後コードだけを計測する
+
+# SU の境界判定に使う固定閾値 [nats] (既存分析の p67 / p80)。変換結果に合わせて変えない
+[thresholds]
+p67 = 0.6813
+p80 = 1.2515
+
+[accuracy]
+# 回答モデル (lm-cc と同じ OpenAI 互換 API。環境変数 OPENAI_API_KEY / OPENAI_BASE_URL / OPENAI_MODEL_NAME)
+answer_model = "UNCONFIGURED"
+trials = 5                 # lm-cc の IER は 5 回
+temperature = 0.0
+max_tokens = 1024
+ier_cases = "base"         # base: 接尾辞なしのケースだけ (先行研究の pass@1) / all: __0, __1 も
+require_behavior_match = true

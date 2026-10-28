@@ -1,0 +1,13 @@
+model_id,threshold_label,dataset,model,n_codes,n_clusters,n_intervals,p_raw,F,df_num,df_den,status,p_holm,holm_family_size
+p67__humaneval__interval_A,p67,humaneval,interval_A,158,158,3,0.002357652217790786,6.289339543198906,2,157,estimated,0.12495556754291165,60
+p67__humaneval__interval_B,p67,humaneval,interval_B,158,158,3,0.443941746013196,0.8162767328926122,2,157,estimated,1.0,60
+p67__xcodeeval_apr__interval_A,p67,xcodeeval_apr,interval_A,271,180,3,0.07701910116688153,2.6007731920473454,2,179,estimated,1.0,60
+p67__xcodeeval_apr__interval_B,p67,xcodeeval_apr,interval_B,271,180,3,0.13041443765509192,2.0603964914499633,2,179,estimated,1.0,60
+p67__xcodeeval_code_translation__interval_A,p67,xcodeeval_code_translation,interval_A,535,535,3,0.2226997448110742,1.5061631202882964,2,534,estimated,1.0,60
+p67__xcodeeval_code_translation__interval_B,p67,xcodeeval_code_translation,interval_B,535,535,3,0.9454667161129462,0.05608248306921412,2,534,estimated,1.0,60
+p80__humaneval__interval_A,p80,humaneval,interval_A,158,158,3,0.8962331571484542,0.10963116271382264,2,157,unstable,1.0,60
+p80__humaneval__interval_B,p80,humaneval,interval_B,158,158,3,0.5351476422310592,0.627708976733009,2,157,unstable,1.0,60
+p80__xcodeeval_apr__interval_A,p80,xcodeeval_apr,interval_A,271,180,3,0.5772727173508077,0.5511304410148892,2,179,estimated,1.0,60
+p80__xcodeeval_apr__interval_B,p80,xcodeeval_apr,interval_B,271,180,3,0.5332922439505842,0.6308989608522868,2,179,estimated,1.0,60
+p80__xcodeeval_code_translation__interval_A,p80,xcodeeval_code_translation,interval_A,535,535,3,0.0833975187923286,2.4957287015206244,2,534,estimated,1.0,60
+p80__xcodeeval_code_translation__interval_B,p80,xcodeeval_code_translation,interval_B,535,535,3,0.5104534603921076,0.673303332169942,2,534,estimated,1.0,60

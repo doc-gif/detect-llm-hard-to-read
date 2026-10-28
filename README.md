@@ -67,12 +67,17 @@ python src/analysis/pipeline.py --threshold 1.2515 --suffix _p80
 
 ### 等価変換の前後比較 (SU・エントロピー・回答精度)
 
-条件を否定して if/else を入れ替えるなど、動作と LOC を保つ変換の前後で、エントロピーと SU が
-どこでどう変わるかを追跡します。詳細は [docs/equivalence_experiment.md](docs/equivalence_experiment.md)。
+今回の対象は、xCodeEvalのPython→Cタスクに含まれる入力Pythonコード10件と、自作の最小コード3件です。
+if-elseを入れ替え、動作・LOC・トークンエントロピー・SU数の変化を比較する計画です。
+xCodeEvalの候補をLOCで3群に分け、短い群から3件、中程度から4件、長い群から3件を固定シードで抽出します。
 
-```bash
-python scripts/equivalence_experiment.py all --config configs/equivalence/if_else_swap_humaneval_sample.toml
-```
+[実験手順](docs/if_else_swap_translation.md)に、スクリプトの使い方、実行順、期待する出力、エラー時の対処をまとめています。
+抽出・コピー・変換は完了しました。[用意したコードの一覧](docs/if_else_swap_samples.md)で、元コードと入れ替えコードを確認できます。
+13組の動作テストと、M2での計測・比較・結果取得に対応する `scripts/run_if_else_samples.py` を用意しました。
+モデル計測はまだ実行していません。実行順と注意点は実験手順を参照してください。
+既存の `scripts/m2_experiment.sh` はHumanEval用です。今回の実験には使わないでください。
+
+既存機能の詳細は [等価変換実験の仕様](docs/equivalence_experiment.md)を参照してください。
 
 ## テスト
 

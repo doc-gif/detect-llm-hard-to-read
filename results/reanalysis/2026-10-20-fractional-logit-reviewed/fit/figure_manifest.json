@@ -1,0 +1,126 @@
+[
+  {
+    "file": "descriptive__p67__humaneval.png",
+    "kind": "descriptive",
+    "threshold_label": "p67",
+    "dataset": "humaneval",
+    "n_codes": 158,
+    "source": "analysis_input.csv",
+    "sha256": "7f07afaf6923c61cb3aad5f21893b4d379a7db1a1aa119497575d80089c059f4"
+  },
+  {
+    "file": "models__p67__humaneval.png",
+    "kind": "models",
+    "threshold_label": "p67",
+    "dataset": "humaneval",
+    "n_codes": 158,
+    "source": "fit/prediction_curves.csv",
+    "sha256": "404698224b3ee6a1f1d0ebac59cf5336c05330e2e156f649827c27669650bd49"
+  },
+  {
+    "file": "descriptive__p67__xcodeeval_apr.png",
+    "kind": "descriptive",
+    "threshold_label": "p67",
+    "dataset": "xcodeeval_apr",
+    "n_codes": 271,
+    "source": "analysis_input.csv",
+    "sha256": "ed5e2a083c17ad1988718b0391986dd25ff59f1d7026448d334d8d53b3384b98"
+  },
+  {
+    "file": "models__p67__xcodeeval_apr.png",
+    "kind": "models",
+    "threshold_label": "p67",
+    "dataset": "xcodeeval_apr",
+    "n_codes": 271,
+    "source": "fit/prediction_curves.csv",
+    "sha256": "4be4630d421141e42d7336546baa8b238f1d01b261e973fc88b81debc00b9419"
+  },
+  {
+    "file": "descriptive__p67__xcodeeval_code_translation.png",
+    "kind": "descriptive",
+    "threshold_label": "p67",
+    "dataset": "xcodeeval_code_translation",
+    "n_codes": 535,
+    "source": "analysis_input.csv",
+    "sha256": "e5dc6339a8d3842f6d811deac9bc509251b981e6fd29c45fb9cc36ec35b407f1"
+  },
+  {
+    "file": "models__p67__xcodeeval_code_translation.png",
+    "kind": "models",
+    "threshold_label": "p67",
+    "dataset": "xcodeeval_code_translation",
+    "n_codes": 535,
+    "source": "fit/prediction_curves.csv",
+    "sha256": "1e3597540a68a52cd7b4c910ae834c6887f5f796e8dfec9d588e2edd65091ca4"
+  },
+  {
+    "file": "descriptive__p80__humaneval.png",
+    "kind": "descriptive",
+    "threshold_label": "p80",
+    "dataset": "humaneval",
+    "n_codes": 158,
+    "source": "analysis_input.csv",
+    "sha256": "d17f237050226124924e08dd343eaf32bdc062b120e70b48aa88b68a22ae8806"
+  },
+  {
+    "file": "models__p80__humaneval.png",
+    "kind": "models",
+    "threshold_label": "p80",
+    "dataset": "humaneval",
+    "n_codes": 158,
+    "source": "fit/prediction_curves.csv",
+    "sha256": "8769f92ab4d48373c34cba4b04e5043e4f8a69a9bf86061c72e9e881ee164119"
+  },
+  {
+    "file": "descriptive__p80__xcodeeval_apr.png",
+    "kind": "descriptive",
+    "threshold_label": "p80",
+    "dataset": "xcodeeval_apr",
+    "n_codes": 271,
+    "source": "analysis_input.csv",
+    "sha256": "5f38bb8d33ca3a5aaf6d4a7c452596a3feac705c1080e939c693dcfc92b922a6"
+  },
+  {
+    "file": "models__p80__xcodeeval_apr.png",
+    "kind": "models",
+    "threshold_label": "p80",
+    "dataset": "xcodeeval_apr",
+    "n_codes": 271,
+    "source": "fit/prediction_curves.csv",
+    "sha256": "6e74f0da3b49bf36d6ba4938e90977073daa6927dafe68a37bee1fd9312fa7bb"
+  },
+  {
+    "file": "descriptive__p80__xcodeeval_code_translation.png",
+    "kind": "descriptive",
+    "threshold_label": "p80",
+    "dataset": "xcodeeval_code_translation",
+    "n_codes": 535,
+    "source": "analysis_input.csv",
+    "sha256": "cb70e073350364e3f35445b1108c06b12c25d68802c676c622ccd56608861339"
+  },
+  {
+    "file": "models__p80__xcodeeval_code_translation.png",
+    "kind": "models",
+    "threshold_label": "p80",
+    "dataset": "xcodeeval_code_translation",
+    "n_codes": 535,
+    "source": "fit/prediction_curves.csv",
+    "sha256": "74d1c56cb9f73465d47d221c6c7acf29699ed551d6723093b47df6f84022d7b1"
+  },
+  {
+    "file": "slopes__p67.png",
+    "kind": "slopes",
+    "threshold_label": "p67",
+    "dataset": "all",
+    "source": "fit/slopes.csv",
+    "sha256": "8f96c93e1a3abc602e26faaf53e6f7abd13724aa7aa9330fe35f8b45a0029046"
+  },
+  {
+    "file": "slopes__p80.png",
+    "kind": "slopes",
+    "threshold_label": "p80",
+    "dataset": "all",
+    "source": "fit/slopes.csv",
+    "sha256": "5d82a7f1282d74116fbba06e826048149882179a63ba796bc9d9dd937be14677"
+  }
+]

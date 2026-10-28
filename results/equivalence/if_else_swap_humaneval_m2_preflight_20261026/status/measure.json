@@ -1,0 +1,22 @@
+{
+ "HumanEval_47": {
+  "status": "ok",
+  "updated_at": "2026-10-26T09:54:52.519745+00:00",
+  "tokens": 85,
+  "seconds": 3.94,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ },
+ "HumanEval_47__ifelse_L4": {
+  "status": "ok",
+  "updated_at": "2026-10-26T09:54:53.714482+00:00",
+  "tokens": 87,
+  "seconds": 1.19,
+  "model": "codellama/CodeLlama-7b-hf",
+  "model_kind": "hf_causal_lm",
+  "device": "mps",
+  "dtype": "float16"
+ }
+}

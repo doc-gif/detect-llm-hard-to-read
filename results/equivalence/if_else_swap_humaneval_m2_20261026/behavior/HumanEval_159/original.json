@@ -1,0 +1,90 @@
+{
+ "uid": "HumanEval_159",
+ "case_ids": [
+  "input:HumanEval_159",
+  "input:HumanEval_159__0",
+  "input:HumanEval_159__1",
+  "asserts"
+ ],
+ "observations": [
+  {
+   "str": "[11, 4]",
+   "repr": "[11, 4]",
+   "error": null,
+   "matches_expected": true
+  },
+  {
+   "str": "[5, 0]",
+   "repr": "[5, 0]",
+   "error": null,
+   "matches_expected": true
+  },
+  {
+   "str": "[7, 0]",
+   "repr": "[7, 0]",
+   "error": null,
+   "matches_expected": true
+  },
+  {
+   "asserts": [
+    {
+     "i": 0,
+     "line": 4,
+     "ok": true,
+     "value": null,
+     "error": null
+    },
+    {
+     "i": 1,
+     "line": 5,
+     "ok": true,
+     "value": "[11, 4]",
+     "error": null
+    },
+    {
+     "i": 2,
+     "line": 6,
+     "ok": true,
+     "value": "[12, 1]",
+     "error": null
+    },
+    {
+     "i": 3,
+     "line": 7,
+     "ok": true,
+     "value": "[11, 0]",
+     "error": null
+    },
+    {
+     "i": 4,
+     "line": 8,
+     "ok": true,
+     "value": "[7, 0]",
+     "error": null
+    },
+    {
+     "i": 5,
+     "line": 11,
+     "ok": true,
+     "value": null,
+     "error": null
+    },
+    {
+     "i": 6,
+     "line": 12,
+     "ok": true,
+     "value": "[9, 2]",
+     "error": null
+    },
+    {
+     "i": 7,
+     "line": 13,
+     "ok": true,
+     "value": "[5, 0]",
+     "error": null
+    }
+   ],
+   "error": null
+  }
+ ]
+}

@@ -1,0 +1,11 @@
+--- original.py
++++ swapped.py
+@@ -1,5 +1,5 @@
+ a, b = map(int, input().split())
+-if a > 0 and b > 0:
++if not (a > 0 and b > 0):
++    print(0)
++else:
+     print(1)
+-else:
+-    print(0)

@@ -1,0 +1,219 @@
+{
+  "candidate": {
+    "transform": "if_else_swap",
+    "index": 0,
+    "variant_id": "ifelse_L20",
+    "start_line": 20,
+    "end_line": 23,
+    "status": "ok",
+    "reason": null,
+    "info": {
+      "condition": "x1 < 0",
+      "condition_type": "comparison_operator",
+      "then_lines": [
+        21,
+        21
+      ],
+      "else_line": 22,
+      "else_lines": [
+        23,
+        23
+      ]
+    }
+  },
+  "status": "ok",
+  "reason": null,
+  "edits": [
+    {
+      "kind": "negate_condition",
+      "method": "add_not_paren",
+      "line": 20,
+      "before": "x1 < 0",
+      "after": "not (x1 < 0)"
+    },
+    {
+      "kind": "swap_bodies",
+      "then_lines_before": [
+        21,
+        21
+      ],
+      "else_lines_before": [
+        23,
+        23
+      ],
+      "then_lines_after": [
+        23,
+        23
+      ],
+      "else_lines_after": [
+        21,
+        21
+      ]
+    }
+  ],
+  "line_map": [
+    {
+      "orig_line": 1,
+      "new_line": 1,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 2,
+      "new_line": 2,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 3,
+      "new_line": 3,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 4,
+      "new_line": 4,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 5,
+      "new_line": 5,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 6,
+      "new_line": 6,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 7,
+      "new_line": 7,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 8,
+      "new_line": 8,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 9,
+      "new_line": 9,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 10,
+      "new_line": 10,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 11,
+      "new_line": 11,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 12,
+      "new_line": 12,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 13,
+      "new_line": 13,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 14,
+      "new_line": 14,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 15,
+      "new_line": 15,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 16,
+      "new_line": 16,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 17,
+      "new_line": 17,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 18,
+      "new_line": 18,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 19,
+      "new_line": 19,
+      "region": "before",
+      "text_changed": false
+    },
+    {
+      "orig_line": 20,
+      "new_line": 20,
+      "region": "if_header",
+      "text_changed": true
+    },
+    {
+      "orig_line": 21,
+      "new_line": 23,
+      "region": "then_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 22,
+      "new_line": 22,
+      "region": "between",
+      "text_changed": false
+    },
+    {
+      "orig_line": 23,
+      "new_line": 21,
+      "region": "else_body",
+      "text_changed": false
+    },
+    {
+      "orig_line": 24,
+      "new_line": 24,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 25,
+      "new_line": 25,
+      "region": "after",
+      "text_changed": false
+    },
+    {
+      "orig_line": 26,
+      "new_line": 26,
+      "region": "after",
+      "text_changed": false
+    }
+  ],
+  "checks": {
+    "line_count_before": 26,
+    "line_count_after": 26,
+    "line_count_equal": true,
+    "compiles": true,
+    "ast_matches_expected": true
+  }
+}

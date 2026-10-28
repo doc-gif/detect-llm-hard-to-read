@@ -1,0 +1,18 @@
+--- original.py
++++ swapped.py
+@@ -10,11 +10,11 @@
+         v = min(int(sqrt(t)), m)
+         tn, tm = (t - 1) // m, t // n
+         vv = [t // i for i in range(tm + 1, v + 1)]
+-        if t // n * (n + m) + sum(vv) * 2 + max(min((tn - tm), len(vv)) * m, 0) - v * v - sum(
+-                vv[:max(min(tn - tm, len(vv)), 0)]) < k:
++        if not (t // n * (n + m) + sum(vv) * 2 + max(min((tn - tm), len(vv)) * m, 0) - v * v - sum(
++                vv[:max(min(tn - tm, len(vv)), 0)]) < k):
++            hi = mid
++        else:
+             lo = mid
+-        else:
+-            hi = mid
+     print(lo)
+ 
+ 

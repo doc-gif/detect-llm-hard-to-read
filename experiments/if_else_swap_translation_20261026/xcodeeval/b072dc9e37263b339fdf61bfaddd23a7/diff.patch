@@ -1,0 +1,15 @@
+--- original.py
++++ swapped.py
+@@ -7,7 +7,7 @@
+ r += aa + bb
+ aa *= k-1
+ bb *= k-1
+-if a <= aa and b <= bb:
+-    print(r)
++if not (a <= aa and b <= bb):
++    print(-1)
+ else:
+-    print(-1)
+\ No newline at end of file
++    print(r)
+\ No newline at end of file
